@@ -14,10 +14,9 @@ public class ClinicaServiceImpl implements ClinicaService {
     @Override
     public RespuestaRs test() {
         RespuestaRs rta = new RespuestaRs();
-        rta.setMensaje("El servicio de clinica esta funcionando MELO");
+        rta.setMessage("HOOLAAAAAAAAAAAAAAAAA MUNDOOOOOOOOOOOOOOO");
         rta.setEstaFuncionando(true);
-        rta.setStatus(200);
-        return rta;
+        return rta; 
     }
     
 }
