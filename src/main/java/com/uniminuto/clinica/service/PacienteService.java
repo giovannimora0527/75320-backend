@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface PacienteService {
     List<Paciente> listarPacientes();
+    Paciente buscarPorNumeroDocumento(String numeroDocumento);
     
 }

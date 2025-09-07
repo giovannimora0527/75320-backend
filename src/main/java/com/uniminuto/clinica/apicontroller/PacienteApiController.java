@@ -6,8 +6,14 @@ import com.uniminuto.clinica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
+import org.apache.coyote.BadRequestException;
+
+
+/**
+ *
+ * @author Andre
+ */
 
 @RestController
 public class PacienteApiController implements PacienteApi {
@@ -18,5 +24,12 @@ public class PacienteApiController implements PacienteApi {
     @Override
     public ResponseEntity<List<Paciente>> listarPacientes() {
         return ResponseEntity.ok(pacienteService.listarPacientes());
+    }
+    
+    //** sedundo api buscar por documento**//
+    @Override
+    public ResponseEntity<Paciente> buscarPorDocumento(String numeroDocumento) 
+        throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.buscarPorNumeroDocumento(numeroDocumento));
     }
 }
