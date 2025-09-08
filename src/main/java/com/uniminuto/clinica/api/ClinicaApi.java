@@ -21,3 +21,4 @@ public interface ClinicaApi {
     ResponseEntity<RespuestaRs> testService();
 
 }
+
