@@ -25,7 +25,6 @@ public interface UsuarioApi {
      */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Usuario>> listarUsuarios();
 
@@ -36,7 +35,6 @@ public interface UsuarioApi {
      */
     @RequestMapping(value = "/buscar-usuario",
             produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Usuario> buscarUsuarioXUsername(
             @RequestParam String username) 

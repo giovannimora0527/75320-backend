@@ -8,12 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author lmora
  */
 @Data
+@Getter
+@Setter
 @Entity
 @Table(name = "medico")
 public class Medico implements Serializable {
