@@ -24,16 +24,16 @@ public class PacienteServiceImpl implements PacienteService{
      * PacienteRepository.
      */
     @Autowired
-    private PacienteRepository PacienteRepository;
+    private PacienteRepository pacienteRepository;
     
     @Override
     public List<Paciente> encontrarTodosLosPacientes() {
-        return this.PacienteRepository.findAll();
+        return this.pacienteRepository.findAll();
     }
 
     @Override
     public Paciente encontrarPacientePorNombre(String nombres) throws BadRequestException {
-        Optional<Paciente> optUser = this.PacienteRepository
+        Optional<Paciente> optUser = this.pacienteRepository
                 .findByNombres(nombres);
         if (!optUser.isPresent()) {
             throw new BadRequestException("PACIENTE NO ENCONTRADO.");
@@ -43,7 +43,7 @@ public class PacienteServiceImpl implements PacienteService{
     }
     @Override
     public Paciente buscarPorNumeroDocumento(String numeroDocumento) throws BadRequestException {
-        Optional<Paciente> optUser = this.PacienteRepository
+        Optional<Paciente> optUser = this.pacienteRepository
                 .findByNumeroDocumento(numeroDocumento);
         if (!optUser.isPresent()) {
             throw new BadRequestException("PACIENTE NO ENCONTRADO POR DOCUMENTO.");

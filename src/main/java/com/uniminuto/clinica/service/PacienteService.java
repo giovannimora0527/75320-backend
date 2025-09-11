@@ -10,7 +10,7 @@ import org.apache.coyote.BadRequestException;
 
 /**
  *
- * @author DELL
+ * @author Alkri
  */
 public interface PacienteService {
  /**

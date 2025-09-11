@@ -37,17 +37,17 @@ public class Paciente implements Serializable {
      * Username.
      */
     @Column(name = "usuario_id")
-    private int usuario_id;
+    private int usuarioId;
     /**
      * Tipo de documento.
      */
     @Column(name = "tipo_documento")
-    private String tipo_documento;
+    private String tipoDocumento;
     /**
      * Numero de documento.
      */
     @Column(name = "numero_documento")
-    private String numero_documento;    
+    private String numeroDocumento;    
     /**
      * Nombres.
      */
@@ -62,7 +62,7 @@ public class Paciente implements Serializable {
      * Fecha de nacimiento.
      */
     @Column(name = "fecha_nacimiento")
-    private LocalDate fecha_nacimiento;
+    private LocalDate fechaNacimiento;
     /**
      * Genero.
      */
