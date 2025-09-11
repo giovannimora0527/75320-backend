@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.uniminuto.clinica.apicontroller;
+
 import com.uniminuto.clinica.api.PacienteApi;
 import com.uniminuto.clinica.entity.Paciente;
 import com.uniminuto.clinica.service.PacienteService;
+import java.util.List;
+import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 
 /**
  *
@@ -17,24 +20,21 @@ import java.util.List;
 
 @RestController
 public class PacienteApiController implements PacienteApi {
-
-    private final PacienteService pacienteService;
-
-    public PacienteApiController(PacienteService pacienteService) {
-        this.pacienteService = pacienteService;
-    }
+    @Autowired
+    private PacienteService pacienteService;
 
     @Override
     public ResponseEntity<List<Paciente>> listarPacientes() {
-        return ResponseEntity.ok(pacienteService.listarPacientes());
+        return ResponseEntity.ok(pacienteService.encontrarTodosLosPacientes());
     }
 
     @Override
-    public ResponseEntity<Paciente> buscarPorDocumento(String documento) {
-        Paciente paciente = pacienteService.buscarPorDocumento(documento);
-        if (paciente == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(paciente);
+    public ResponseEntity<Paciente> buscarPacientePornombres(String nombres) throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.encontrarPacientePorNombre(nombres));
+    }
+    
+    @Override
+    public ResponseEntity<Paciente> buscarPacientePorDocumento(String numeroDocumento) throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.buscarPorNumeroDocumento(numeroDocumento));
     }
 }

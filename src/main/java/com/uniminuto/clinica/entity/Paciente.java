@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.uniminuto.clinica.entity;
+
+import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,32 +18,65 @@ import lombok.Data;
  *
  * @author Alkri
  */
-
+@Data
 @Entity
 @Table(name = "paciente")
-@Data
-public class Paciente {
+public class Paciente implements Serializable {
+    /**
+     * Id serializable.
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * Id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "tipo_documento", nullable = false)
-    private String tipoDocumento;
-
-    @Column(name = "numero_documento", nullable = false, unique = true)
-    private String numeroDocumento;
-
-    private String nombres;
-    private String apellidos;
-    private String telefono;
-    private String direccion;
-
-    @Column(name = "fecha_nacimiento")
-    private String fechaNacimiento;
-
-    private String genero;
-
+    @Column(name = "id")
+    private long id;
+    /**
+     * Username.
+     */
     @Column(name = "usuario_id")
-    private Long usuarioId;
+    private int usuario_id;
+    /**
+     * Tipo de documento.
+     */
+    @Column(name = "tipo_documento")
+    private String tipo_documento;
+    /**
+     * Numero de documento.
+     */
+    @Column(name = "numero_documento")
+    private String numero_documento;    
+    /**
+     * Nombres.
+     */
+    @Column(name = "nombres")
+    private String nombres;
+    /**
+     * Apellidos.
+     */
+    @Column(name = "apellidos")
+    private String apellidos;
+    /**
+     * Fecha de nacimiento.
+     */
+    @Column(name = "fecha_nacimiento")
+    private LocalDate fecha_nacimiento;
+    /**
+     * Genero.
+     */
+    @Column(name = "genero")
+    private char genero;
+    /**
+     * Telefono.
+     */
+    @Column(name = "telefono")
+    private String telefono;
+    /**
+     * Direccion.
+     */
+    @Column(name = "direccion")
+    private String direccion;
 }
 
