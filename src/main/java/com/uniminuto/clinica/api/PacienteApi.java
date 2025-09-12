@@ -1,6 +1,6 @@
 package com.uniminuto.clinica.api;
 
-import com.uniminuto.clinica.entity.Usuario;
+import com.uniminuto.clinica.entity.Paciente;
 import java.util.List;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * ApiRest para logica de usuarios.
  *
  * @author lmora
  */
 @CrossOrigin(origins = "*")
-@RequestMapping("/usuario")
-public interface UsuarioApi {
-
-    /**
+@RequestMapping("/paciente")
+public interface PacienteApi {
+    
+        /**
      * Lista los usuarios de la bd.
      *
      * @return
@@ -27,19 +26,16 @@ public interface UsuarioApi {
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<List<Usuario>> listarUsuarios();
-
-    /**
-     * Lista los usuarios de la bd.
-     *
-     * @return
-     */
-    @RequestMapping(value = "/buscar-usuario",
+    ResponseEntity<List<Paciente>> listarPacientes();
+    
+    
+        @RequestMapping(value = "/buscar-paciente-documento",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<Usuario> buscarUsuarioXUsername(
-            @RequestParam String username) 
+    ResponseEntity<Paciente> buscarPacienteXIdentificacion(
+            @RequestParam String numeroDocumento) 
             throws BadRequestException;
-        
 }
+
+
