@@ -2,12 +2,12 @@ package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Usuario;
 import java.util.List;
+
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.model.UsuarioRq;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * ApiRest para logica de usuarios.
@@ -40,6 +40,20 @@ public interface UsuarioApi {
             method = RequestMethod.GET)
     ResponseEntity<Usuario> buscarUsuarioXUsername(
             @RequestParam String username) 
+            throws BadRequestException;
+
+    /**
+     * Guarda un usuario nuevo en la bd.
+     * @param usuarioRq Usuario de entrada.
+     * @return respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
+    @RequestMapping(value = "/guardar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> guardarUsuario(
+            @RequestBody UsuarioRq usuarioRq)
             throws BadRequestException;
         
 }
