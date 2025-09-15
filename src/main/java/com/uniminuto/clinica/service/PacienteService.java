@@ -11,4 +11,5 @@ import org.apache.coyote.BadRequestException;
 public interface PacienteService {
       List<Paciente> encontrarTodosLosPacientes();
       Paciente buscarPacientePorDocumento(String documento) throws BadRequestException;
+      List<Paciente> encontrarTodosLosPacientesXFechaNacimiento();
 }
