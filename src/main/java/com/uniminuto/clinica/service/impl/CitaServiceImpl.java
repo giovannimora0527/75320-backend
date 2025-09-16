@@ -3,12 +3,15 @@ package com.uniminuto.clinica.service.impl;
 import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.entity.Medico;
 import com.uniminuto.clinica.entity.Paciente;
+
 import com.uniminuto.clinica.repository.CitaRepository;
 import com.uniminuto.clinica.repository.MedicoRepository;
 import com.uniminuto.clinica.repository.PacienteRepository;
+
 import com.uniminuto.clinica.service.CitaService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 

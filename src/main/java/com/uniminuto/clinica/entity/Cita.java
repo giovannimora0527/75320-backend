@@ -17,6 +17,7 @@ public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
@@ -26,6 +27,7 @@ public class Cita {
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
+    
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
 
@@ -34,7 +36,7 @@ public class Cita {
 
     private String motivo;
 
-    // 👉 Asegúrate de tener TODOS los getters y setters públicos:
+    // Metodos getters y setters públicos:
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
