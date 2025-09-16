@@ -9,6 +9,7 @@ import com.uniminuto.clinica.repository.MedicoRepository;
 import com.uniminuto.clinica.repository.PacienteRepository;
 
 import com.uniminuto.clinica.service.CitaService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,5 +56,10 @@ public class CitaServiceImpl implements CitaService {
         cita.setPaciente(paciente);
 
         return citaRepository.save(cita);
+    }
+
+    @Override
+    public List<Cita> obtenerCitasOrdenadasPorFechaDesc() {
+        return citaRepository.findAllByOrderByFechaHoraDesc();
     }
 }

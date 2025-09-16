@@ -3,6 +3,7 @@ package com.uniminuto.clinica.apicontroller;
 import com.uniminuto.clinica.api.CitaApi;
 import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.service.CitaService;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,4 +22,13 @@ public class CitaApiController implements CitaApi {
         Cita guardar = citaService.guardarCita(cita);
         return ResponseEntity.ok(guardar);
     }
+    
+    @Override
+    public ResponseEntity<List<Cita>> getCitasOrdenadas() {
+        List<Cita> citas = citaService.obtenerCitasOrdenadasPorFechaDesc();
+        return ResponseEntity.ok(citas);
+    }
+
+
+
 }
