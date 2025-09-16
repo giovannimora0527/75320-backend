@@ -35,5 +35,12 @@ public interface CitaApi {
     ResponseEntity<RespuestaRs> guardarCita(
             @RequestBody CitaRq citaRq
     ) throws BadRequestException;
+    
+    @RequestMapping(value = "/listar-por-fecha",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Cita>> ListarCitasOrdenadas();   
+    
 }
 

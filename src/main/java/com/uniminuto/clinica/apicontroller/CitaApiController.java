@@ -34,4 +34,10 @@ public class CitaApiController implements CitaApi{
     }
     
     
+     @Override
+    public ResponseEntity<List<Cita>> ListarCitasOrdenadas() {
+        return ResponseEntity.ok(this.citaService.ListarCitasOrdenadas());
+        
+    }   
+    
 }

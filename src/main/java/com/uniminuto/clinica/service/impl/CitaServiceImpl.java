@@ -65,6 +65,15 @@ public class CitaServiceImpl implements CitaService{
         
         
     }
+    /**
+     * Lista por fecha
+    */
+    
+    @Override
+    public List<Cita>ListarCitasOrdenadas(){
+        return citaRepository.findAllByOrderByFechaHoraDesc();
+        
+    }
     
     
     /**
