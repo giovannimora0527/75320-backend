@@ -27,6 +27,14 @@ public interface MedicoApi {
             method = RequestMethod.GET)
     ResponseEntity<List<Medico>> listarMedicos();
     
+    /**
+     * Endpoint de prueba simple
+     */
+    @RequestMapping(value = "/test",
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<String> testMedico();
+    
     
     /**
      * Lista los medicos por especializacion de la bd.

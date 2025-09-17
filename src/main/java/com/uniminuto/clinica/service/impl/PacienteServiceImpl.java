@@ -1,36 +1,43 @@
 package com.uniminuto.clinica.service.impl;
 
-import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
-import java.util.List;
 import com.uniminuto.clinica.entity.Paciente;
 import com.uniminuto.clinica.repository.PacienteRepository;
 import com.uniminuto.clinica.service.PacienteService;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+/**
+ *
+ * @author lmora
+ */
 @Service
-@RequiredArgsConstructor
 public class PacienteServiceImpl implements PacienteService {
 
-    private final PacienteRepository pacienteRepository;
+    @Autowired
+    private PacienteRepository PacienteRepository;
 
     @Override
     public List<Paciente> encontrarTodosLosPacientes() {
-        return pacienteRepository.findAll();
+        return this.PacienteRepository.findAll();
     }
 
     @Override
-    public Paciente buscarPacientePorDocumento(String documento) {
-        return pacienteRepository.findByNumeroDocumento(documento)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "No se encuentra el paciente"
-                ));
+    public Paciente buscarPacientePorDocumento(String documento) throws ResponseStatusException {
+        
+        Optional<Paciente> optPaciente = this.PacienteRepository.findByNumeroDocumento(documento);
+        if (!optPaciente.isPresent()) {
+            throw new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "No se encuentra el paciente");
+        
+        }
+        return optPaciente.get();
     }
 
     @Override
     public List<Paciente> listarPacientesPorEdad() {
-        return pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+        return this.PacienteRepository.findAllOrderByFechaNacimientoAsc();
     }
+
 }

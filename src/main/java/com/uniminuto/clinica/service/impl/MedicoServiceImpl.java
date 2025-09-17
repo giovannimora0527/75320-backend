@@ -26,7 +26,13 @@ public class MedicoServiceImpl implements MedicoService {
 
     @Override
     public List<Medico> buscarMedicos() {
-        return this.medicoRepository.findAll();
+        try {
+            return this.medicoRepository.findAll();
+        } catch (Exception e) {
+            System.err.println("Error al buscar médicos: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Error al obtener la lista de médicos", e);
+        }
     }
 
     @Override

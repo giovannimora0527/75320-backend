@@ -31,4 +31,9 @@ public class MedicoApiController implements MedicoApi {
                 .buscarMedicosPorEspecializacion(codigo));
     }
     
+    @Override
+    public ResponseEntity<String> testMedico() {
+        return ResponseEntity.ok("Test médico funcionando");
+    }
+    
 }

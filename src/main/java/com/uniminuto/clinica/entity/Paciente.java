@@ -1,25 +1,27 @@
 package com.uniminuto.clinica.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import java.io.Serializable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 import lombok.Data;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "paciente")
-public class Paciente {
+public class Paciente implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    @Column(name = "id")
     private Integer id;
-
-    @Column(name = "usuario_id")
-    private Integer usuarioId;
 
     @Column(name = "tipo_documento")
     private String tipoDocumento;
@@ -45,3 +47,4 @@ public class Paciente {
     @Column(name = "direccion")
     private String direccion;
 }
+
