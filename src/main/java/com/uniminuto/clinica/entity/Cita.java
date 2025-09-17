@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -58,6 +59,7 @@ public class Cita implements Serializable{
      * Estado de la cita
      */
     @Column(length = 20)
+    @JsonIgnore
     private String estado;
 
     /**

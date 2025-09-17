@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +46,10 @@ public class CitaServiceImpl implements CitaService {
         respuesta.setStatus(200);
         respuesta.setMessage("Cita creada correctamente");
         return respuesta;
+    }
+    
+    @Override
+    public List<Cita> listarCitaPorFechaHora() {
+        return this.citaRepository.findAllOrderByFechaHoraDesc();
     }
 }

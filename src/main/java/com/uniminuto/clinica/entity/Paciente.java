@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
 import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
@@ -24,9 +25,11 @@ public class Paciente implements Serializable {
     private Integer id;
 
     @Column(name = "tipo_documento")
+    @JsonIgnore
     private String tipoDocumento;
 
     @Column(name = "numero_documento")
+    @JsonIgnore
     private String numeroDocumento;
 
     @Column(name = "nombres")
@@ -36,15 +39,19 @@ public class Paciente implements Serializable {
     private String apellidos;
 
     @Column(name = "fecha_nacimiento")
+    @JsonIgnore
     private LocalDate fechaNacimiento;
 
     @Column(name = "genero")
+    @JsonIgnore
     private String genero;
 
     @Column(name = "telefono")
+    @JsonIgnore
     private String telefono;
 
     @Column(name = "direccion")
+    @JsonIgnore
     private String direccion;
 }
 

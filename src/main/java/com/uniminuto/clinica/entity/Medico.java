@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -37,12 +38,14 @@ public class Medico implements Serializable {
      * Tipo de documento del médico (por ejemplo, CC, TI, CE).
      */
     @Column(name = "tipo_documento")
+    @JsonIgnore
     private String tipoDocumento;
 
     /**
      * Número de documento del médico.
      */
     @Column(name = "numero_documento")
+    @JsonIgnore
     private String numeroDocumento;
 
     /**
@@ -61,12 +64,14 @@ public class Medico implements Serializable {
      * Número de teléfono de contacto del médico.
      */
     @Column(name = "telefono")
+    @JsonIgnore
     private String telefono;
 
     /**
      * Número de registro profesional del médico.
      */
     @Column(name = "registro_profesional")
+    @JsonIgnore
     private String registroProfesional;
     
     /**
@@ -75,5 +80,6 @@ public class Medico implements Serializable {
     @ManyToOne
     @JoinColumn(name = "especializacion_id", nullable = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     private Especializacion especializacion;
 }
