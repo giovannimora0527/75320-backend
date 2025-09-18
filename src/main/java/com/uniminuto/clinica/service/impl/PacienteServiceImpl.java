@@ -34,5 +34,11 @@ public class PacienteServiceImpl implements PacienteService {
         }
         return optPaciente.get();
     }
+    
+    @Override
+    public List<Paciente> encontrarPacientesFNacimientoDesc() {       
+        return this.PacienteRepository.findAllByOrderByFechaNacimientoAsc();
+        
+    }
 
 }
