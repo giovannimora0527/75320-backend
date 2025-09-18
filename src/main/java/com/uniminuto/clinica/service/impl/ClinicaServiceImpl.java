@@ -15,7 +15,7 @@ public class ClinicaServiceImpl implements ClinicaService {
     public RespuestaRs test() {
         RespuestaRs rta = new RespuestaRs();
         rta.setMessage("HOOLAAAAAAAAAAAAAAAAA MUNDOOOOOOOOOOOOOOO");
-        rta.setEstaFuncionando(true);
+
         return rta; 
     }
     
