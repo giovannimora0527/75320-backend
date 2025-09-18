@@ -2,6 +2,7 @@ package com.uniminuto.clinica.apicontroller;
 
 import com.uniminuto.clinica.api.RecetaApi;
 import com.uniminuto.clinica.entity.Receta;
+import com.uniminuto.clinica.model.CitaRs;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.RecetaService;
 import org.apache.coyote.BadRequestException;
@@ -21,26 +22,27 @@ public class RecetaApiController implements RecetaApi {
     }
 
     @Override
-    public ResponseEntity<RespuestaRs> createReceta(Long citaId, Receta receta) throws BadRequestException {
+    public ResponseEntity<RespuestaRs> createReceta(CitaRs request) throws BadRequestException {
         try {
+            Long citaId = request.getCitaId();
+            Receta receta = request.getReceta();
+
             Receta nueva = recetaService.createReceta(
-                    receta.getMedicamento().getId(), // primero medicamentoId (Integer)
-                    citaId,                          // después citaId (Long)
+                    receta.getMedicamento().getId(),
+                    citaId,
                     receta.getDosis(),
                     receta.getIndicaciones()
             );
 
             RespuestaRs respuesta = new RespuestaRs();
-            respuesta.setStatus(201);
+            respuesta.setStatus(200);
             respuesta.setMessage("Receta creada correctamente con id " + nueva.getId());
-
             return ResponseEntity.status(HttpStatus.CREATED).body(respuesta);
 
         } catch (Exception e) {
             RespuestaRs respuesta = new RespuestaRs();
             respuesta.setStatus(400);
             respuesta.setMessage("No se pudo crear la receta: " + e.getMessage());
-
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
         }
     }
