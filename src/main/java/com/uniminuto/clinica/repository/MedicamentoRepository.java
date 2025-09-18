@@ -8,5 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface MedicamentoRepository extends JpaRepository<Medicamento, Integer> {
+    
+    //Busca por Nombre.
     Optional<Medicamento> findByNombre(String nombre);
 }

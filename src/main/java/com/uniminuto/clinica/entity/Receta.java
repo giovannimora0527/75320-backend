@@ -10,28 +10,44 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "receta")
 public class Receta implements Serializable {
 
+    /**
+     * Id serializable.
+     */    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relación con Cita
+    /**
+     * Relación con Entidadd Cita.
+     */ 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cita_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Cita cita;
 
-    // Relación con Medicamento
+    /**
+     * Relación con Entidadd Medicamento.
+     */    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "medicamento_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Medicamento medicamento;
 
+    /**
+     * Dosis de la Receta.
+     */
     @Column(name = "dosis")
     private String dosis;
 
+    /**
+     * Indicaciones de la Receta.
+     */    
     @Column(name = "indicaciones")
     private String indicaciones;
-    
+   
+    /**
+     * Creacion Registro de Receta.
+     */    
     @Column(name = "fecha_creacion_registro", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime fechaCreacionRegistro;
 

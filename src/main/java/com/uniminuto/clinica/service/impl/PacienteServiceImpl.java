@@ -21,22 +21,41 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public List<Paciente> encontrarTodosLosPacientes() {
+        
+        // La lógica de este método es muy simple: delega la tarea de encontrar
+        // todos los pacientes al repositorio. findAll() es un método estándar
+        // de Spring Data JPA que obtiene todas las entidades de la tabla.
         return this.PacienteRepository.findAll();
     }
 
     @Override
     public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
         
+        // Aquí se usa el método de consulta personalizado del repositorio.
+        // findByNumeroDocumento(documento) es un método que Spring Data JPA
+        // genera automáticamente para buscar por la propiedad "numeroDocumento".
         Optional<Paciente> optPaciente = this.PacienteRepository.findByNumeroDocumento(documento);
+        
+        // Se verifica si el objeto Optional tiene un valor. Si el paciente no se encuentra,
+        // Optional.isPresent() devolverá 'false'.
         if (!optPaciente.isPresent()) {
+            
+            // Si el paciente no se encuentra, se lanza una excepción personalizada
+            // para indicar que la solicitud no es válida.
             throw new BadRequestException("No se encuentra el paciente");
         
         }
+        // Si el paciente existe, se obtiene y se devuelve del objeto Optional.
         return optPaciente.get();
     }
     
     @Override
     public List<Paciente> encontrarTodosLosPacientesXFechaNacimiento () {
+        
+        // Similar al primer método, este delega la lógica al repositorio.
+        // Spring Data JPA interpreta el nombre del método
+        // "findAllByOrderByFechaNacimientoAsc()" para encontrar todos los pacientes
+        // y ordenarlos de forma ascendente por su fecha de nacimiento.
         return this.PacienteRepository.findAllByOrderByFechaNacimientoAsc();
     }
 

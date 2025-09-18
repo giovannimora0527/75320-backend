@@ -14,26 +14,42 @@ import javax.persistence.Table;
 @Table(name = "cita")
 public class Cita {
 
+    /**
+     * Id Cita.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    /**
+     * Relacion con Entidad Paciente.
+     */
+    @ManyToOne //Relacion Muchos a Uno
+    @JoinColumn(name = "paciente_id", nullable = false) //Mapear la Relacion a nivel de la DB
+    private Paciente paciente; //Entidad
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id", nullable = false)
-    private Paciente paciente;
+    /**
+     * Relacion con Entidad Medico.
+     */    
+    @ManyToOne //Relacion Muchos a Uno
+    @JoinColumn(name = "medico_id", nullable = false) //Mapear la Relacion a nivel de la DB
+    private Medico medico; //Entidad
 
-    @ManyToOne
-    @JoinColumn(name = "medico_id", nullable = false)
-    private Medico medico;
-
-    
+    /**
+     * Fecha y Hora de la Cita.
+     */  
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
 
+    /**
+     * Estado de la Cita.
+     */     
     @Column(nullable = false)
     private String estado;
 
+    /**
+     * Motivo de la Cita.
+     */     
     private String motivo;
 
     // Metodos getters y setters públicos:

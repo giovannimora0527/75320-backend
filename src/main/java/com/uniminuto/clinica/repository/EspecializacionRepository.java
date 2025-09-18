@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
  * @author lmora
  */
 @Repository
-public interface EspecializacionRepository 
-        extends JpaRepository<Especializacion, Integer> {
+public interface EspecializacionRepository extends JpaRepository<Especializacion, Integer> {
+    
+    //Busca por Codigo de Especializacion.
     Optional<Especializacion> findByCodigoEspecializacion(String codigo);
 }
