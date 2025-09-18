@@ -41,4 +41,16 @@ public interface PacienteApi {
     ResponseEntity<Paciente> buscarPacientePorDocumento(
         @RequestParam String numeroDocumento) 
         throws BadRequestException;
+
+    /**
+     * se ponen los datos los cuales se pondran en el postman para la visualizacion
+     * @return
+     * @throws BadRequestException 
+     */
+    @RequestMapping(value = "/cumpleaños",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.GET)
+ResponseEntity<List<Paciente>> listarPorFecha() throws BadRequestException;
+    
 }

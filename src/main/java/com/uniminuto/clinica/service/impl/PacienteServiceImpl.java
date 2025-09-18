@@ -52,4 +52,19 @@ public class PacienteServiceImpl implements PacienteService{
         return optUser.get();
     }
     
+    /**
+     * se hace la implementacion del servicio en forma Ascendente
+     * @return todos los pacientes ordenados
+     * @throws BadRequestException 
+     */
+       @Override
+    public List<Paciente> listarPorFecha()throws BadRequestException{
+        
+        List<Paciente> pacientes = this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+        if (pacientes.isEmpty()) {
+            throw new BadRequestException("NO HAY REGISTROS");
+        }
+        return pacientes;
+    }
+    
 }

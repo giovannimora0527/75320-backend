@@ -37,4 +37,15 @@ public class PacienteApiController implements PacienteApi {
     public ResponseEntity<Paciente> buscarPacientePorDocumento(String numeroDocumento) throws BadRequestException {
         return ResponseEntity.ok(pacienteService.buscarPorNumeroDocumento(numeroDocumento));
     }
+    
+    /**
+     * se hace uso del api controller para que los atributos sean correctos
+     * @return
+     * @throws BadRequestException 
+     */
+    @Override
+    public ResponseEntity<List<Paciente>> listarPorFecha() throws BadRequestException {
+      List<Paciente> pacientes = pacienteService.listarPorFecha();
+     return ResponseEntity.ok(pacientes);
+    }
 }
