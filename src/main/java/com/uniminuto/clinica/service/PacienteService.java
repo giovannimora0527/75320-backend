@@ -6,12 +6,17 @@ import org.apache.coyote.BadRequestException;
 
 /**
  *
+<<<<<<< HEAD
  * @author lmora
+=======
+ * @author Julian
+>>>>>>> 62bbf5ad50e20053f4fca59ad1ef11555df8f6bf
  */
 public interface PacienteService {
 
     List<Paciente> encontrarTodosLosPacientes();
 
+<<<<<<< HEAD
     Paciente buscarPacientePorDocumento(String documento) throws BadRequestException;
 
     /**
@@ -23,4 +28,7 @@ public interface PacienteService {
      */
     List<Paciente> encontrarPacientesOrdenadosPorFechaNacimientoAsc();
 
+=======
+    Paciente encontrarPacientePorDocumento(String numeroDocumento) throws BadRequestException;
+>>>>>>> 62bbf5ad50e20053f4fca59ad1ef11555df8f6bf
 }
