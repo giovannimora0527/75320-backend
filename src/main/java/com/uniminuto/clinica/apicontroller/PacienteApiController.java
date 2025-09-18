@@ -30,4 +30,15 @@ public class PacienteApiController implements PacienteApi {
             throws BadRequestException {
         return ResponseEntity.ok(pacienteService.buscarPacientePorDocumento(numeroDocumento));
     }
+/**
+     *
+     * @author JulianLopez
+     *
+     * Nuevo método: listar pacientes en orden ascendente (más viejo -> más
+     * joven)
+     */
+    @Override
+    public ResponseEntity<List<Paciente>> listarPacientesPorEdadAsc() {
+        return ResponseEntity.ok(pacienteService.encontrarPacientesOrdenadosPorFechaNacimientoAsc());
+    }
 }
