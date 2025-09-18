@@ -7,9 +7,7 @@ public interface RecetaService {
 
     Receta createReceta(Integer medicamentoId, Long citaId, String dosis, String indicaciones);
 
-    Receta getRecetaById(Long id);
-
-    List<Receta> getRecetasByCita(Long citaId);
+    List<Receta> obtenerRecetasOrdenadasPorFechaDesc();
 }
 
 

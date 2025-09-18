@@ -2,6 +2,7 @@ package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Receta;
 import com.uniminuto.clinica.model.CitaRs;
+import com.uniminuto.clinica.model.RecetaRs;
 import com.uniminuto.clinica.model.RespuestaRs;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
@@ -23,20 +24,11 @@ public interface RecetaApi {
             @RequestBody CitaRs request)
             throws BadRequestException;
 
-    // GET por citaId se mantiene igual
     @RequestMapping(
-            value = "/{citaId}/recetas",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<List<Receta>> getRecetasByCita(
-            @PathVariable Long citaId)
-            throws BadRequestException;
-
-    @RequestMapping(
-            value = "/recetas/{id}",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<Receta> getRecetaById(
-            @PathVariable Long id)
-            throws BadRequestException;
+           value = "/listarRecetas",
+           produces = {"application/json"},
+           method = RequestMethod.GET
+       )
+        ResponseEntity<List<RecetaRs>> getRecetasOrdenadas();
+    
 }

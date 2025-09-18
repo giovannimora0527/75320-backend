@@ -3,14 +3,18 @@ package com.uniminuto.clinica.apicontroller;
 import com.uniminuto.clinica.api.RecetaApi;
 import com.uniminuto.clinica.entity.Receta;
 import com.uniminuto.clinica.model.CitaRs;
+
+import com.uniminuto.clinica.model.RecetaRs;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.RecetaService;
+
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class RecetaApiController implements RecetaApi {
@@ -48,21 +52,22 @@ public class RecetaApiController implements RecetaApi {
     }
 
     @Override
-    public ResponseEntity<List<Receta>> getRecetasByCita(Long citaId) throws BadRequestException {
-        List<Receta> recetas = recetaService.getRecetasByCita(citaId);
-        if (recetas.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(recetas);
-    }
+    public ResponseEntity<List<RecetaRs>> getRecetasOrdenadas() {
+        // Obtener la lista de recetas de la base de datos
+        List<Receta> recetas = recetaService.obtenerRecetasOrdenadasPorFechaDesc();
 
-    @Override
-    public ResponseEntity<Receta> getRecetaById(Long id) throws BadRequestException {
-        try {
-            Receta receta = recetaService.getRecetaById(id);
-            return ResponseEntity.ok(receta);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        // Mapear cada entidad Receta a RecetaRs
+        List<RecetaRs> respuesta = recetas.stream().map(r -> {
+            RecetaRs rs = new RecetaRs();
+            rs.setId(r.getId().intValue());
+            rs.setCitaId(r.getCita().getId().intValue());
+            rs.setMedicamentoId(r.getMedicamento().getId());
+            rs.setDosis(r.getDosis());
+            rs.setIndicaciones(r.getIndicaciones());
+            rs.setFechaCreacionRegistro(r.getFechaCreacionRegistro());
+            return rs;
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(respuesta);
     }
 }

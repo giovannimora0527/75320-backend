@@ -3,12 +3,14 @@ package com.uniminuto.clinica.service.impl;
 import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.entity.Medicamento;
 import com.uniminuto.clinica.entity.Receta;
+
 import com.uniminuto.clinica.repository.CitaRepository;
 import com.uniminuto.clinica.repository.MedicamentoRepository;
 import com.uniminuto.clinica.repository.RecetaRepository;
-import com.uniminuto.clinica.service.RecetaService;
-import org.springframework.stereotype.Service;
 
+import com.uniminuto.clinica.service.RecetaService;
+import java.time.LocalDateTime;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
@@ -39,24 +41,15 @@ public class RecetaServiceImpl implements RecetaService {
         receta.setMedicamento(medicamento);
         receta.setDosis(dosis);
         receta.setIndicaciones(indicaciones);
+        if(receta.getFechaCreacionRegistro() == null) {
+            receta.setFechaCreacionRegistro(LocalDateTime.now());
+        }
 
         return recetaRepository.save(receta);
     }
 
     @Override
-    public Receta getRecetaById(Long id) {
-        return recetaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Receta no encontrada con id " + id));
+    public List<Receta> obtenerRecetasOrdenadasPorFechaDesc() {
+        return recetaRepository.findAllByOrderByFechaCreacionRegistroDesc();
     }
-
-    @Override
-    public List<Receta> getRecetasByCita(Long citaId) {
-        return recetaRepository.findByCitaId(citaId);
-    }
-
-
 }
-
-
-
-

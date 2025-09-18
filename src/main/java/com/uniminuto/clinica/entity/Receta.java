@@ -2,6 +2,9 @@ package com.uniminuto.clinica.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "receta")
@@ -12,20 +15,25 @@ public class Receta implements Serializable {
     private Long id;
 
     // Relación con Cita
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cita_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Cita cita;
 
     // Relación con Medicamento
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "medicamento_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Medicamento medicamento;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "dosis")
     private String dosis;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "indicaciones")
     private String indicaciones;
+    
+    @Column(name = "fecha_creacion_registro", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime fechaCreacionRegistro;
 
     // Getters y Setters
     public Long getId() 
@@ -52,5 +60,12 @@ public class Receta implements Serializable {
         { return indicaciones; }
     public void setIndicaciones(String indicaciones) 
         { this.indicaciones = indicaciones; }
+    
+    public LocalDateTime getFechaCreacionRegistro() {
+        return fechaCreacionRegistro;
+    }
+    public void setFechaCreacionRegistro(LocalDateTime fechaCreacionRegistro) {
+        this.fechaCreacionRegistro = fechaCreacionRegistro;
+    }
 }
     
