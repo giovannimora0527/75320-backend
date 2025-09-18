@@ -36,6 +36,13 @@ public interface PacienteApi {
     ResponseEntity<Paciente> buscarPacienteXIdentificacion(
             @RequestParam String numeroDocumento) 
             throws BadRequestException;
+    
+    @RequestMapping(value = "/listaPorFNacimientoASC",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Paciente>> listaPacienteFechaASC();
+    
 }
 
 
