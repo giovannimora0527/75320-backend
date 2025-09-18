@@ -141,4 +141,11 @@ public class PacienteApiController implements PacienteApi {
         long conteo = pacienteService.contarPacientesActivos();
         return ResponseEntity.ok(conteo);
     }
+
+    @Override
+    public ResponseEntity<List<Paciente>> listarPacientesPorFechaNacimiento() {
+        List<Paciente> pacientes = pacienteService.listarPacientesOrdenadosPorFechaNacimiento();
+        return ResponseEntity.ok(pacientes);
+    }
+
 }

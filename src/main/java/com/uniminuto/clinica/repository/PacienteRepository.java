@@ -76,4 +76,12 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
      * @return Número de pacientes activos
      */
     long countByActivoTrue();
+
+    /**
+     * Lista todos los pacientes ordenados por fecha de nacimiento (de mayor a menor).
+     *
+     * @return Lista de pacientes ordenados
+     */
+    List<Paciente> findAllByOrderByFechaNacimientoDesc();
+
 }

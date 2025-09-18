@@ -167,5 +167,16 @@ public interface PacienteApi {
             produces = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Long> contarPacientesActivos();
+
+    /**
+     * Lista todos los pacientes ordenados por fecha de nacimiento (de mayor a menor).
+     *
+     * @return Lista de pacientes ordenados
+     */
+    @RequestMapping(value = "/listar-por-fecha-nacimiento",
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Paciente>> listarPacientesPorFechaNacimiento();
+
 }
 

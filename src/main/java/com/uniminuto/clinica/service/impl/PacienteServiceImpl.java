@@ -23,6 +23,11 @@ public class PacienteServiceImpl implements PacienteService {
     private PacienteRepository pacienteRepository;
 
     @Override
+    public List<Paciente> listarPacientesOrdenadosPorFechaNacimiento() {
+        return pacienteRepository.findAllByOrderByFechaNacimientoDesc();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Paciente> encontrarTodosLosPacientes() {
         return pacienteRepository.findAll();
@@ -132,5 +137,7 @@ public class PacienteServiceImpl implements PacienteService {
     public long contarPacientesActivos() {
         return pacienteRepository.countByActivoTrue();
     }
+
+
 }
 
