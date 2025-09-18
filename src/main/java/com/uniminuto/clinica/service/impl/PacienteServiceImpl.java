@@ -26,25 +26,28 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
-
+        
         Optional<Paciente> optPaciente = this.PacienteRepository.findByNumeroDocumento(documento);
         if (!optPaciente.isPresent()) {
             throw new BadRequestException("No se encuentra el paciente");
-
+        
         }
         return optPaciente.get();
     }
-
+    
+    
     /**
      *
      * @author JulianLopez
      *
-     * Nuevo método: listar pacientes en orden ascendente (más viejo -> más
-     * joven)
+     *    Nuevo método: listar pacientes en orden ascendente (más viejo -> más joven)
+
      */
-    @Override
+
+   @Override
     public List<Paciente> encontrarPacientesOrdenadosPorFechaNacimientoAsc() {
         return PacienteRepository.findAllByOrderByFechaNacimientoAsc();
+    } 
+    
 
-    }
 }

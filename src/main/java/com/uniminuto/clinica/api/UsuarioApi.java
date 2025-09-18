@@ -32,9 +32,7 @@ public interface UsuarioApi {
     /**
      * Lista los usuarios de la bd.
      *
-     * @param username
      * @return
-     * @throws org.apache.coyote.BadRequestException
      */
     @RequestMapping(value = "/buscar-usuario",
             produces = {"application/json"},
@@ -42,7 +40,6 @@ public interface UsuarioApi {
             method = RequestMethod.GET)
     ResponseEntity<Usuario> buscarUsuarioXUsername(
             @RequestParam String username) 
-<<<<<<< HEAD
             throws BadRequestException;
 
     /**
@@ -59,7 +56,4 @@ public interface UsuarioApi {
             @RequestBody UsuarioRq usuarioRq)
             throws BadRequestException;
         
-=======
-            throws BadRequestException;    
->>>>>>> 62bbf5ad50e20053f4fca59ad1ef11555df8f6bf
 }
