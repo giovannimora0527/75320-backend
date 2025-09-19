@@ -1,4 +1,4 @@
-package com.uniminuto.clinica.service.impl;
+package com.uniminuto.clinica.service.lmpl;
 
 /**
  *

@@ -1,4 +1,4 @@
-package com.uniminuto.clinica.service.impl;
+package com.uniminuto.clinica.service.lmpl;
 
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.ClinicaService;

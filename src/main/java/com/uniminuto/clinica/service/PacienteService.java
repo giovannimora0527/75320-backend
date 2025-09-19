@@ -123,4 +123,18 @@ public interface PacienteService {
      * @return Número de pacientes activos
      */
     long contarPacientesActivos();
+    
+    /**
+     * Obtiene todos los pacientes ordenados por fecha de nacimiento ascendente (de mayor a menor edad).
+     *
+     * @return Lista de pacientes ordenados por fecha de nacimiento ascendente
+     */
+    List<Paciente> encontrarPacientesOrdenadosPorEdadDesc();
+
+    /**
+     * Obtiene todos los pacientes ordenados por fecha de nacimiento descendente (de menor a mayor edad).
+     *
+     * @return Lista de pacientes ordenados por fecha de nacimiento descendente
+     */
+    List<Paciente> encontrarPacientesOrdenadosPorEdadAsc();
 }

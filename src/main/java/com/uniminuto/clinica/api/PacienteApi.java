@@ -171,4 +171,10 @@ public interface PacienteApi {
             produces = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Long> contarPacientesActivos();
+    
+    @RequestMapping(value = "/ordenados-por-edad",
+        produces = {"application/json"},
+        method = RequestMethod.GET)
+ResponseEntity<List<Paciente>> listarPacientesOrdenadosPorEdad(
+        @RequestParam(defaultValue = "desc") String orden);
 }

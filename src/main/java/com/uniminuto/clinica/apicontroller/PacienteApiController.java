@@ -145,4 +145,18 @@ public class PacienteApiController implements PacienteApi {
         long conteo = pacienteService.contarPacientesActivos();
         return ResponseEntity.ok(conteo);
     }
+    
+    // NUEVO ENDPOINT AGREGADO
+    @GetMapping("/ordenados-por-edad")
+    public ResponseEntity<List<Paciente>> listarPacientesOrdenadosPorEdad(
+            @RequestParam(defaultValue = "desc") String orden) {
+        
+        List<Paciente> pacientes;
+        if ("asc".equalsIgnoreCase(orden)) {
+            pacientes = pacienteService.encontrarPacientesOrdenadosPorEdadAsc();
+        } else {
+            pacientes = pacienteService.encontrarPacientesOrdenadosPorEdadDesc();
+        }
+        return ResponseEntity.ok(pacientes);
+    }
 }

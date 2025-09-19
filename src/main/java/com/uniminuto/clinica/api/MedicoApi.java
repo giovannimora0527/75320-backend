@@ -31,7 +31,9 @@ public interface MedicoApi {
     /**
      * Lista los medicos por especializacion de la bd.
      *
+     * @param codigo
      * @return
+     * @throws org.apache.coyote.BadRequestException
      */
     @RequestMapping(value = "/listar-por-especializacion",
             produces = {"application/json"},
