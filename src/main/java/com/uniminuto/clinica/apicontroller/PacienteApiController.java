@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
  * @author lmora
  */
 @RestController
-@RequestMapping("/api/pacientes")
 public class PacienteApiController implements PacienteApi {
 
     @Autowired
@@ -140,5 +139,10 @@ public class PacienteApiController implements PacienteApi {
     public ResponseEntity<Long> contarPacientesActivos() {
         long conteo = pacienteService.contarPacientesActivos();
         return ResponseEntity.ok(conteo);
+    }
+
+    @Override
+    public ResponseEntity<List<Paciente>> listarPorFechaNacimientoDesc() {
+       return ResponseEntity.ok(pacienteService.listarPorFechaNacimientoDesc());
     }
 }

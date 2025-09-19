@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author lmora
  */
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/pacientes")
+@RequestMapping("/paciente")
 public interface PacienteApi {
 
     /**
@@ -167,4 +167,15 @@ public interface PacienteApi {
             produces = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Long> contarPacientesActivos();
+
+    /**
+     * Lista pacientes ordenados por fecha de nacimiento descendente.
+     *
+     * @return Lista ordenada
+     */
+    @RequestMapping(value = "/listar-por-fecha-nacimiento-desc",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Paciente>> listarPorFechaNacimientoDesc();
 }

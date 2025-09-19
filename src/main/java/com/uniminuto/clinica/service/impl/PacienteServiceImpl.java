@@ -132,4 +132,10 @@ public class PacienteServiceImpl implements PacienteService {
     public long contarPacientesActivos() {
         return pacienteRepository.countByActivoTrue();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Paciente> listarPorFechaNacimientoDesc() {
+        return pacienteRepository.findAllByOrderByFechaNacimientoDesc();
+    }
 }

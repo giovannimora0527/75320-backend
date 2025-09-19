@@ -119,4 +119,11 @@ public interface PacienteService {
      * @return Número de pacientes activos
      */
     long contarPacientesActivos();
+
+    /**
+     * Lista pacientes ordenados por fecha de nacimiento descendente.
+     *
+     * @return Lista ordenada
+     */
+    List<Paciente> listarPorFechaNacimientoDesc();
 }

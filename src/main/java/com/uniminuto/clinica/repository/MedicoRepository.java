@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @author lmora
  */
 @Repository
-public interface MedicoRepository extends JpaRepository<Medico, Integer> {
+public interface MedicoRepository extends JpaRepository<Medico, Long> {
     
 }

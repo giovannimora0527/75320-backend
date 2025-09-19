@@ -7,17 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  *
  * @author lmora
  */
-@Data
-@Getter
-@Setter
 @Entity
 @Table(name = "medico")
 public class Medico implements Serializable {
@@ -69,4 +63,66 @@ public class Medico implements Serializable {
      */
     @Column(name = "registro_profesional")
     private String registroProfesional;
+
+    // Constructor por defecto
+    public Medico() {
+    }
+
+    // Getters y Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getRegistroProfesional() {
+        return registroProfesional;
+    }
+
+    public void setRegistroProfesional(String registroProfesional) {
+        this.registroProfesional = registroProfesional;
+    }
 }
