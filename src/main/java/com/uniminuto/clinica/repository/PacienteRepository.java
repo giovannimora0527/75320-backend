@@ -10,19 +10,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author Alkri
- */
 @Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Long> {
-    Optional<Paciente> findByNombres(String nombres);
-    Optional<Paciente> findByNumeroDocumento(String numeroDocumento);
+public interface PacienteRepository extends JpaRepository<Paciente, Integer>{
     
-    /**
-     * se enlistan los pacientes de mayor a menor o manera Ascendente
-     * @return 
-     */
-    List<Paciente> findAllByOrderByFechaNacimientoAsc();
-    
+      // Buscar un paciente por número de documento
+    Optional<Paciente> findByNumeroDocumento(String documento);
+     // Listar todos los pacientes ordenados por fecha de nacimiento (mayor a menor)
+    List<Paciente> findAllByOrderByFechaNacimientoAsc(); 
 }
+

@@ -4,30 +4,31 @@
  */
 package com.uniminuto.clinica.model;
 
-import com.uniminuto.clinica.entity.Cita;
-import com.uniminuto.clinica.entity.Medicamento;
+import java.time.LocalDateTime;
 import lombok.Data;
-
-@Data
 
 /**
  *
- * @author alkri
+ * @author Andre
  */
+
+
+/**
+ * Objeto de entrada para el JSON
+ */
+
+@Data
 public class RecetaRq {
-
-    /**
-     * Id del medicamento.
-     */
-    private Integer id;
-    private Integer citaId;
-    private Integer medicamentoId;
-    /**
-     * Nombre.
-     */
-
-    private String dosis;
-
+    
+    
+    private Long id; 
+    
+    private Long citaId; 
+    
+    private Integer medicamentoId; 
+    
+    private String dosis; 
+    
     private String indicaciones;
-
+    
 }

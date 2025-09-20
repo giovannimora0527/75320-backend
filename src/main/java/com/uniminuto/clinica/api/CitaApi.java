@@ -17,22 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * 
- * @author diego
+ * Api de Cita
  */
-
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/cita")
 public interface CitaApi {
-    
-    
-@RequestMapping(value = "/listar",
-    produces = {"application/json"},
-    consumes = {"application/json"},
-    method = RequestMethod.GET)
-    ResponseEntity<List<Cita>> listarCitas();
-     
+    /**
+     * Endpoint para listar las citas
+     */
+    @RequestMapping(value = "/listar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Cita>> listarCita();
+    /**
+     * Endpoint para guardar las citas
+     */
     @RequestMapping(value = "/guardar",
             produces = {"application/json"},
             consumes = {"application/json"},
@@ -40,7 +41,12 @@ public interface CitaApi {
     ResponseEntity<RespuestaRs> guardarCita(
             @RequestBody CitaRq citaRq
     ) throws BadRequestException;
-
-    
-    
+    /**
+     * Endpoint para listar las citas por fecha
+     */
+    @RequestMapping(value = "/listar-por-fecha",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Cita>> ListarCitasOrdenadas();   
 }

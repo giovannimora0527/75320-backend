@@ -13,30 +13,15 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author diego
+ * @author Andre
  */
 @Repository
-public interface CitaRepository extends JpaRepository<Cita, Integer> {
-
+public interface CitaRepository extends JpaRepository <Cita, Long>{
+    Optional<Cita> findByMedico_IdAndFechaHora(Long medicoId, LocalDateTime fechaHora);
+    
+    
     /**
-     * 
-     * @param pacienteId
-     * @param fechaHora
-     * @return 
+     * Metodo listar por fecha
      */
-    Optional<Cita> findByPacienteIdAndFechaHora(Integer pacienteId, LocalDateTime fechaHora);
-
-    /**
-     * 
-     * @param medicoId
-     * @param fechaHora
-     * @return 
-     */     
-    Optional<Cita> findByMedicoIdAndFechaHora(Long medicoId, LocalDateTime fechaHora);
-
-    /**
-     * 
-     * @return 
-     */
-    List<Cita> findAllByOrderByFechaHoraDesc();
+    List<Cita>findAllByOrderByFechaHoraDesc();
 }

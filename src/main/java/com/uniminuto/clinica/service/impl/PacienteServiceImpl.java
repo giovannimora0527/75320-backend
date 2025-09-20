@@ -15,56 +15,32 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Alkri
+ * @author lmora
  */
 @Service
-public class PacienteServiceImpl implements PacienteService{
-    
-    /**
-     * PacienteRepository.
-     */
+public class PacienteServiceImpl implements PacienteService {
+
     @Autowired
-    private PacienteRepository pacienteRepository;
-    
+    private PacienteRepository PacienteRepository;
+
     @Override
     public List<Paciente> encontrarTodosLosPacientes() {
-        return this.pacienteRepository.findAll();
+        return this.PacienteRepository.findAll();
     }
 
     @Override
-    public Paciente encontrarPacientePorNombre(String nombres) throws BadRequestException {
-        Optional<Paciente> optUser = this.pacienteRepository
-                .findByNombres(nombres);
-        if (!optUser.isPresent()) {
-            throw new BadRequestException("PACIENTE NO ENCONTRADO.");
-        }
+    public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
         
-        return optUser.get();
+        Optional<Paciente> optPaciente = this.PacienteRepository.findByNumeroDocumento(documento);
+        if (!optPaciente.isPresent()) {
+            throw new BadRequestException("No se encuentra el paciente");
+        
+        }
+        return optPaciente.get();
     }
     @Override
-    public Paciente buscarPorNumeroDocumento(String numeroDocumento) throws BadRequestException {
-        Optional<Paciente> optUser = this.pacienteRepository
-                .findByNumeroDocumento(numeroDocumento);
-        if (!optUser.isPresent()) {
-            throw new BadRequestException("PACIENTE NO ENCONTRADO POR DOCUMENTO.");
-        }
-        
-        return optUser.get();
+    public List<Paciente> listarPacientesPorFechaNacimiento (){
+        return this.PacienteRepository.findAllByOrderByFechaNacimientoAsc();
     }
-    
-    /**
-     * se hace la implementacion del servicio en forma Ascendente
-     * @return todos los pacientes ordenados
-     * @throws BadRequestException 
-     */
-       @Override
-    public List<Paciente> listarPorFecha()throws BadRequestException{
-        
-        List<Paciente> pacientes = this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
-        if (pacientes.isEmpty()) {
-            throw new BadRequestException("NO HAY REGISTROS");
-        }
-        return pacientes;
-    }
-    
+
 }

@@ -10,47 +10,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- *
- * @author Alkri
+ * Api de paciente
  */
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/paciente")
 
 public interface PacienteApi {
-    
-    /* Lista los pacientes de la bd */
+    /**
+     * Endpoint para listar los pacientes
+     */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Paciente>> listarPacientes();
-    
-    @RequestMapping(value = "/buscar-paciente",
+    /**
+     * Endpoint para buscar los pacientes por documento
+     */
+    @RequestMapping(value = "/buscar-paciente-documento",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<Paciente> buscarPacientePornombres(
-            @RequestParam String nombres) 
+    ResponseEntity<Paciente> buscarPacienteXIdentificacion(
+            @RequestParam String numeroDocumento) 
             throws BadRequestException;
-    
-    @RequestMapping(value = "/buscar-documento",
-        produces = {"application/json"},
-        consumes = {"application/json"},
-        method = RequestMethod.GET)
-    ResponseEntity<Paciente> buscarPacientePorDocumento(
-        @RequestParam String numeroDocumento) 
-        throws BadRequestException;
 
     /**
-     * se ponen los datos los cuales se pondran en el postman para la visualizacion
-     * @return
-     * @throws BadRequestException 
+     * Endpoint para listar los pacientes de mayor a menor por la fecha de nacimiento
      */
-    @RequestMapping(value = "/cumpleaños",
-        produces = {"application/json"},
-        consumes = {"application/json"},
-        method = RequestMethod.GET)
-ResponseEntity<List<Paciente>> listarPorFecha() throws BadRequestException;
-    
+    @RequestMapping(value ="/cumpleaños",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Paciente>> listarPacientesPorFechaNacimiento();
 }

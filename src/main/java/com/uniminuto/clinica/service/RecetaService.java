@@ -12,22 +12,13 @@ import org.apache.coyote.BadRequestException;
 
 /**
  *
- * @author DELL
+ * @author Andre
  */
-public interface RecetaService {
-    /**
-     * Lista todas las recetas de la bd.
-     * @return Lista de usuarios.
-     */
-    List<Receta> encontrarTodasLasRecetas();
-    
-    /**
-     * Buscamos un usuario dado su username.
-     * @param username username a buscar.
-     * @return Usuario que cumpla con el criterio.
-     */
-    Receta encontrarRecetaPorId(int id) throws BadRequestException;
-    
-    RespuestaRs guardarRecetaPorIndicaciones(RecetaRq receta) throws BadRequestException;
 
+
+public interface RecetaService {
+    
+    List<Receta> listarRecetas();
+    
+    RespuestaRs guardarReceta(RecetaRq receta) throws BadRequestException;
 }

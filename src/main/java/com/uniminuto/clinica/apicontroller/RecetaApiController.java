@@ -8,6 +8,7 @@ import com.uniminuto.clinica.api.RecetaApi;
 import com.uniminuto.clinica.entity.Receta;
 import com.uniminuto.clinica.model.RecetaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.repository.RecetaRepository;
 import com.uniminuto.clinica.service.RecetaService;
 import java.util.List;
 import org.apache.coyote.BadRequestException;
@@ -17,27 +18,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author DELL
+ * @author Andre
  */
+
 @RestController
 public class RecetaApiController implements RecetaApi{
+    
+    /**
+    * Inyectar el servicio.
+    */
     @Autowired
     private RecetaService recetaService;
 
     @Override
-    public ResponseEntity<List<Receta>> listarReceta() {
-        return ResponseEntity.ok(recetaService.encontrarTodasLasRecetas());
+    public ResponseEntity<List<Receta>> listarRecetas() {
+        return ResponseEntity.ok(this.recetaService.listarRecetas());
+        
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> guardarReceta(RecetaRq recetaRq) throws BadRequestException {
+        return ResponseEntity.ok(this.recetaService.guardarReceta(recetaRq));
+        
     }
     
-    @Override
-    public ResponseEntity<Receta> buscarRecetaXId(int id)
-            throws BadRequestException {
-        return ResponseEntity.ok(recetaService
-                .encontrarRecetaPorId(id));
-    }
-    @Override
-    public ResponseEntity<RespuestaRs> guardarRecetaPorIndicaciones(RecetaRq recetaRq)
-            throws BadRequestException {
-        return ResponseEntity.ok(this.recetaService.guardarRecetaPorIndicaciones(recetaRq));
-    }
 }

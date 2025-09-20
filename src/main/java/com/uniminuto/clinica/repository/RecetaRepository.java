@@ -5,18 +5,14 @@
 package com.uniminuto.clinica.repository;
 
 import com.uniminuto.clinica.entity.Receta;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author DELL
+ * @author Oskr
  */
-@Repository
-public interface RecetaRepository extends JpaRepository<Receta, Integer> {
-    Optional<Receta> findById(int id);
-    Optional<Receta> findByIndicaciones (String indicaciones);
+public interface RecetaRepository extends JpaRepository<Receta,Long>{
+    
 }
 
 

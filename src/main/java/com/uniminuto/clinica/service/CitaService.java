@@ -11,12 +11,20 @@ import java.util.List;
 import org.apache.coyote.BadRequestException;
 
 /**
- * 
- * @author diego
+ *
+ * @author Andre
  */
+
+
 public interface CitaService {
-    List<Cita> listarCitas();
- RespuestaRs guardarCita(CitaRq cita) throws BadRequestException;
-    
-    
+        List<Cita> listarCita();
+        
+        // servicio para guardar.
+        RespuestaRs guardarCita(CitaRq cita) throws BadRequestException;   
+        
+        /**
+         * listar por fecha hora
+         */
+        
+        List<Cita>ListarCitasOrdenadas();
 }

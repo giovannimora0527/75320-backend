@@ -16,24 +16,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
- * @author diego
+ * Controlador de la Api de cita
  */
 
 @RestController
-public class CitaApiController implements CitaApi {
+public class CitaApiController implements CitaApi{
     
     @Autowired
     private CitaService citaService;
-    
+
     @Override
-    public ResponseEntity<List<Cita>> listarCitas() {
-       return ResponseEntity.ok(citaService.listarCitas());
-    }
-    
-    @Override
-    public ResponseEntity<RespuestaRs> guardarCita(CitaRq citaRq) throws BadRequestException {
-        return ResponseEntity.ok(this.citaService.guardarCita(citaRq));
+    public ResponseEntity<List<Cita>> listarCita() {
+        return ResponseEntity.ok(this.citaService.listarCita());  
     }
 
+    @Override
+    public ResponseEntity<RespuestaRs> guardarCita(CitaRq citaRq) throws BadRequestException {
+       return ResponseEntity.ok(this.citaService.guardarCita(citaRq));
+    }
+    
+     @Override
+    public ResponseEntity<List<Cita>> ListarCitasOrdenadas() {
+        return ResponseEntity.ok(this.citaService.ListarCitasOrdenadas());  
+    }
 }

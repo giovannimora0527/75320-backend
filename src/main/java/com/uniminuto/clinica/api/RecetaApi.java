@@ -14,47 +14,30 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Api de Receta
- * @author DELL
+ * Api de receta
  */
 
-/**
- * Permite que Postman consuma la API
- */
 @CrossOrigin(origins = "*")
-/**
- * Todas las rutas de esta API comenzarán con /receta
- */
 @RequestMapping("/receta")
 public interface RecetaApi {
     /**
-     * Endpoint para listar las recetas de la bd.
+     * Endpoint para listar las recetas
      */
     @RequestMapping(value = "/listar",
-            produces = {"application/json"}, // La respuesta será en formato JSON
-            consumes = {"application/json"}, // Indica que consume JSON
-            method = RequestMethod.GET) // Tipo de petición: GET
-    ResponseEntity<List<Receta>> listarReceta();
-    
-    /**
-     * Endpoint para buscar una receta por su id.
-     */
-    @RequestMapping(value = "/buscar-receta",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<Receta> buscarRecetaXId(
-            @RequestParam int id) // Recibe el parámetro "id" desde la URL
-            throws BadRequestException; //Puede lanzar una excepción si hay un error
-    
+    ResponseEntity<List<Receta>> listarRecetas(); 
+    /**
+     * Endpoint para guardar las recetas
+     */
     @RequestMapping(value = "/guardar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<RespuestaRs> guardarRecetaPorIndicaciones(
+    ResponseEntity<RespuestaRs> guardarReceta(
             @RequestBody RecetaRq recetaRq
-    ) throws BadRequestException;
+    ) throws BadRequestException;   
 }

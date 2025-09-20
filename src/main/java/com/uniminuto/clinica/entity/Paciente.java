@@ -6,7 +6,6 @@
 package com.uniminuto.clinica.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,16 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
-
-/**
- *
- * @author Alkri
- */
+   
 @Data
 @Entity
 @Table(name = "paciente")
 public class Paciente implements Serializable {
-    /**
+    
+       /**
      * Id serializable.
      */
     private static final long serialVersionUID = 1L;
@@ -34,50 +30,33 @@ public class Paciente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    /**
-     * Username.
-     */
+    
     @Column(name = "usuario_id")
-    private int usuarioId;
-    /**
-     * Tipo de documento.
-     */
+    private  Integer usuarioId;
+    
     @Column(name = "tipo_documento")
-    private String tipoDocumento;
-    /**
-     * Numero de documento.
-     */
+    private  String tipoDocumento;
+    
     @Column(name = "numero_documento")
-    private String numeroDocumento;    
-    /**
-     * Nombres.
-     */
+    private  String numeroDocumento;
+    
     @Column(name = "nombres")
-    private String nombres;
-    /**
-     * Apellidos.
-     */
+    private  String nombres ; 
+    
     @Column(name = "apellidos")
-    private String apellidos;
-    /**
-     * Fecha de nacimiento.
-     */
+    private  String apellidos ; 
+    
     @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
-    /**
-     * Genero.
-     */
+    private  String fechaNacimiento ; 
+    
     @Column(name = "genero")
-    private char genero;
-    /**
-     * Telefono.
-     */
+    private  String genero ;
+    
     @Column(name = "telefono")
-    private String telefono;
-    /**
-     * Direccion.
-     */
+private  String telefono ;    
+    
     @Column(name = "direccion")
-    private String direccion;
+private  String direccion ;                                
+                       
 }
 

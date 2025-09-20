@@ -10,28 +10,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- *
- * @author lmora
+ * Api de medico
  */
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/medico")
 public interface MedicoApi {
     /**
-     * Lista los usuarios de la bd.
-     *
-     * @return
+     * Endpoint para listar los medicos
      */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Medico>> listarMedicos();
-    
-    
     /**
-     * Lista los medicos por especializacion de la bd.
-     *
-     * @return
+     * Endpoint para listar los medicos por especializacion
      */
     @RequestMapping(value = "/listar-por-especializacion",
             produces = {"application/json"},

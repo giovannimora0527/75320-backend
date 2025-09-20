@@ -9,100 +9,115 @@ import com.uniminuto.clinica.entity.Medicamento;
 import com.uniminuto.clinica.entity.Receta;
 import com.uniminuto.clinica.model.RecetaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
-import com.uniminuto.clinica.repository.MedicamentoRepository;
-import com.uniminuto.clinica.repository.CitaRepository;
 import com.uniminuto.clinica.repository.RecetaRepository;
 import com.uniminuto.clinica.service.RecetaService;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-
 
 /**
  *
- * @author DELL
+ * @author Andre
  */
 @Service
 public class RecetaServiceImpl implements RecetaService{
+    
+    
     /**
-     * UsuarioRepository.
+     * Inyectar el repositorio.
      */
     @Autowired
-    private RecetaRepository RecetaRepository;
-
-    @Override
-    public List<Receta> encontrarTodasLasRecetas() {        
-        return this.RecetaRepository.findAll();
-    }
-
-    @Override
-    public Receta encontrarRecetaPorId(int id) 
-            throws BadRequestException {
-        Optional<Receta> optUser = this.RecetaRepository
-                .findById(id);
-        if (!optUser.isPresent()) {
-            throw new BadRequestException("No se encuentra la receta.");
-        }
-        
-        return optUser.get();
-    }
+    private RecetaRepository recetaRepository;
+    
+    /**
+     * Implementar metodos.
+     */
     
     @Override
-    public RespuestaRs guardarRecetaPorIndicaciones(RecetaRq receta) throws BadRequestException {
+    public List<Receta> listarRecetas(){
+        return recetaRepository.findAll();
+    
+    }
+    
+    /**
+     * Metodo guardar.
+     */
+    
+    @Override
+    public RespuestaRs guardarReceta(RecetaRq receta)throws BadRequestException {
         this.validadorCampos(receta);
-        Optional<Receta> optMedic = this.RecetaRepository
-                .findByIndicaciones(receta.getIndicaciones());
-        if (optMedic.isPresent()) {
-            throw new BadRequestException("la receta ya existe");
-        }
-        Receta objGuardar = this.convertirARecetaClass(receta);
-        this.RecetaRepository.save(objGuardar);
-        RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Se guardo la receta satisfactoriamente");
-        rta.setStatus(200);
-        return rta;
-    }
-
-    private void validadorCampos(RecetaRq receta) throws BadRequestException {
-        
-        if (receta.getCitaId() == null) {
-            throw new BadRequestException("Cita es obligatoria");
-        }
-        
-        if (receta.getMedicamentoId() == null ) {
-            throw new BadRequestException("Medicamento es obligatoria");
-        }
-        if (receta.getDosis() == null || receta.getDosis().isBlank() ||
-                receta.getDosis().isEmpty()) {
-            throw new BadRequestException("Dosis es obligatoria");
-        }
-        
-        if (receta.getIndicaciones() == null || receta.getIndicaciones().isBlank() ||
-                receta.getIndicaciones().isEmpty()) {
-            throw new BadRequestException("Indicaciones es obligatoria");
-        }
     
+    /**
+    * Guarda el objeto.
+    */
+    Receta objGuardar =this.convertirRecetaClass(receta);
+    this.recetaRepository.save(objGuardar);
+    RespuestaRs rta = new RespuestaRs();
+    rta.setMessage("Receta guardada exitosamente");
+    rta.setStatus(200);
+    return rta;
     }
+            
+        
+      /**
+     * Validador de campos.
+     */
+    
+    private void validadorCampos(RecetaRq receta)throws BadRequestException{
+        if (receta.getCitaId() == null) {
+            throw new BadRequestException("El ID de la cita es obligatorio");
+        }
+            if (receta.getMedicamentoId() == null)  {
+            throw new BadRequestException("El Id del medicamento es obligatorio");
+        }
 
-       /**
-        * private Receta convertirARecetaClass(RecetaRq recetaRq){
+        if (receta.getDosis() == null|| receta.getDosis().isBlank()||
+                receta.getDosis().isEmpty()) {
+        throw new BadRequestException("La docis es obligatorias");
+        }
+
+        if (receta.getIndicaciones() == null || receta.getIndicaciones().isBlank()||
+                receta.getIndicaciones().isEmpty()) {
+        throw new BadRequestException("Las indicaciones son obligatorias");
+        }
+
+    }
+      
+     /**
+     * Convertir objeto.
+     */
+    
+    private Receta convertirRecetaClass(RecetaRq recetaRq){
         Receta nuevo = new Receta();
-        // Cita
-        Optional<Cita> optCita = this.citaRepository.findById(recetaRq.getCitaId());       
-        nuevo.setCita(optCita.get());
+        
+    /**
+     * Cita.
+     */
+    
+    Cita cita = new Cita();
+    cita.setId(recetaRq.getCitaId());
+    nuevo.setCita(cita);
+    
+    /**
+     * Medicamento.
+     */
 
-        // Medicamento.
-        Medicamento medicamento = new Medicamento();
-        medicamento.setId(recetaRq.getMedicamentoId());
-        nuevo.setMedicamento(medicamento);
+    Medicamento medicamento = new Medicamento();
+    medicamento.setId(recetaRq.getMedicamentoId());
+    nuevo.setMedicamento(medicamento);    
+    
+    /**
+     * Otros campos.
+     */
 
-      **/
-        nuevo.setDosis(recetaRq.getDosis());
-        nuevo.setIndicaciones(recetaRq.getIndicaciones());
-        nuevo.setFechaCreacionRegistro(LocalDateTime.now());
-        return nuevo;
-    }
+    nuevo.setDosis(recetaRq.getDosis());
+    nuevo.setIndicaciones(recetaRq.getIndicaciones());
+    nuevo.setFechaCreacionRegistro(LocalDateTime.now());      
+    
+    
+    return nuevo;
+    
+}
 }

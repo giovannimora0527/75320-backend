@@ -14,12 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
- * @author Alkri
+ * Controlador de la Api de paciente
  */
 
 @RestController
 public class PacienteApiController implements PacienteApi {
+
     @Autowired
     private PacienteService pacienteService;
 
@@ -29,23 +29,13 @@ public class PacienteApiController implements PacienteApi {
     }
 
     @Override
-    public ResponseEntity<Paciente> buscarPacientePornombres(String nombres) throws BadRequestException {
-        return ResponseEntity.ok(pacienteService.encontrarPacientePorNombre(nombres));
+    public ResponseEntity<Paciente> buscarPacienteXIdentificacion(String numeroDocumento)
+            throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.buscarPacientePorDocumento(numeroDocumento));
     }
     
     @Override
-    public ResponseEntity<Paciente> buscarPacientePorDocumento(String numeroDocumento) throws BadRequestException {
-        return ResponseEntity.ok(pacienteService.buscarPorNumeroDocumento(numeroDocumento));
-    }
-    
-    /**
-     * se hace uso del api controller para que los atributos sean correctos
-     * @return
-     * @throws BadRequestException 
-     */
-    @Override
-    public ResponseEntity<List<Paciente>> listarPorFecha() throws BadRequestException {
-      List<Paciente> pacientes = pacienteService.listarPorFecha();
-     return ResponseEntity.ok(pacientes);
+    public ResponseEntity<List<Paciente>>  listarPacientesPorFechaNacimiento(){
+            return ResponseEntity.ok(pacienteService.listarPacientesPorFechaNacimiento());
     }
 }

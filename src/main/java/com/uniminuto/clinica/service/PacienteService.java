@@ -5,26 +5,16 @@
 package com.uniminuto.clinica.service;
 
 import com.uniminuto.clinica.entity.Paciente;
-import java.time.LocalDate;
 import java.util.List;
 import org.apache.coyote.BadRequestException;
 
 /**
  *
- * @author Alkri
+ * @author lmora
  */
 public interface PacienteService {
- /**
-     * Lista todos los pacientes de la bd.
-     * @return Lista de pacientes.
-     */
-    List<Paciente> encontrarTodosLosPacientes(); 
-    Paciente encontrarPacientePorNombre(String nombres) throws BadRequestException;
-    Paciente buscarPorNumeroDocumento(String numeroDocumento) throws BadRequestException;
-    /**
-     * se listan los pacientes por fecha de mayor a menor
-     * @return
-     * @throws BadRequestException 
-     */
-    List<Paciente>listarPorFecha()throws BadRequestException;
+      List<Paciente> encontrarTodosLosPacientes();
+      Paciente buscarPacientePorDocumento(String documento) throws BadRequestException;
+      // metodo para listar por feche de nacimiento
+      List<Paciente>listarPacientesPorFechaNacimiento();
 }

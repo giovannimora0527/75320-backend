@@ -23,7 +23,7 @@ public class MedicamentoRq {
 
     private String presentacion;
 
-    private LocalDate fechaCompra;
+    private LocalDate fechaCmpra;
 
     private LocalDate fechaVence;
 }
