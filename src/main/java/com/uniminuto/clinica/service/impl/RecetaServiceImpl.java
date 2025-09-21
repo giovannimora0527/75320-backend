@@ -8,6 +8,7 @@ import com.uniminuto.clinica.model.RecetaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.repository.RecetaRepository;
 import com.uniminuto.clinica.service.RecetaService;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +111,8 @@ public class RecetaServiceImpl implements RecetaService{
 
     nuevo.setDosis(recetaRq.getDosis());
     nuevo.setIndicaciones(recetaRq.getIndicaciones());
+    nuevo.setFechaCreacionRegistro(LocalDateTime.now());      
+    
     
     return nuevo;
     

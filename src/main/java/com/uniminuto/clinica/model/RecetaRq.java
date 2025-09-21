@@ -1,6 +1,7 @@
 
 package com.uniminuto.clinica.model;
 
+import java.time.LocalDateTime;
 import lombok.Data;
 
 /**

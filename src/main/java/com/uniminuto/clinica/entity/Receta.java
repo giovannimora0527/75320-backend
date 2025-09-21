@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -50,6 +51,9 @@ public class Receta implements Serializable{
     
     @Column(name = "indicaciones")
     private String indicaciones; 
+    
+    @Column(name = "fecha_creacion_registro")
+    private LocalDateTime fechaCreacionRegistro;
     
   
 }
