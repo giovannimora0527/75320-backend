@@ -1,0 +1,29 @@
+package com.uniminuto.clinica.service;
+
+import com.uniminuto.clinica.entity.Usuario;
+import java.util.List;
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.model.UsuarioRq;
+import org.apache.coyote.BadRequestException;
+
+/**
+* Servicio de usuario
+*/
+/**
+* @author Anderson
+*/
+
+public interface UsuarioService {
+    /**
+    * Servicio para listar los usuarios
+    */
+    List<Usuario> encontrarTodosLosUsuarios();
+    /**
+    * Servicio para buscar usuario por username
+    */
+    Usuario encontrarUsuarioPorNombre(String username) throws BadRequestException;
+    /**
+    * Servicio para guardar usuario
+    */
+    RespuestaRs guardarUsuario(UsuarioRq usuarioNuevo) throws BadRequestException;
+}
