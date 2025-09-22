@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.entity;
+
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,30 +9,51 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "paciente")
-@Data
-public class Paciente {
+public class Paciente implements Serializable {
+    
+       /**
+     * Id serializable.
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * Id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "tipo_documento", nullable = false)
-    private String tipoDocumento;
-
-    @Column(name = "numero_documento", nullable = false, unique = true)
-    private String numeroDocumento;
-
-    private String nombres;
-    private String apellidos;
-    private String telefono;
-    private String direccion;
-
-    @Column(name = "fecha_nacimiento")
-    private String fechaNacimiento;
-
-    private String genero;
-
+    @Column(name = "id")
+    
+    private Integer id;
     @Column(name = "usuario_id")
-    private Long usuarioId;
+    
+    private  Integer usuarioId;
+    
+     @Column(name = "tipo_documento")
+    
+    private  String tipoDocumento;
+    
+      @Column(name = "numero_documento")
+    
+    private  String numeroDocumento;
+           @Column(name = "nombres")
+    
+    private  String nombres ; 
+                 @Column(name = "apellidos")
+    
+    private  String apellidos ; 
+                       @Column(name = "fecha_nacimiento")
+    
+    private  String fechaNacimiento ;            
+                        @Column(name = "genero")
+    
+    private  String genero ;            
+                                @Column(name = "telefono")
+    
+    private  String telefono ;    
+                                @Column(name = "direccion")
+    
+    private  String direccion ;                                
+                       
 }
