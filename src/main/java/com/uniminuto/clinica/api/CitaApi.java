@@ -1,6 +1,7 @@
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Cita;
+<<<<<<< HEAD
 import com.uniminuto.clinica.model.CitaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import org.apache.coyote.BadRequestException;
@@ -32,3 +33,22 @@ public interface CitaApi {
             @RequestBody @Valid CitaRq citaRq
     ) throws BadRequestException;
 }
+=======
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RequestMapping("/clinica/v1/api/citas")
+public interface CitaApi {
+
+    /**
+     * Crea una nueva cita relacionada con paciente y médico.
+     *
+     * @param cita objeto de la cita
+     * @return la cita creada
+     */
+    @PostMapping(value = "/crear", produces = {"application/json"}, consumes = {"application/json"})
+    ResponseEntity<Cita> crearCita(@RequestBody Cita cita);
+}
+
+
+>>>>>>> origin/Mariana_976621Castillo
