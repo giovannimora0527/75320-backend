@@ -12,12 +12,13 @@ import lombok.Data;
 
 /**
  *
- * @author lmora
+ * @author User
  */
 @Data
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
+    
     /**
      * Id serializable.
      */

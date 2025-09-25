@@ -30,4 +30,9 @@ public class PacienteApiController implements PacienteApi {
             throws BadRequestException {
         return ResponseEntity.ok(pacienteService.buscarPacientePorDocumento(numeroDocumento));
     }
+    
+    @Override
+    public ResponseEntity<List<Paciente>> listarPacientesXFecha() {
+        return ResponseEntity.ok(pacienteService.encontrarTodosLosPacientesXFechaNacimiento());
+    }
 }
