@@ -24,14 +24,12 @@ public interface PacienteApi {
      */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Paciente>> listarPacientes();
     
     
         @RequestMapping(value = "/buscar-paciente-documento",
             produces = {"application/json"},
-            consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Paciente> buscarPacienteXIdentificacion(
             @RequestParam String numeroDocumento) 
