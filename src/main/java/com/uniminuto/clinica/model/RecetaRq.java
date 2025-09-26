@@ -1,34 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.model;
 
-import java.time.LocalDateTime;
 import lombok.Data;
 
-/**
- *
- * @author Andre
- */
-
-
-/**
- * Objeto de entrada para el JSON
- */
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class RecetaRq {
-    
-    
-    private Long id; 
-    
-    private Long citaId; 
-    
-    private Integer medicamentoId; 
-    
-    private String dosis; 
-    
+    @NotNull(message = "El campo citaId es obligatorio")
+    private Long citaId;
+
+    @NotNull(message = "El campo medicamentoId es obligatorio")
+    private Integer medicamentoId;
+
+    @NotBlank(message = "El campo dosis es obligatorio")
+    private String dosis;
+
+    @NotBlank(message = "El campo indicaciones es obligatorio")
     private String indicaciones;
-    
 }

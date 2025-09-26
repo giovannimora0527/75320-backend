@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador de la Api de medico
+ *
+ * @author lmora
  */
-
 @RestController
 public class MedicoApiController implements MedicoApi {
     
@@ -30,4 +30,5 @@ public class MedicoApiController implements MedicoApi {
         return ResponseEntity.ok(this.medicoService
                 .buscarMedicosPorEspecializacion(codigo));
     }
+    
 }

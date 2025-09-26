@@ -13,11 +13,8 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 
-/**
- * Controlador de la Api de medicamento
- */
+import java.util.List;
 
 @RestController
 public class MedicamentoApiController implements MedicamentoApi {

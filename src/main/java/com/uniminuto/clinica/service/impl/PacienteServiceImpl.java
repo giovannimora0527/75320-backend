@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.service.impl;
 
 import com.uniminuto.clinica.entity.Paciente;
@@ -21,26 +17,27 @@ import org.springframework.stereotype.Service;
 public class PacienteServiceImpl implements PacienteService {
 
     @Autowired
-    private PacienteRepository PacienteRepository;
+    private PacienteRepository pacienteRepository;
 
     @Override
     public List<Paciente> encontrarTodosLosPacientes() {
-        return this.PacienteRepository.findAll();
+        return this.pacienteRepository.findAll();
     }
 
     @Override
     public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
         
-        Optional<Paciente> optPaciente = this.PacienteRepository.findByNumeroDocumento(documento);
+        Optional<Paciente> optPaciente = this.pacienteRepository.findByNumeroDocumento(documento);
         if (!optPaciente.isPresent()) {
             throw new BadRequestException("No se encuentra el paciente");
         
         }
         return optPaciente.get();
     }
+
     @Override
-    public List<Paciente> listarPacientesPorFechaNacimiento (){
-        return this.PacienteRepository.findAllByOrderByFechaNacimientoAsc();
+    public List<Paciente> listarPacientesPorEdad() {
+        return this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
     }
 
 }

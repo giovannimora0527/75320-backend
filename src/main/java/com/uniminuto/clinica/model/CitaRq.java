@@ -1,28 +1,23 @@
 package com.uniminuto.clinica.model;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-import lombok.Data;
 
-/**
- *
- * @author Andre
- */
+import lombok.Data;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class CitaRq {
-
-
-    /**
-     * otros campos para el objeto de entrada.
-     */
+    @NotNull(message = "El campo pacienteId es obligatorio")
     private Integer pacienteId;
 
+    @NotNull(message = "El campo medicoId es obligatorio")
     private Long medicoId;
 
-    private LocalDateTime fechaHora;
+    @NotBlank(message = "El campo fechaHora es obligatorio")
+    private String fechaHora;
 
+    @NotBlank(message = "El campo estado es obligatorio")
     private String estado;
 
+    @NotBlank(message = "El campo motivo es obligatorio")
     private String motivo;
-    
 }

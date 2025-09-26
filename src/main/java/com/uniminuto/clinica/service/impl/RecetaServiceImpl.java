@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.service.impl;
 
 import com.uniminuto.clinica.entity.Cita;
@@ -9,115 +5,68 @@ import com.uniminuto.clinica.entity.Medicamento;
 import com.uniminuto.clinica.entity.Receta;
 import com.uniminuto.clinica.model.RecetaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.repository.CitaRepository;
+import com.uniminuto.clinica.repository.MedicamentoRepository;
 import com.uniminuto.clinica.repository.RecetaRepository;
 import com.uniminuto.clinica.service.RecetaService;
-import java.time.LocalDateTime;
-import java.util.List;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author Andre
- */
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class RecetaServiceImpl implements RecetaService{
-    
-    
-    /**
-     * Inyectar el repositorio.
-     */
+public class RecetaServiceImpl implements RecetaService {
+
     @Autowired
     private RecetaRepository recetaRepository;
-    
-    /**
-     * Implementar metodos.
-     */
-    
+
+    @Autowired
+    private CitaRepository citaRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
+
     @Override
-    public List<Receta> listarRecetas(){
-        return recetaRepository.findAll();
-    
+    public List<Receta> listarRecetasOrdenadas() {
+        return this.recetaRepository.findAllByOrderByFechaCreacionRegistroDesc();
     }
-    
-    /**
-     * Metodo guardar.
-     */
-    
+
     @Override
-    public RespuestaRs guardarReceta(RecetaRq receta)throws BadRequestException {
-        this.validadorCampos(receta);
-    
-    /**
-    * Guarda el objeto.
-    */
-    Receta objGuardar =this.convertirRecetaClass(receta);
-    this.recetaRepository.save(objGuardar);
-    RespuestaRs rta = new RespuestaRs();
-    rta.setMessage("Receta guardada exitosamente");
-    rta.setStatus(200);
-    return rta;
+    public RespuestaRs guardarReceta(RecetaRq recetaRq) throws BadRequestException {
+        Optional<Medicamento> optMedicamento = this
+                .medicamentoRepository.findById(recetaRq.getMedicamentoId());
+        if (optMedicamento.isEmpty()) {
+            throw new BadRequestException("El medicamento con ID " + recetaRq.getMedicamentoId() + " no existe.");
+        }
+
+        Optional<Cita> optCita = this.citaRepository.findById(recetaRq.getCitaId());
+        if (optCita.isEmpty()) {
+            throw new BadRequestException("La cita con ID " + recetaRq.getCitaId() + " no existe.");
+        }
+
+        Receta recetaGuardar = this.convertRecetaRqToReceta(
+                recetaRq,
+                optCita.get(),
+                optMedicamento.get()
+        );
+        this.recetaRepository.save(recetaGuardar);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setStatus(200);
+        rta.setMessage("Receta guardada con éxito.");
+        return rta;
     }
-            
-        
-      /**
-     * Validador de campos.
-     */
-    
-    private void validadorCampos(RecetaRq receta)throws BadRequestException{
-        if (receta.getCitaId() == null) {
-            throw new BadRequestException("El ID de la cita es obligatorio");
-        }
-            if (receta.getMedicamentoId() == null)  {
-            throw new BadRequestException("El Id del medicamento es obligatorio");
-        }
 
-        if (receta.getDosis() == null|| receta.getDosis().isBlank()||
-                receta.getDosis().isEmpty()) {
-        throw new BadRequestException("La docis es obligatorias");
-        }
-
-        if (receta.getIndicaciones() == null || receta.getIndicaciones().isBlank()||
-                receta.getIndicaciones().isEmpty()) {
-        throw new BadRequestException("Las indicaciones son obligatorias");
-        }
-
+    private Receta convertRecetaRqToReceta(RecetaRq recetaRq, Cita cita, Medicamento medicamento) {
+        Receta receta = new Receta();
+        receta.setCita(cita);
+        receta.setMedicamento(medicamento);
+        receta.setDosis(recetaRq.getDosis());
+        receta.setIndicaciones(recetaRq.getIndicaciones());
+        return receta;
     }
-      
-     /**
-     * Convertir objeto.
-     */
-    
-    private Receta convertirRecetaClass(RecetaRq recetaRq){
-        Receta nuevo = new Receta();
-        
-    /**
-     * Cita.
-     */
-    
-    Cita cita = new Cita();
-    cita.setId(recetaRq.getCitaId());
-    nuevo.setCita(cita);
-    
-    /**
-     * Medicamento.
-     */
 
-    Medicamento medicamento = new Medicamento();
-    medicamento.setId(recetaRq.getMedicamentoId());
-    nuevo.setMedicamento(medicamento);    
-    
-    /**
-     * Otros campos.
-     */
 
-    nuevo.setDosis(recetaRq.getDosis());
-    nuevo.setIndicaciones(recetaRq.getIndicaciones());
-    nuevo.setFechaCreacionRegistro(LocalDateTime.now());      
-    
-    
-    return nuevo;
-    
-}
+
 }

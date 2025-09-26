@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.service.impl;
 
 import com.uniminuto.clinica.entity.Cita;
@@ -10,125 +6,77 @@ import com.uniminuto.clinica.entity.Paciente;
 import com.uniminuto.clinica.model.CitaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.repository.CitaRepository;
+import com.uniminuto.clinica.repository.MedicoRepository;
+import com.uniminuto.clinica.repository.PacienteRepository;
 import com.uniminuto.clinica.service.CitaService;
-import java.util.List;
-import java.util.Optional;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author Andre
- */
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class CitaServiceImpl implements CitaService{
-    
-    
+public class CitaServiceImpl implements CitaService {
+
     @Autowired
     private CitaRepository citaRepository;
 
-    /**
-     * 
-     * Metodo listar.
-     */
-    
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private MedicoRepository medicoRepository;
+
     @Override
-    public List<Cita> listarCita() {
-       return citaRepository.findAll();
+    public List<Cita> listarCitasOrdenadas() {
+        return this.citaRepository.findAllByOrderByFechaHoraDesc();
     }
 
-    /**
-    * Metodo Guardar.
-    */
     @Override
-    public RespuestaRs guardarCita(CitaRq cita) throws BadRequestException {
-        this.validadorCampos(cita);
-        
-        /**
-         * valida si existe una cita para el medico en esa fecha.
-         */
-        Optional<Cita> optCita = this.citaRepository
-            .findByMedico_IdAndFechaHora(cita.getMedicoId(),cita.getFechaHora());
-        if (optCita.isPresent()) {
-            throw new BadRequestException("El medico ya tiene una cita en ese horario");
+    public RespuestaRs guardarCita(CitaRq citaRq) throws BadRequestException {
+        Optional<Paciente> optPaciente = this.pacienteRepository.findById(citaRq.getPacienteId());
+        if (optPaciente.isEmpty()) {
+            throw new BadRequestException("El paciente con ID " + citaRq.getPacienteId() + " no existe.");
         }
-        /**
-         * Guarda el objeto.
-         */
-        
-        Cita objGuardar = this.convertirCitaClass(cita);
-        this.citaRepository.save(objGuardar);
+
+        Optional<Medico> optMedico = this.medicoRepository.findById(citaRq.getMedicoId());
+        if (optMedico.isEmpty()) {
+            throw new BadRequestException("El médico con ID " + citaRq.getMedicoId() + " no existe.");
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fechaInicioCita = LocalDateTime.parse(citaRq.getFechaHora(), formatter);
+        LocalDateTime fechaFinCita = fechaInicioCita.plusMinutes(15);
+
+        List<Cita> citasMedico = this.citaRepository.findByMedicoAndFechaHoraBetween(optMedico.get(), fechaInicioCita, fechaFinCita);
+        if (!citasMedico.isEmpty()) {
+            throw new BadRequestException("El médico ya tiene una cita programada en este horario.");
+        }
+        List<Cita> citasPaciente = this.citaRepository.findByPacienteAndFechaHoraBetween(optPaciente.get(), fechaInicioCita, fechaFinCita);
+        if (!citasPaciente.isEmpty()) {
+            throw new BadRequestException("El paciente ya tiene una cita programada en este horario.");
+        }
+
+        Cita citaGuardar = this.convertCitaRqToCitaEntity(citaRq, optPaciente.get(), optMedico.get());
+        this.citaRepository.save(citaGuardar);
         RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Cita guardada exitosamente");
+        rta.setMessage("Cita guardada exitosamente.");
         rta.setStatus(200);
         return rta;
-        
-        
-        
     }
-    /**
-     * Lista por fecha
-    */
-    
-    @Override
-    public List<Cita>ListarCitasOrdenadas(){
-        return citaRepository.findAllByOrderByFechaHoraDesc();
-        
-    }
-    
-    
-    /**
-     * Validador de campos.
-     */
-    
-    private void validadorCampos(CitaRq cita)throws BadRequestException{
-        if (cita.getPacienteId() == null) {
-            throw new BadRequestException("El ID del paciente es obligatorio");
-        }
-        if (cita.getMedicoId() == null)  {
-            throw new BadRequestException("El Id del medico es obligatorio");
-        }
 
-        if (cita.getFechaHora() == null) {
-        throw new BadRequestException("La fecha y hora son obligatorias");
-        }
 
-        if (cita.getEstado() == null || cita.getEstado().isBlank()) {
-        throw new BadRequestException("El estado es obligatorio");
-        }
-
-        if (cita.getMotivo() == null || cita.getMotivo().isBlank()) {
-        throw new BadRequestException("El motivo es obligatorio");
-        }   
-    }
-    
-    
-    
-    /**
-     * Convertir cita.
-     */
-    
-    private Cita convertirCitaClass(CitaRq citaRq){
-        Cita nuevo = new Cita();
-        // Paciente
-        Paciente paciente = new Paciente();
-        paciente.setId(citaRq.getPacienteId());
-        nuevo.setPaciente(paciente);
-
-        // Medico.
-        Medico medico = new Medico();
-        medico.setId(citaRq.getMedicoId());
-        nuevo.setMedico(medico);
-         
-        // otros campos seteados.
-        nuevo.setFechaHora(citaRq.getFechaHora());
-        nuevo.setEstado(citaRq.getEstado());
-        nuevo.setMotivo(citaRq.getMotivo());
-        return nuevo;
-        
- 
+    private Cita convertCitaRqToCitaEntity(CitaRq citaRq, Paciente paciente, Medico medico) {
+        Cita cita = new Cita();
+        cita.setPaciente(paciente);
+        cita.setMedico(medico);
+        cita.setFechaHora(LocalDateTime.now());
+        cita.setEstado(citaRq.getEstado());
+        cita.setMotivo(citaRq.getMotivo());
+        return cita;
     }
 }
