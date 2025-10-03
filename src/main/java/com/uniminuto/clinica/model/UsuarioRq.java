@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class UsuarioRq {
+    private Integer usuarioId;
     private String username;
     private String password;
     private String rol;

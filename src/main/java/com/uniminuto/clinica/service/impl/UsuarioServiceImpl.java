@@ -74,6 +74,34 @@ public class UsuarioServiceImpl implements UsuarioService {
         return rta;
     }
 
+    @Override
+    public RespuestaRs actualizarUsuario(UsuarioRq usuarioRq) throws BadRequestException {
+        Optional<Usuario> optUser = this.usuarioRepository.findById(usuarioRq.getUsuarioId());
+        if (!optUser.isPresent()) {
+            throw new BadRequestException("No se encuentra el usuario a actualizar.");
+        }
+
+        Usuario userActualizar = optUser.get();
+        if (!userActualizar.getUsername()
+                .toLowerCase().equals(usuarioRq.getUsername().toLowerCase())) {
+            // Cambio el nombre de usuario
+            Optional<Usuario> optUserByUsername = this.usuarioRepository
+                    .findByUsername(usuarioRq.getUsername().toLowerCase());
+            if (optUserByUsername.isPresent()) {
+                throw new BadRequestException("El usuario ya existe.");
+            }
+        }
+
+        userActualizar.setUsername(usuarioRq.getUsername().toLowerCase());
+        userActualizar.setPassword(this.encriptarPassword(usuarioRq.getPassword()));
+        userActualizar.setRol(usuarioRq.getRol().toUpperCase());
+        this.usuarioRepository.save(userActualizar);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("El usuario se ha actualizado correctamente.");
+        rta.setStatus(200);
+        return rta;
+    }
+
     private void validarCampos(UsuarioRq usuarioNuevo)
             throws BadRequestException {
         if (usuarioNuevo.getUsername() == null
