@@ -8,9 +8,9 @@ import lombok.Data;
  */
 @Data
 public class UsuarioRq {
-    private Integer usuarioId;
+    private Integer id;
     private String username;
     private String password;
     private String rol;
-    
+    private boolean activo;
 }
