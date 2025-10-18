@@ -4,12 +4,12 @@ import com.uniminuto.clinica.entity.Paciente;
 
 import java.util.List;
 
+import com.uniminuto.clinica.model.MedicoRq;
+import com.uniminuto.clinica.model.PacienteRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -45,6 +45,29 @@ public interface PacienteApi {
             method = RequestMethod.GET)
     ResponseEntity<List<Paciente>> listarPacientesPorEdad();
 
+    @RequestMapping(value = "/guardar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> guardarPaciente(
+            @RequestBody PacienteRq pacienteRq)
+            throws BadRequestException;
+
+    /**
+     * Actualiza un medico en la bd.
+     * @param pacienteRq medico de entrada.
+     * @return respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
+    @RequestMapping(value = "/actualizar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarPaciente(
+            @RequestBody PacienteRq pacienteRq)
+            throws BadRequestException;
 }
+
+
 
 
