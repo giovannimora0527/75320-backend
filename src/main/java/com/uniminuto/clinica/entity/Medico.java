@@ -21,7 +21,7 @@ import lombok.Data;
 public class Medico implements Serializable {
     /**
      * Id serializable.
-     */    
+     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -30,7 +30,7 @@ public class Medico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;    
+    private Long id;
 
     /**
      * Tipo de documento del médico (por ejemplo, CC, TI, CE).
@@ -67,7 +67,7 @@ public class Medico implements Serializable {
      */
     @Column(name = "registro_profesional")
     private String registroProfesional;
-    
+
     /**
      * Especializacion del medico.
      */

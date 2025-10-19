@@ -11,4 +11,6 @@ public interface RecetaService {
     List<Receta> listarRecetasOrdenadas();
 
     RespuestaRs guardarReceta(RecetaRq recetaRq) throws BadRequestException;
+
+    RespuestaRs actualizarReceta(Long id, RecetaRq recetaRq) throws BadRequestException;
 }

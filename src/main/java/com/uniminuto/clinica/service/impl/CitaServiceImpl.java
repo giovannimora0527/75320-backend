@@ -38,7 +38,7 @@ public class CitaServiceImpl implements CitaService {
 
     @Override
     public RespuestaRs guardarCita(CitaRq citaRq) throws BadRequestException {
-        Optional<Paciente> optPaciente = this.pacienteRepository.findById(citaRq.getPacienteId());
+        Optional<Paciente> optPaciente = this.pacienteRepository.findById(Long.valueOf(citaRq.getPacienteId()));
         if (optPaciente.isEmpty()) {
             throw new BadRequestException("El paciente con ID " + citaRq.getPacienteId() + " no existe.");
         }

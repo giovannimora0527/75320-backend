@@ -17,7 +17,7 @@ public interface UsuarioService {
      * @return Lista de usuarios.
      */
     List<Usuario> encontrarTodosLosUsuarios();
-    
+
     /**
      * Buscamos un usuario dado su username.
      * @param username username a buscar.
@@ -32,4 +32,13 @@ public interface UsuarioService {
      * @throws BadRequestException excepcion.
      */
     RespuestaRs guardarUsuario(UsuarioRq usuarioNuevo) throws BadRequestException;
+
+
+    /**
+     * Actualiza un usuario registrado en la bd.
+     * @param usuarioRq usuario a actualizar.
+     * @return Respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
+    RespuestaRs actualizarUsuario(UsuarioRq usuarioRq) throws BadRequestException;
 }

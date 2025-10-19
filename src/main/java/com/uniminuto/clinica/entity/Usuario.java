@@ -43,17 +43,17 @@ public class Usuario implements Serializable {
      * Rol.
      */
     @Column(name = "rol")
-    private String rol;    
+    private String rol;
     /**
      * Fecha Creacion.
      */
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
-    
+
     /**
      * Activo.
      */
     @Column(name = "activo")
     private boolean activo;
-    
+
 }

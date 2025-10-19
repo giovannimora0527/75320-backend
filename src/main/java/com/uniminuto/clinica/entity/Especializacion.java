@@ -21,7 +21,7 @@ public class Especializacion implements Serializable {
      * Id serializable.
      */
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Id.
      */
@@ -29,14 +29,14 @@ public class Especializacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "nombre")
     private String nombre;
-   
+
     @Column(name = "descripcion")
     private String descripcion;
-    
+
     @Column(name = "codigo_especializacion")
     private String codigoEspecializacion;
-    
+
 }

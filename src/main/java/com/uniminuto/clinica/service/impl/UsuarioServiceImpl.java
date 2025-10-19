@@ -21,7 +21,7 @@ import java.security.NoSuchAlgorithmException;
  */
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
-    
+
     /**
      * UsuarioRepository.
      */
@@ -29,19 +29,19 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public List<Usuario> encontrarTodosLosUsuarios() {        
+    public List<Usuario> encontrarTodosLosUsuarios() {
         return this.usuarioRepository.findAll();
     }
 
     @Override
-    public Usuario encontrarUsuarioPorNombre(String username) 
+    public Usuario encontrarUsuarioPorNombre(String username)
             throws BadRequestException {
         Optional<Usuario> optUser = this.usuarioRepository
                 .findByUsername(username);
         if (!optUser.isPresent()) {
             throw new BadRequestException("No se encuentra el usuario.");
         }
-        
+
         return optUser.get();
     }
 
@@ -70,6 +70,35 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Paso 5. Devuelve respuesta ok
         RespuestaRs rta = new RespuestaRs();
         rta.setMessage("El usuario se ha guardado correctamente.");
+        rta.setStatus(200);
+        return rta;
+    }
+
+    @Override
+    public RespuestaRs actualizarUsuario(UsuarioRq usuarioRq) throws BadRequestException {
+        Optional<Usuario> optUser = this.usuarioRepository.findById(usuarioRq.getId());
+        if (!optUser.isPresent()) {
+            throw new BadRequestException("No se encuentra el usuario a actualizar.");
+        }
+
+        Usuario userActualizar = optUser.get();
+        if (!userActualizar.getUsername()
+                .toLowerCase().equals(usuarioRq.getUsername().toLowerCase())) {
+            // Cambio el nombre de usuario
+            Optional<Usuario> optUserByUsername = this.usuarioRepository
+                    .findByUsername(usuarioRq.getUsername().toLowerCase());
+            if (optUserByUsername.isPresent()) {
+                throw new BadRequestException("El usuario ya existe.");
+            }
+        }
+
+        userActualizar.setUsername(usuarioRq.getUsername().toLowerCase());
+        userActualizar.setPassword(this.encriptarPassword(usuarioRq.getPassword()));
+        userActualizar.setRol(usuarioRq.getRol().toUpperCase());
+        userActualizar.setActivo(usuarioRq.isActivo());
+        this.usuarioRepository.save(userActualizar);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("El usuario se ha actualizado correctamente.");
         rta.setStatus(200);
         return rta;
     }

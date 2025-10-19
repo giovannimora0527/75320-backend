@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.apicontroller;
 
 /**
@@ -10,6 +6,8 @@ package com.uniminuto.clinica.apicontroller;
  */
 import com.uniminuto.clinica.api.PacienteApi;
 import com.uniminuto.clinica.entity.Paciente;
+import com.uniminuto.clinica.model.PacienteRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.PacienteService;
 
 import java.util.List;
@@ -20,6 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PacienteApiController implements PacienteApi {
+    @Override
+    public ResponseEntity<RespuestaRs> guardarPaciente(PacienteRq pacienteRq) throws BadRequestException {
+        return ResponseEntity.ok(this.pacienteService.guardarPaciente(pacienteRq));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarPaciente(PacienteRq pacienteRq) throws BadRequestException {
+        return ResponseEntity.ok(this.pacienteService.actualizarPaciente(pacienteRq));
+    }
 
     @Autowired
     private PacienteService pacienteService;
@@ -39,4 +46,5 @@ public class PacienteApiController implements PacienteApi {
     public ResponseEntity<List<Paciente>> listarPacientesPorEdad() {
         return ResponseEntity.ok(this.pacienteService.listarPacientesPorEdad());
     }
+
 }

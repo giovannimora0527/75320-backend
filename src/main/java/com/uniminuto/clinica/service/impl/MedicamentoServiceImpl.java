@@ -27,15 +27,19 @@ public class MedicamentoServiceImpl implements MedicamentoService {
     @Override
     public RespuestaRs guardarMedicamento(MedicamentoRq medicamento) throws BadRequestException {
         this.validadorCampos(medicamento);
+
         Optional<Medicamento> optMedic = this.medicamentoRepository
-                .findByNombre(medicamento.getNombre());
+                .findByNombreAndPresentacion(medicamento.getNombre(), medicamento.getPresentacion());
+
         if (optMedic.isPresent()) {
-            throw new BadRequestException("El medicamento ya existe");
+            throw new BadRequestException("Ya existe un medicamento con ese nombre y presentación");
         }
+
         Medicamento objGuardar = this.convertirAMedicamentoClass(medicamento);
         this.medicamentoRepository.save(objGuardar);
+
         RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Se guardo el medicamento satisfactoriamente");
+        rta.setMessage("Se guardó el medicamento satisfactoriamente");
         rta.setStatus(200);
         return rta;
     }
@@ -51,53 +55,67 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 
     @Override
     public RespuestaRs actualizarMedicamento(MedicamentoRq medicamento) throws BadRequestException {
+        this.validadorCampos(medicamento);
+
         Medicamento medicamentoUpdate = this.buscarPorId(medicamento.getId());
+
+        // Validar que no exista otro medicamento con el mismo nombre y presentación
         Optional<Medicamento> optMedic = this.medicamentoRepository
-                .findByNombre(medicamento.getNombre());
+                .findByNombreAndPresentacionAndIdNot(
+                        medicamento.getNombre(),
+                        medicamento.getPresentacion(),
+                        medicamento.getId()
+                );
+
         if (optMedic.isPresent()) {
-            throw new BadRequestException("El medicamento ya existe y no se puede actualizar");
+            throw new BadRequestException("Ya existe otro medicamento con ese nombre y presentación");
         }
-        medicamentoUpdate.setPresentacion(medicamento.getPresentacion() == null? medicamentoUpdate.getPresentacion() : medicamento.getPresentacion());
-        medicamentoUpdate.setDescripcion(medicamento.getDescripcion() == null? medicamentoUpdate.getDescripcion() : medicamento.getDescripcion());
-        medicamentoUpdate.setNombre(medicamento.getNombre() == null? medicamentoUpdate.getNombre() : medicamento.getNombre());
-        medicamentoUpdate.setFechaCompra(medicamento.getFechaCmpra() == null? medicamentoUpdate.getFechaCompra() : medicamento.getFechaCmpra());
-        medicamentoUpdate.setFechaVence(medicamento.getFechaVence() == null? medicamentoUpdate.getFechaVence() : medicamento.getFechaVence());
+
+        // Actualizar campos
+        medicamentoUpdate.setPresentacion(
+                medicamento.getPresentacion() == null ? medicamentoUpdate.getPresentacion() : medicamento.getPresentacion());
+        medicamentoUpdate.setDescripcion(
+                medicamento.getDescripcion() == null ? medicamentoUpdate.getDescripcion() : medicamento.getDescripcion());
+        medicamentoUpdate.setNombre(
+                medicamento.getNombre() == null ? medicamentoUpdate.getNombre() : medicamento.getNombre());
+        medicamentoUpdate.setFechaCompra(
+                medicamento.getFechaCompra() == null ? medicamentoUpdate.getFechaCompra() : medicamento.getFechaCompra());
+        medicamentoUpdate.setFechaVence(
+                medicamento.getFechaVence() == null ? medicamentoUpdate.getFechaVence() : medicamento.getFechaVence());
         medicamentoUpdate.setFechaModificacionRegistro(LocalDateTime.now());
+
         this.medicamentoRepository.save(medicamentoUpdate);
+
         RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Se actualizo el medicamento satisfactoriamente");
+        rta.setMessage("Se actualizó el medicamento satisfactoriamente");
         rta.setStatus(200);
         return rta;
     }
 
     private void validadorCampos(MedicamentoRq medicamento) throws BadRequestException {
-        if (medicamento.getDescripcion() == null || medicamento.getDescripcion().isBlank() ||
-                medicamento.getDescripcion().isEmpty()) {
-            throw new BadRequestException("Descripcion es obligatoria");
+        if (medicamento.getDescripcion() == null || medicamento.getDescripcion().isBlank()) {
+            throw new BadRequestException("Descripción es obligatoria");
         }
-        if (medicamento.getNombre() == null || medicamento.getNombre().isBlank() ||
-                medicamento.getNombre().isEmpty()) {
+        if (medicamento.getNombre() == null || medicamento.getNombre().isBlank()) {
             throw new BadRequestException("Nombre del medicamento es obligatorio");
         }
-        if (medicamento.getPresentacion() == null || medicamento.getPresentacion().isBlank() ||
-                medicamento.getPresentacion().isEmpty()) {
+        if (medicamento.getPresentacion() == null || medicamento.getPresentacion().isBlank()) {
             throw new BadRequestException("Presentación es obligatoria");
         }
-        if (medicamento.getFechaCmpra() == null) {
-            throw new BadRequestException("Fecha de compra es obligarorio es obligatoria");
+        if (medicamento.getFechaCompra() == null) {
+            throw new BadRequestException("Fecha de compra es obligatoria");
         }
         if (medicamento.getFechaVence() == null) {
-            throw new BadRequestException("Fecha vencimiento es obligatoria");
+            throw new BadRequestException("Fecha de vencimiento es obligatoria");
         }
     }
-
 
     private Medicamento convertirAMedicamentoClass(MedicamentoRq medicamentoRq) {
         Medicamento nuevo = new Medicamento();
         nuevo.setDescripcion(medicamentoRq.getDescripcion());
         nuevo.setNombre(medicamentoRq.getNombre());
         nuevo.setPresentacion(medicamentoRq.getPresentacion());
-        nuevo.setFechaCompra(medicamentoRq.getFechaCmpra());
+        nuevo.setFechaCompra(medicamentoRq.getFechaCompra());
         nuevo.setFechaVence(medicamentoRq.getFechaVence());
         nuevo.setFechaCreacionRegistro(LocalDateTime.now());
         return nuevo;
