@@ -37,5 +37,17 @@ public class UsuarioApiController implements UsuarioApi {
     public ResponseEntity<RespuestaRs> guardarUsuario(UsuarioRq usuarioRq) throws BadRequestException {
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuarioRq));
     }
+    
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarUsuario(Integer id, UsuarioRq usuarioRq) 
+        throws BadRequestException {
+        return ResponseEntity.ok(usuarioService.actualizarUsuario(id, usuarioRq));
+}
+
+    @Override
+    public ResponseEntity<RespuestaRs> eliminarUsuario(Integer id) 
+        throws BadRequestException {
+        return ResponseEntity.ok(usuarioService.eliminarUsuario(id));
+}
 
 }

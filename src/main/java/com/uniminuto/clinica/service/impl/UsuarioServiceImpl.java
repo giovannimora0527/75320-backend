@@ -110,5 +110,85 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new RuntimeException("Algoritmo no soportado: " + algoritmo, e);
         }
     }
+    
+    @Override
+    public RespuestaRs actualizarUsuario(Integer id, UsuarioRq usuarioRq) 
+        throws BadRequestException {
+    // Validar que el ID no sea nulo
+        if (id == null) {
+        throw new BadRequestException("Id inválido");
+        }
+    
+    // Validar los campos (username y rol son obligatorios, password es opcional en edición)
+        if (usuarioRq.getUsername() == null
+            || usuarioRq.getUsername().isBlank()
+            || usuarioRq.getUsername().isEmpty()) {
+        throw new BadRequestException("El campo username es obligatorio.");
+        }
+        if (usuarioRq.getRol() == null
+            || usuarioRq.getRol().isBlank()
+            || usuarioRq.getRol().isEmpty()) {
+            throw new BadRequestException("El campo rol es obligatorio.");
+        }
+    
+    // Buscar el usuario existente por ID
+        Optional<Usuario> optUsuario = this.usuarioRepository.findById(id);
+        if (!optUsuario.isPresent()) {
+            throw new BadRequestException("No se encuentra el usuario a actualizar");
+        }
+    
+    // Verificar que no exista otro usuario con el mismo username
+        Optional<Usuario> usuarioConMismoUsername = this.usuarioRepository
+                .findByUsername(usuarioRq.getUsername().toLowerCase());
+        if (usuarioConMismoUsername.isPresent() 
+                && !usuarioConMismoUsername.get().getId().equals(id)) {
+            throw new BadRequestException("Ya existe otro usuario con ese username");
+        }
+    
+    // Obtener el usuario existente y actualizar sus datos
+        Usuario usuarioExistente = optUsuario.get();
+        usuarioExistente.setUsername(usuarioRq.getUsername().toLowerCase());
+        usuarioExistente.setRol(usuarioRq.getRol().toUpperCase());
+    
+    // Solo actualizar la contraseña si se proporciona una nueva
+        if (usuarioRq.getPassword() != null 
+                && !usuarioRq.getPassword().isBlank() 
+                && !usuarioRq.getPassword().isEmpty()) {
+            usuarioExistente.setPassword(this.encriptarPassword(usuarioRq.getPassword()));
+    }
+    
+    // Actualizar el estado activo si viene en el request
+        if (usuarioRq.getActivo() != null) {
+            usuarioExistente.setActivo(usuarioRq.getActivo());
+        }
+    
+    // Guardar los cambios
+        this.usuarioRepository.save(usuarioExistente);
+    
+    // Preparar respuesta
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("El usuario se ha actualizado correctamente");
+        rta.setStatus(200);
+        return rta;
+    }
+
+    @Override
+    public RespuestaRs eliminarUsuario(Integer id) throws BadRequestException {
+        if (id == null) {
+            throw new BadRequestException("Id inválido");
+        }
+    
+        Optional<Usuario> optUsuario = this.usuarioRepository.findById(id);
+        if (!optUsuario.isPresent()) {
+            throw new BadRequestException("No se encuentra el usuario");
+        }
+    
+        this.usuarioRepository.deleteById(id);
+    
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("El usuario se ha eliminado correctamente");
+        rta.setStatus(200);
+        return rta;
+    }
 
 }

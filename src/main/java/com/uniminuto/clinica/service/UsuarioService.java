@@ -32,4 +32,21 @@ public interface UsuarioService {
      * @throws BadRequestException excepcion.
      */
     RespuestaRs guardarUsuario(UsuarioRq usuarioNuevo) throws BadRequestException;
+    
+    /**
+    * Actualiza un usuario existente.
+    * @param id ID del usuario a actualizar.
+    * @param usuarioRq Usuario con los datos actualizados.
+    * @return Respuesta del servicio.
+    * @throws BadRequestException excepcion.
+    */
+    RespuestaRs actualizarUsuario(Integer id, UsuarioRq usuarioRq) throws BadRequestException;
+
+    /**
+    * Elimina un usuario de la bd.
+    * @param id ID del usuario a eliminar.
+    * @return Respuesta del servicio.
+    * @throws BadRequestException excepcion.
+    */
+    RespuestaRs eliminarUsuario(Integer id) throws BadRequestException;
 }

@@ -6,6 +6,8 @@ package com.uniminuto.clinica.apicontroller;
  */
 import com.uniminuto.clinica.api.PacienteApi;
 import com.uniminuto.clinica.entity.Paciente;
+import com.uniminuto.clinica.model.PacienteRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.PacienteService;
 
 import java.util.List;
@@ -30,4 +32,19 @@ public class PacienteApiController implements PacienteApi {
             throws BadRequestException {
         return ResponseEntity.ok(pacienteService.buscarPacientePorDocumento(numeroDocumento));
     }
+
+    @Override
+    public ResponseEntity<RespuestaRs> guardarPaciente(PacienteRq pacienteRq) throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.guardarPaciente(pacienteRq));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> eliminarPaciente(Integer id) throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.eliminarPaciente(id));
+    }
+    
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarPaciente(Integer id, PacienteRq pacienteRq) throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.actualizarPaciente(id, pacienteRq));
+}
 }

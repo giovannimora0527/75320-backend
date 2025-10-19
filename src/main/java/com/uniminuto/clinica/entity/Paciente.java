@@ -23,37 +23,35 @@ public class Paciente implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     @Column(name = "id")
-    
     private Integer id;
+    
     @Column(name = "usuario_id")
-    
     private  Integer usuarioId;
-    
-     @Column(name = "tipo_documento")
-    
+  
+    @Column(name = "tipo_documento")
     private  String tipoDocumento;
     
-      @Column(name = "numero_documento")
-    
+    @Column(name = "numero_documento")
     private  String numeroDocumento;
-           @Column(name = "nombres")
+            
+    @Column(name = "nombres")
+    private  String nombres ;
     
-    private  String nombres ; 
-                 @Column(name = "apellidos")
+    @Column(name = "apellidos")
+    private  String apellidos ;
     
-    private  String apellidos ; 
-                       @Column(name = "fecha_nacimiento")
+    @Column(name = "fecha_nacimiento")
+    private  String fechaNacimiento ; 
     
-    private  String fechaNacimiento ;            
-                        @Column(name = "genero")
+    @Column(name = "genero")
+    private  String genero ; 
     
-    private  String genero ;            
-                                @Column(name = "telefono")
+    @Column(name = "telefono")
+    private  String telefono ;  
     
-    private  String telefono ;    
-                                @Column(name = "direccion")
-    
+    @Column(name = "direccion")
     private  String direccion ;                                
                        
 }

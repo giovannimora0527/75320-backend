@@ -55,5 +55,34 @@ public interface UsuarioApi {
     ResponseEntity<RespuestaRs> guardarUsuario(
             @RequestBody UsuarioRq usuarioRq)
             throws BadRequestException;
-        
+    
+    /**
+    * Actualiza un usuario existente.
+    * @param id ID del usuario a actualizar.
+    * @param usuarioRq Usuario con los datos actualizados.
+    * @return respuesta del servicio.
+    * @throws BadRequestException excepcion.
+    */
+    @RequestMapping(value = "/actualizar",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarUsuario(
+        @RequestParam Integer id,
+        @RequestBody UsuarioRq usuarioRq)
+        throws BadRequestException;
+
+    /**
+    * Elimina un usuario.
+    * @param id ID del usuario a eliminar.
+    * @return respuesta del servicio.
+    * @throws BadRequestException excepcion.
+    */
+    @RequestMapping(value = "/eliminar",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> eliminarUsuario(
+        @RequestParam Integer id)
+        throws BadRequestException;
 }
