@@ -7,66 +7,136 @@ import com.uniminuto.clinica.repository.PacienteRepository;
 import com.uniminuto.clinica.service.PacienteService;
 import java.util.List;
 import java.util.Optional;
-import org.apache.coyote.BadRequestException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
- *
- * @author lmora
+ * Implementación del servicio para gestión de pacientes.
+ * Autor: lmora
  */
 @Service
 public class PacienteServiceImpl implements PacienteService {
 
-    @Autowired
-    private PacienteRepository PacienteRepository;
+    private final PacienteRepository pacienteRepository;
 
-    @Override
-    public List<Paciente> encontrarTodosLosPacientes() {
-        return this.PacienteRepository.findAll();
+    public PacienteServiceImpl(PacienteRepository pacienteRepository) {
+        this.pacienteRepository = pacienteRepository;
     }
 
     @Override
-    public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
-        
-        Optional<Paciente> optPaciente = this.PacienteRepository.findByNumeroDocumento(documento);
-        if (!optPaciente.isPresent()) {
-            throw new BadRequestException("No se encuentra el paciente");
-        
+    public List<Paciente> encontrarTodosLosPacientes() {
+        return this.pacienteRepository.findAll();
+    }
+
+    @Override
+    public Paciente buscarPacientePorDocumento(String documento) throws ResponseStatusException {
+        Optional<Paciente> optPaciente = this.pacienteRepository.findByNumeroDocumento(documento);
+        if (optPaciente.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encuentra el paciente");
         }
         return optPaciente.get();
     }
 
     @Override
-    public RespuestaRs guardarPaciente(PacienteRq pacienteRq) throws BadRequestException {
-        this.validarCampos(pacienteRq);
-        Optional<Paciente> existente = this.PacienteRepository.findByNumeroDocumento(pacienteRq.getNumeroDocumento());
+    public RespuestaRs guardarPaciente(PacienteRq pacienteRq) {
+        validarCampos(pacienteRq);
+
+        Optional<Paciente> existente = this.pacienteRepository.findByNumeroDocumento(pacienteRq.getNumeroDocumento());
         if (existente.isPresent()) {
-            throw new BadRequestException("El paciente ya existe");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El paciente ya existe");
         }
-        Paciente aGuardar = this.convertirAPaciente(pacienteRq);
-        this.PacienteRepository.save(aGuardar);
+
+        Paciente nuevoPaciente = convertirAPaciente(pacienteRq);
+        this.pacienteRepository.save(nuevoPaciente);
+
         RespuestaRs rta = new RespuestaRs();
         rta.setMessage("Se guardó el paciente satisfactoriamente");
-        rta.setStatus(200);
+        rta.setStatus(HttpStatus.OK.value());
         return rta;
     }
 
-    private void validarCampos(PacienteRq rq) throws BadRequestException {
+    @Override
+    public RespuestaRs eliminarPaciente(Integer id) {
+        if (id == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id inválido");
+        }
+
+        Optional<Paciente> optPac = this.pacienteRepository.findById(id);
+        if (optPac.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encuentra el paciente");
+        }
+
+        this.pacienteRepository.deleteById(id);
+
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("Se eliminó el paciente satisfactoriamente");
+        rta.setStatus(HttpStatus.OK.value());
+        return rta;
+    }
+
+    @Override
+    public RespuestaRs actualizarPaciente(Integer id, PacienteRq pacienteRq) {
+        if (id == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id inválido");
+        }
+
+        validarCampos(pacienteRq);
+
+        Optional<Paciente> optPaciente = this.pacienteRepository.findById(id);
+        if (optPaciente.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encuentra el paciente a actualizar");
+        }
+
+        Optional<Paciente> pacienteConMismoDocumento =
+                this.pacienteRepository.findByNumeroDocumento(pacienteRq.getNumeroDocumento());
+        if (pacienteConMismoDocumento.isPresent()
+                && !pacienteConMismoDocumento.get().getId().equals(id)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe otro paciente con ese número de documento");
+        }
+
+        Paciente pacienteExistente = optPaciente.get();
+        pacienteExistente.setTipoDocumento(pacienteRq.getTipoDocumento());
+        pacienteExistente.setNumeroDocumento(pacienteRq.getNumeroDocumento());
+        pacienteExistente.setNombres(pacienteRq.getNombres());
+        pacienteExistente.setApellidos(pacienteRq.getApellidos());
+        pacienteExistente.setFechaNacimiento(pacienteRq.getFechaNacimiento());
+        pacienteExistente.setGenero(pacienteRq.getGenero());
+        pacienteExistente.setTelefono(pacienteRq.getTelefono());
+        pacienteExistente.setDireccion(pacienteRq.getDireccion());
+
+        this.pacienteRepository.save(pacienteExistente);
+
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("Se actualizó el paciente satisfactoriamente");
+        rta.setStatus(HttpStatus.OK.value());
+        return rta;
+    }
+
+    @Override
+    public List<Paciente> listarPacientesPorEdad() {
+        // Asegúrate de que tu repositorio tenga este método:
+        // List<Paciente> findAllByOrderByFechaNacimientoAsc();
+        return this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+    }
+
+    // ================= Métodos privados auxiliares =================
+
+    private void validarCampos(PacienteRq rq) {
         if (rq == null) {
-            throw new BadRequestException("Solicitud inválida");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Solicitud inválida");
         }
         if (rq.getTipoDocumento() == null || rq.getTipoDocumento().trim().isEmpty()) {
-            throw new BadRequestException("El tipo de documento es obligatorio");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El tipo de documento es obligatorio");
         }
         if (rq.getNumeroDocumento() == null || rq.getNumeroDocumento().trim().isEmpty()) {
-            throw new BadRequestException("El número de documento es obligatorio");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El número de documento es obligatorio");
         }
         if (rq.getNombres() == null || rq.getNombres().trim().isEmpty()) {
-            throw new BadRequestException("Los nombres son obligatorios");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Los nombres son obligatorios");
         }
         if (rq.getApellidos() == null || rq.getApellidos().trim().isEmpty()) {
-            throw new BadRequestException("Los apellidos son obligatorios");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Los apellidos son obligatorios");
         }
     }
 
@@ -83,64 +153,4 @@ public class PacienteServiceImpl implements PacienteService {
         p.setDireccion(rq.getDireccion());
         return p;
     }
-
-    @Override
-    public RespuestaRs eliminarPaciente(Integer id) throws BadRequestException {
-        if (id == null) {
-            throw new BadRequestException("Id inválido");
-        }
-        Optional<Paciente> optPac = this.PacienteRepository.findById(id);
-        if (!optPac.isPresent()) {
-            throw new BadRequestException("No se encuentra el paciente");
-        }
-        this.PacienteRepository.deleteById(id);
-        RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Se eliminó el paciente satisfactoriamente");
-        rta.setStatus(200);
-        return rta;
-    }
-    
-    @Override
-    public RespuestaRs actualizarPaciente(Integer id, PacienteRq pacienteRq) throws BadRequestException {
-    // Validar que el ID no sea nulo
-        if (id == null) {
-        throw new BadRequestException("Id inválido");
-        }
-    
-    // Validar los campos del request
-    this.validarCampos(pacienteRq);
-    
-    // Buscar el paciente existente por ID
-    Optional<Paciente> optPaciente = this.PacienteRepository.findById(id);
-    if (!optPaciente.isPresent()) {
-        throw new BadRequestException("No se encuentra el paciente a actualizar");
-    }
-    
-    // Verificar que no exista otro paciente con el mismo número de documento
-    Optional<Paciente> pacienteConMismoDocumento = this.PacienteRepository.findByNumeroDocumento(pacienteRq.getNumeroDocumento());
-    if (pacienteConMismoDocumento.isPresent() && !pacienteConMismoDocumento.get().getId().equals(id)) {
-        throw new BadRequestException("Ya existe otro paciente con ese número de documento");
-    }
-    
-    // Obtener el paciente existente y actualizar sus datos
-    Paciente pacienteExistente = optPaciente.get();
-    pacienteExistente.setTipoDocumento(pacienteRq.getTipoDocumento());
-    pacienteExistente.setNumeroDocumento(pacienteRq.getNumeroDocumento());
-    pacienteExistente.setNombres(pacienteRq.getNombres());
-    pacienteExistente.setApellidos(pacienteRq.getApellidos());
-    pacienteExistente.setFechaNacimiento(pacienteRq.getFechaNacimiento());
-    pacienteExistente.setGenero(pacienteRq.getGenero());
-    pacienteExistente.setTelefono(pacienteRq.getTelefono());
-    pacienteExistente.setDireccion(pacienteRq.getDireccion());
-    
-    // Guardar los cambios
-    this.PacienteRepository.save(pacienteExistente);
-    
-    // Preparar respuesta
-    RespuestaRs rta = new RespuestaRs();
-    rta.setMessage("Se actualizó el paciente satisfactoriamente");
-    rta.setStatus(200);
-    return rta;
-}
-
 }

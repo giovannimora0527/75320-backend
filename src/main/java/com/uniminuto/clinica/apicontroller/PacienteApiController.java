@@ -12,6 +12,7 @@ import com.uniminuto.clinica.service.PacienteService;
 
 import java.util.List;
 import org.apache.coyote.BadRequestException;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class PacienteApiController implements PacienteApi {
 
     @Override
     public ResponseEntity<Paciente> buscarPacienteXIdentificacion(String numeroDocumento)
-            throws BadRequestException {
+            throws ResponseStatusException {
         return ResponseEntity.ok(pacienteService.buscarPacientePorDocumento(numeroDocumento));
     }
 
@@ -47,4 +48,7 @@ public class PacienteApiController implements PacienteApi {
     public ResponseEntity<RespuestaRs> actualizarPaciente(Integer id, PacienteRq pacienteRq) throws BadRequestException {
         return ResponseEntity.ok(pacienteService.actualizarPaciente(id, pacienteRq));
 }
+    public ResponseEntity<List<Paciente>> listarPacientesPorEdad() {
+        return ResponseEntity.ok(pacienteService.listarPacientesPorEdad());
+    }
 }
