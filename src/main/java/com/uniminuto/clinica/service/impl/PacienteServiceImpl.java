@@ -1,11 +1,9 @@
 package com.uniminuto.clinica.service.impl;
 
 import com.uniminuto.clinica.entity.Paciente;
-import com.uniminuto.clinica.entity.Usuario;
 import com.uniminuto.clinica.model.PacienteRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.repository.PacienteRepository;
-import com.uniminuto.clinica.repository.UsuarioRepository;
 import com.uniminuto.clinica.service.PacienteService;
 import java.util.List;
 import java.util.Optional;
@@ -13,19 +11,15 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
- *
- * @author lmora
+ * Servicio para gestión de pacientes.
+ * Corrige el manejo de usuarioId y evita errores de constraint en base de datos.
  */
 @Service
 public class PacienteServiceImpl implements PacienteService {
 
     @Autowired
     private PacienteRepository pacienteRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;  // ← AGREGADO
 
     @Override
     public List<Paciente> encontrarTodosLosPacientes() {
@@ -34,11 +28,9 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
-
         Optional<Paciente> optPaciente = this.pacienteRepository.findByNumeroDocumento(documento);
-        if (!optPaciente.isPresent()) {
+        if (optPaciente.isEmpty()) {
             throw new BadRequestException("No se encuentra el paciente");
-
         }
         return optPaciente.get();
     }
@@ -58,14 +50,16 @@ public class PacienteServiceImpl implements PacienteService {
                     + pacienteRq.getNumeroDocumento() + " ya existe.");
         }
 
-        // Validar usuario
-        Optional<Usuario> optUsuario = this.usuarioRepository.findById(Math.toIntExact(pacienteRq.getUsuarioId()));
-        if (optUsuario.isEmpty()) {
-            throw new BadRequestException("El usuario asociado no es válido.");
+        // Convertir RQ → Entity
+        Paciente paciente = this.convertirRqToEntity(pacienteRq);
+
+        // ✅ Si usuarioId viene nulo o en 0, lo ignoramos para evitar error SQL
+        if (pacienteRq.getUsuarioId() != null && pacienteRq.getUsuarioId() > 0) {
+            paciente.setUsuarioId(Math.toIntExact(pacienteRq.getUsuarioId()));
+        } else {
+            paciente.setUsuarioId(null);
         }
 
-        // Convertir RQ → Entity
-        Paciente paciente = this.convertirRqToEntity(pacienteRq, optUsuario.get());
         this.pacienteRepository.save(paciente);
 
         RespuestaRs rta = new RespuestaRs();
@@ -93,14 +87,7 @@ public class PacienteServiceImpl implements PacienteService {
             }
         }
 
-        // Validar usuario
-        Optional<Usuario> optUsuario = this.usuarioRepository.findById(Math.toIntExact(pacienteRq.getUsuarioId()));
-        if (optUsuario.isEmpty()) {
-            throw new BadRequestException("El usuario asociado no es válido.");
-        }
-
         // Actualizar datos
-        pacienteActual.setUsuario(optUsuario.get());
         pacienteActual.setTipoDocumento(pacienteRq.getTipoDocumento());
         pacienteActual.setNumeroDocumento(pacienteRq.getNumeroDocumento());
         pacienteActual.setNombres(pacienteRq.getNombres());
@@ -110,6 +97,13 @@ public class PacienteServiceImpl implements PacienteService {
         pacienteActual.setTelefono(pacienteRq.getTelefono());
         pacienteActual.setDireccion(pacienteRq.getDireccion());
 
+        // ✅ Manejo seguro del usuarioId
+        if (pacienteRq.getUsuarioId() != null && pacienteRq.getUsuarioId() > 0) {
+            pacienteActual.setUsuarioId(Math.toIntExact(pacienteRq.getUsuarioId()));
+        } else {
+            pacienteActual.setUsuarioId(null);
+        }
+
         this.pacienteRepository.save(pacienteActual);
 
         RespuestaRs rta = new RespuestaRs();
@@ -118,9 +112,11 @@ public class PacienteServiceImpl implements PacienteService {
         return rta;
     }
 
-    private Paciente convertirRqToEntity(PacienteRq pacienteRq, Usuario usuario) {
+    /**
+     * Convierte un objeto de solicitud (PacienteRq) en entidad (Paciente).
+     */
+    private Paciente convertirRqToEntity(PacienteRq pacienteRq) {
         Paciente p = new Paciente();
-        p.setUsuario(usuario);
         p.setTipoDocumento(pacienteRq.getTipoDocumento());
         p.setNumeroDocumento(pacienteRq.getNumeroDocumento());
         p.setNombres(pacienteRq.getNombres());
@@ -129,6 +125,7 @@ public class PacienteServiceImpl implements PacienteService {
         p.setGenero(pacienteRq.getGenero());
         p.setTelefono(pacienteRq.getTelefono());
         p.setDireccion(pacienteRq.getDireccion());
+        // UsuarioId se maneja en el método principal
         return p;
     }
 }

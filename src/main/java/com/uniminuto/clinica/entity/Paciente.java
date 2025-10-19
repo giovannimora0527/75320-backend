@@ -35,9 +35,13 @@ public class Paciente implements Serializable {
     /**
      * Usuario asociado al paciente.
      */
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    // Antes (problema):
+// private int usuarioId;  // o private long usuarioId;
+
+// Después (acepta null):
+    @Column(name = "usuario_id", nullable = true)
+    private Integer usuarioId;
+
 
     /**
      * Tipo de documento del paciente (CC, TI, CE, etc.).
