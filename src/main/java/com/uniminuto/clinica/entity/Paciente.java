@@ -40,7 +40,7 @@ public class Paciente implements Serializable {
     private  String apellidos ;
     
     @Column(name = "fecha_nacimiento")
-    private  String fechaNacimiento ; 
+    private  LocalDate fechaNacimiento ; 
     
     @Column(name = "genero")
     private  String genero ; 

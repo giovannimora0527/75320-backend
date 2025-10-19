@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Integer>{
+public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
     
     Optional<Paciente> findByNumeroDocumento(String documento);
     
     @Query("SELECT p FROM Paciente p ORDER BY p.fechaNacimiento ASC")
-    List<Paciente> findAllOrderByFechaNacimientoAsc();
+    List<Paciente> findAllByOrderByFechaNacimientoAsc();
 }

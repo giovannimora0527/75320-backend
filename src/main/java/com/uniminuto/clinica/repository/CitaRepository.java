@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CitaRepository extends JpaRepository<Cita, Integer> { 
 
-    @Query("SELECT c FROM Cita c ORDER BY c.fechaHora DESC")
-    List<Cita> findAllOrderByFechaHoraDesc();
+    List<Cita> findAllByOrderByFechaHoraDesc();
 
 }
