@@ -8,10 +8,7 @@ import com.uniminuto.clinica.model.RecetaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -32,6 +29,16 @@ public interface RecetaApi {
             consumes = {"application/json"},
             method = RequestMethod.POST)
     ResponseEntity<RespuestaRs> guardarReceta(
+            @RequestBody @Valid RecetaRq recetaRq
+    ) throws BadRequestException;
+
+    @RequestMapping(
+            value = "/actualizar/{id}",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarReceta(
+            @PathVariable("id") Long id,
             @RequestBody @Valid RecetaRq recetaRq
     ) throws BadRequestException;
 }
