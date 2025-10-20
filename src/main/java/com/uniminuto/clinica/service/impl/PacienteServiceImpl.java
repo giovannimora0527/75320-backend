@@ -100,6 +100,7 @@ public class PacienteServiceImpl implements PacienteService {
 
         pacienteActualizar.setUsuarioId(pacienteRq.getUsuarioId());
         pacienteActualizar.setTipoDocumento(pacienteRq.getTipoDocumento());
+        pacienteActualizar.setNumeroDocumento(pacienteRq.getNumeroDocumento());
         pacienteActualizar.setNombres(pacienteRq.getNombres());
         pacienteActualizar.setApellidos(pacienteRq.getApellidos());
         pacienteActualizar.setGenero(pacienteRq.getGenero());
