@@ -53,4 +53,11 @@ public interface PacienteApi {
             @RequestBody PacienteRq pacienteRq)
             throws BadRequestException;
 
+    @RequestMapping(value = "/actualizar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarPaciente(
+            @RequestBody PacienteRq pacienteRq)
+            throws BadRequestException;
 }

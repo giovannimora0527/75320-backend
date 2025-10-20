@@ -1,8 +1,10 @@
 package com.uniminuto.clinica.service.impl;
 
 import com.uniminuto.clinica.entity.Paciente;
+import com.uniminuto.clinica.entity.Usuario;
 import com.uniminuto.clinica.model.PacienteRq;
 import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.model.UsuarioRq;
 import com.uniminuto.clinica.repository.PacienteRepository;
 import com.uniminuto.clinica.service.PacienteService;
 
@@ -70,6 +72,43 @@ public class PacienteServiceImpl implements PacienteService {
         RespuestaRs rta = new RespuestaRs();
         rta.setStatus(200);
         rta.setMessage("Se ha agregado el paciente con éxito");
+        return rta;
+    }
+
+    @Override
+    public RespuestaRs actualizarPaciente(PacienteRq pacienteRq) throws BadRequestException {
+        this.validadorCampos(pacienteRq);
+        Optional<Paciente> optPaciente = this.pacienteRepository.findById(pacienteRq.getId());
+        if (!optPaciente.isPresent()) {
+            throw new BadRequestException("No se encuentra el paciente a actualizar.");
+        }
+
+        Paciente pacienteActualizar = optPaciente.get();
+        if (!pacienteActualizar.getNumeroDocumento().equals(pacienteRq.getNumeroDocumento())) {
+            Optional<Paciente> optDocumento = this.pacienteRepository.findByNumeroDocumento(pacienteRq.getNumeroDocumento());
+            if (optDocumento.isPresent()) {
+                throw new BadRequestException("El número de documento ya está registrado para otro paciente.");
+            }
+        }
+
+        if (!pacienteActualizar.getUsuarioId().equals(pacienteRq.getUsuarioId())) {
+            Optional<Paciente> optUsuarioId = this.pacienteRepository.findByUsuarioId(pacienteRq.getUsuarioId());
+            if (optUsuarioId.isPresent()) {
+                throw new BadRequestException("El usuarioId ya está asociado a otro paciente.");
+            }
+        }
+
+        pacienteActualizar.setUsuarioId(pacienteRq.getUsuarioId());
+        pacienteActualizar.setTipoDocumento(pacienteRq.getTipoDocumento());
+        pacienteActualizar.setNombres(pacienteRq.getNombres());
+        pacienteActualizar.setApellidos(pacienteRq.getApellidos());
+        pacienteActualizar.setGenero(pacienteRq.getGenero());
+        pacienteActualizar.setTelefono(pacienteRq.getTelefono());
+        pacienteActualizar.setDireccion(pacienteRq.getDireccion());
+        this.pacienteRepository.save(pacienteActualizar);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("El paciente se ha actualizado correctamente.");
+        rta.setStatus(200);
         return rta;
     }
 

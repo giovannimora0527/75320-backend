@@ -43,4 +43,10 @@ public class PacienteApiController implements PacienteApi {
     public ResponseEntity<RespuestaRs> agregarPaciente(PacienteRq pacienteRq) throws BadRequestException {
         return ResponseEntity.ok(pacienteService.agregarPaciente(pacienteRq));
     }
+
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarPaciente(PacienteRq pacienteRq) throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.actualizarPaciente(pacienteRq));
+    }
+    
 }

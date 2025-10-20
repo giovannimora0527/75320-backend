@@ -19,4 +19,7 @@ public interface PacienteService {
     List<Paciente> listarPacientesPorEdad();
 
     RespuestaRs agregarPaciente(PacienteRq pacienteRq) throws BadRequestException;
+
+    RespuestaRs actualizarPaciente(PacienteRq pacienteRq) throws BadRequestException;
+
 }
