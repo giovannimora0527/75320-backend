@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EspecializacionRepository 
-        extends JpaRepository<Especializacion, Integer> {
+        extends JpaRepository<Especializacion, Long> {
     Optional<Especializacion> findByCodigoEspecializacion(String codigo);
+
+    Optional<Especializacion> findByNombre(String nombre);
 }
