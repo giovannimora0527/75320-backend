@@ -1,5 +1,8 @@
 package com.uniminuto.clinica.service;
 
+import com.uniminuto.clinica.entity.Especializacion;
+import java.util.List;
+
 /**
 * Servicio de especializacion
 */
@@ -7,5 +10,6 @@ package com.uniminuto.clinica.service;
 * @author Anderson
 */
 
-public interface EspecializacionService {   
+public interface EspecializacionService {
+    List<Especializacion> listarEspecializaciones();
 }

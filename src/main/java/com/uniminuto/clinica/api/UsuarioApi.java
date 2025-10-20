@@ -46,4 +46,18 @@ public interface UsuarioApi {
     ResponseEntity<RespuestaRs> guardarUsuario(
             @RequestBody UsuarioRq usuarioRq)
             throws BadRequestException;
+    
+    /**
+     * Guarda un usuario nuevo en la bd.
+     * @param usuarioRq Usuario de entrada.
+     * @return respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
+    @RequestMapping(value = "/actualizar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarUsuario(
+            @RequestBody UsuarioRq usuarioRq)
+            throws BadRequestException;
 }
