@@ -19,10 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MedicoServiceImpl implements MedicoService {
-    
+
     @Autowired
     private MedicoRepository medicoRepository;
-    
+
     @Autowired
     private EspecializacionRepository especializacionRepository;
 
@@ -33,15 +33,15 @@ public class MedicoServiceImpl implements MedicoService {
 
     @Override
     public List<Medico> buscarMedicosPorEspecializacion(
-            String codEspecializacion) 
+            String codEspecializacion)
             throws BadRequestException {
         Optional<Especializacion> optEsp = this.especializacionRepository
                 .findByCodigoEspecializacion(codEspecializacion);
-        
+
         if (!optEsp.isPresent()) {
             throw new BadRequestException("Codigo de especializacion no valido.");
         }
-        
+
         return this.medicoRepository.findByEspecializacion(optEsp.get());
     }
 
