@@ -2,6 +2,8 @@ package com.uniminuto.clinica.repository;
 
 import com.uniminuto.clinica.entity.Especializacion;
 import java.util.Optional;
+
+import com.uniminuto.clinica.entity.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +15,8 @@ import org.springframework.stereotype.Repository;
 public interface EspecializacionRepository 
         extends JpaRepository<Especializacion, Integer> {
     Optional<Especializacion> findByCodigoEspecializacion(String codigo);
+
+    Optional<Especializacion> findByNombre(String nombre);
+
+    Optional<Especializacion> findById(Integer id);
 }

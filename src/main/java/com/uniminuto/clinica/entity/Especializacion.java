@@ -30,13 +30,13 @@ public class Especializacion implements Serializable {
     @Column(name = "id")
     private Integer id;
     
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
    
     @Column(name = "descripcion")
     private String descripcion;
     
-    @Column(name = "codigo_especializacion")
+    @Column(name = "codigo_especializacion", nullable = false)
     private String codigoEspecializacion;
     
 }
