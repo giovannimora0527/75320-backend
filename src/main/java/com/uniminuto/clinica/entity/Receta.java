@@ -5,15 +5,8 @@
 package com.uniminuto.clinica.entity;
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 
 /**
@@ -40,7 +33,7 @@ public class Receta {
     private Medicamento medicamento;
     
     
-    @Column(name="fecha_creacion_registro", nullable = false)
+    @Column(name="fecha_creacion_registro",updatable = false, nullable = false)
     private LocalDateTime fechaRegistro;
             
     @Column
@@ -55,5 +48,11 @@ public class Receta {
             fechaRegistro = LocalDateTime.now();
     
         }
+
     }
+    @PreUpdate
+    public void preUpdate() {
+        fechaRegistro = LocalDateTime.now();
+    }
+
 }

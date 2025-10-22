@@ -1,34 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.apicontroller;
 
-import com.uniminuto.clinica.api.RecetaApi;
 import com.uniminuto.clinica.entity.Receta;
 import com.uniminuto.clinica.service.RecetaService;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import java.util.List;
 
-/**
- *
- * @author Oskr
- */
+
 @RestController
-public class RecetaApiController implements RecetaApi{
-    
-    @Autowired
-    private RecetaService recetaservice;
-    @Override
-    public ResponseEntity<Receta> creacionReceta(Receta receta){
-        return ResponseEntity.ok(recetaservice.creacionReceta(receta));
+@RequestMapping("/receta")
+public class RecetaApiController {
+
+    private final RecetaService recetaService;
+
+    public RecetaApiController(RecetaService recetaService) {
+        this.recetaService = recetaService;
     }
-    
-    @Override
+
+    @PostMapping("/Creacion_de_Receta")
+    public ResponseEntity<Receta> creacionReceta(@RequestBody Receta receta) {
+        return ResponseEntity.ok(recetaService.creacionReceta(receta));
+    }
+
+    @GetMapping("/listaReceta")
     public ResponseEntity<List<Receta>> listadeReceta() {
-        List<Receta> recetas = recetaservice.listadeReceta();
-        return ResponseEntity.ok(recetas);
+        return ResponseEntity.ok(recetaService.listadeReceta());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Receta> actualizarReceta(@PathVariable Long id, @RequestBody Receta receta) {
+        try {
+            Receta actualizada = recetaService.actualizarReceta(id, receta);
+            return ResponseEntity.ok(actualizada);
+        } catch (ResponseStatusException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar la receta", e);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarReceta(@PathVariable Long id) {
+        recetaService.eliminarReceta(id);
+        return ResponseEntity.noContent().build();
     }
 }
