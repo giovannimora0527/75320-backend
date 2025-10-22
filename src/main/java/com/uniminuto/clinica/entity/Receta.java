@@ -40,4 +40,9 @@ public class Receta implements Serializable {
     /** Fecha de creación del registro de la receta */
     @Column(name = "fecha_creacion_registro")
     private LocalDateTime fechaCreacionRegistro;
+
+    @PrePersist
+    public void prePersist() {
+        this.fechaCreacionRegistro = LocalDateTime.now();
+    }
 }

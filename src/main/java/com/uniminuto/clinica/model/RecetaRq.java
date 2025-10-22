@@ -7,6 +7,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class RecetaRq {
+
+    private Long Id;
+
     @NotNull(message = "El campo citaId es obligatorio")
     private Long citaId;
 

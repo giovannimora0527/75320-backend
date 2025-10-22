@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,5 +27,10 @@ public class RecetaApiController implements RecetaApi {
     @Override
     public ResponseEntity<RespuestaRs> guardarReceta(RecetaRq recetaRq) throws BadRequestException {
         return ResponseEntity.ok(this.recetaService.guardarReceta(recetaRq));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarReceta(@Valid RecetaRq recetaRq) throws BadRequestException {
+        return ResponseEntity.ok(this.recetaService.actualizarReceta(recetaRq));
     }
 }
