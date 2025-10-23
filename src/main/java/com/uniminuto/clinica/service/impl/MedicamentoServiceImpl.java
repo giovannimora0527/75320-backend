@@ -66,7 +66,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
         medicamentoUpdate.setPresentacion(medicamento.getPresentacion() == null? medicamentoUpdate.getPresentacion() : medicamento.getPresentacion());
         medicamentoUpdate.setDescripcion(medicamento.getDescripcion() == null? medicamentoUpdate.getDescripcion() : medicamento.getDescripcion());
         medicamentoUpdate.setNombre(medicamento.getNombre() == null? medicamentoUpdate.getNombre() : medicamento.getNombre());
-        medicamentoUpdate.setFechaCompra(medicamento.getFechaCmpra() == null? medicamentoUpdate.getFechaCompra() : medicamento.getFechaCmpra());
+        medicamentoUpdate.setFechaCompra(medicamento.getFechaCompra() == null? medicamentoUpdate.getFechaCompra() : medicamento.getFechaCompra());
         medicamentoUpdate.setFechaVence(medicamento.getFechaVence() == null? medicamentoUpdate.getFechaVence() : medicamento.getFechaVence());
         medicamentoUpdate.setFechaModificacionRegistro(LocalDateTime.now());
         this.medicamentoRepository.save(medicamentoUpdate);
@@ -89,8 +89,8 @@ public class MedicamentoServiceImpl implements MedicamentoService {
                 medicamento.getPresentacion().isEmpty()) {
             throw new BadRequestException("Presentación es obligatoria");
         }
-        if (medicamento.getFechaCmpra() == null) {
-            throw new BadRequestException("Fecha de compra es obligarorio es obligatoria");
+        if (medicamento.getFechaCompra() == null) {
+            throw new BadRequestException("Fecha de compra es obligaroria");
         }
         if (medicamento.getFechaVence() == null) {
             throw new BadRequestException("Fecha vencimiento es obligatoria");
@@ -102,7 +102,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
         nuevo.setDescripcion(medicamentoRq.getDescripcion());
         nuevo.setNombre(medicamentoRq.getNombre());
         nuevo.setPresentacion(medicamentoRq.getPresentacion());
-        nuevo.setFechaCompra(medicamentoRq.getFechaCmpra());
+        nuevo.setFechaCompra(medicamentoRq.getFechaCompra());
         nuevo.setFechaVence(medicamentoRq.getFechaVence());
         nuevo.setFechaCreacionRegistro(LocalDateTime.now());
         return nuevo;
