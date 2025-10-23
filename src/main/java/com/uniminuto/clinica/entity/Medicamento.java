@@ -1,8 +1,7 @@
 package com.uniminuto.clinica.entity;
 
-import lombok.Data;
-
 import jakarta.persistence.*;
+import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,14 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "medicamento")
 public class Medicamento implements Serializable {
-    /**
-     * Id serializable.
-     */
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Id.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

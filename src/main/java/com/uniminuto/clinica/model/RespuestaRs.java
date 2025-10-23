@@ -1,15 +1,16 @@
 package com.uniminuto.clinica.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@AllArgsConstructor   // ✅ genera un constructor con todos los argumentos
+@NoArgsConstructor    // ✅ genera un constructor vacío
 public class RespuestaRs {
-    private int status;
     private String message;
+    private boolean success;
+    private int status = 200; // opcional
+
+    // Puedes agregar métodos auxiliares si quieres
 }
