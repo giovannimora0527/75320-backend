@@ -9,6 +9,7 @@ import com.uniminuto.clinica.repository.RecetaRepository;
 import com.uniminuto.clinica.service.RecetaService;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,62 +39,57 @@ public class RecetaServiceImpl implements RecetaService{
      * Metodo guardar.
      */
     @Override
-    public RespuestaRs guardarReceta(RecetaRq receta)throws BadRequestException {
-        this.validadorCampos(receta);
-    /**
-    * Guarda el objeto.
-    */
-    Receta objGuardar =this.convertirRecetaClass(receta);
-    this.recetaRepository.save(objGuardar);
-    RespuestaRs rta = new RespuestaRs();
-    rta.setMessage("Receta guardada exitosamente");
-    rta.setStatus(200);
-    return rta;
-    }  
-    /**
-    * Validador de campos.
-    */
-    private void validadorCampos(RecetaRq receta)throws BadRequestException{
-        if (receta.getCitaId() == null) {
-            throw new BadRequestException("El ID de la cita es obligatorio");
-        }
-            if (receta.getMedicamentoId() == null)  {
-            throw new BadRequestException("El Id del medicamento es obligatorio");
-        }
+    public RespuestaRs guardarReceta(RecetaRq recetaRq)throws BadRequestException {
+        /**
+        * Guarda el objeto.
+        */
+        Receta receta = new Receta();
+        
+        Cita cita = new Cita();
+        cita.setId(recetaRq.getCita());
+        receta.setCita(cita);
 
-        if (receta.getDosis() == null|| receta.getDosis().isBlank()||
-                receta.getDosis().isEmpty()) {
-        throw new BadRequestException("La docis es obligatorias");
-        }
-
-        if (receta.getIndicaciones() == null || receta.getIndicaciones().isBlank()||
-                receta.getIndicaciones().isEmpty()) {
-        throw new BadRequestException("Las indicaciones son obligatorias");
-        }
+        Medicamento medicamento = new Medicamento();
+        medicamento.setId(recetaRq.getMedicamento());
+        receta.setMedicamento(medicamento);
+        
+        receta.setDosis(recetaRq.getDosis());
+        receta.setIndicaciones(recetaRq.getIndicaciones());
+        receta.setFechaCreacionRegistro(LocalDateTime.now());
+        this.recetaRepository.save(receta);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setStatus(200);
+        rta.setMessage("Receta guardada con éxito.");
+        return rta;
     }
+    
     /**
     * Convertir objeto.
     */
-    private Receta convertirRecetaClass(RecetaRq recetaRq){
-        Receta nuevo = new Receta();
-    /**
-    * Cita.
-    */
-    Cita cita = new Cita();
-    cita.setId(recetaRq.getCitaId());
-    nuevo.setCita(cita);
-    /**
-    * Medicamento.
-    */
-    Medicamento medicamento = new Medicamento();
-    medicamento.setId(recetaRq.getMedicamentoId());
-    nuevo.setMedicamento(medicamento);    
-    /**
-    * Otros campos.
-    */
-    nuevo.setDosis(recetaRq.getDosis());
-    nuevo.setIndicaciones(recetaRq.getIndicaciones());
-    nuevo.setFechaCreacionRegistro(LocalDateTime.now());      
-    return nuevo;
-}
+    
+    @Override
+    public RespuestaRs actualizarReceta(RecetaRq recetaRq) throws BadRequestException {
+        Optional<Receta> recetaExiste = this.recetaRepository.findById(recetaRq.getId());
+        if (recetaExiste.isEmpty()) {
+            throw new BadRequestException("La receta no existe y no se puede actualizar.");
+        }
+        
+        Receta receta = recetaExiste.get();
+        
+        Cita cita = new Cita();
+        cita.setId(recetaRq.getCita());
+        receta.setCita(cita);
+
+        Medicamento medicamento = new Medicamento();
+        medicamento.setId(recetaRq.getMedicamento());
+        receta.setMedicamento(medicamento);
+        
+        receta.setDosis(recetaRq.getDosis());
+        receta.setIndicaciones(recetaRq.getIndicaciones());
+        this.recetaRepository.save(receta);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("Reta actualizada con éxito.");
+        rta.setStatus(200);
+        return rta;
+    }
 }

@@ -21,5 +21,7 @@ public interface RecetaService {
     /**
     * Servicio para guardar receta
     */
-    RespuestaRs guardarReceta(RecetaRq receta) throws BadRequestException;
+    RespuestaRs guardarReceta(RecetaRq recetaRp) throws BadRequestException;
+    
+    RespuestaRs actualizarReceta(RecetaRq recetaRq) throws BadRequestException;
 }

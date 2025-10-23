@@ -37,6 +37,16 @@ public interface RecetaApi {
             consumes = {"application/json"},
             method = RequestMethod.POST)
     ResponseEntity<RespuestaRs> guardarReceta(
-            @RequestBody RecetaRq recetaRq
-    ) throws BadRequestException;   
+            @RequestBody RecetaRq recetaRq) 
+            throws BadRequestException; 
+    /**
+     * Endpoint para actualizar las recetas
+     */
+    @RequestMapping(value = "/actualizar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarReceta(
+            @RequestBody RecetaRq recetaRq)
+            throws BadRequestException;
 }
