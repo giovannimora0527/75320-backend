@@ -10,40 +10,33 @@ import javax.persistence.Table;
 import lombok.Data;
 
 /**
- * Entidad de especializacion de la base de datos
+ *
+ * @author lmora
  */
-/**
- * @author Anderson
- */
-
 @Data
 @Entity
 @Table(name = "especializacion")
 public class Especializacion implements Serializable {
     /**
-     * serializable
+     * Id serializable.
      */
     private static final long serialVersionUID = 1L;
+    
     /**
-     * id
+     * Id.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
-    /**
-     * nombre
-     */
+    private Long id;
+    
     @Column(name = "nombre")
     private String nombre;
-    /**
-     * descripcion
-     */
+   
     @Column(name = "descripcion")
     private String descripcion;
-    /**
-     * codigo_especializacion
-     */
+    
     @Column(name = "codigo_especializacion")
     private String codigoEspecializacion;
+    
 }

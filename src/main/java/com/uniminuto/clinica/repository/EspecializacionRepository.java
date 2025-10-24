@@ -6,16 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repositorio de especializacion
+ *
+ * @author lmora
  */
-/**
- * @author Anderson
- */
-
 @Repository
-public interface EspecializacionRepository extends JpaRepository<Especializacion, Integer> {
-    /**
-     * Metodo listar por especializacion
-     */
+public interface EspecializacionRepository 
+        extends JpaRepository<Especializacion, Long> {
     Optional<Especializacion> findByCodigoEspecializacion(String codigo);
+    Optional<Especializacion> findByNombre(String codigo);
 }
