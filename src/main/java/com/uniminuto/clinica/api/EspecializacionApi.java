@@ -13,13 +13,14 @@ import java.util.List;
 import org.apache.coyote.BadRequestException;
 import org.springframework.web.bind.annotation.RequestBody;
 
+//Especializacion Api
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/especializacion")
 public interface EspecializacionApi {
 
     /**
      * Listar especializaciones
-     * @return List<Especializacion> lista.
      */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},

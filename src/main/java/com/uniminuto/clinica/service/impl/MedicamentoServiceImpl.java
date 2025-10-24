@@ -56,13 +56,15 @@ public class MedicamentoServiceImpl implements MedicamentoService {
     }
 
     @Override
-    public RespuestaRs actualizarMedicamento(MedicamentoRq medicamento) throws BadRequestException {
-        Medicamento medicamentoUpdate = this.buscarPorId(medicamento.getId());
-        Optional<Medicamento> optMedic = this.medicamentoRepository
-                .findByNombre(medicamento.getNombre());
-        if (optMedic.isPresent()) {
-            throw new BadRequestException("El medicamento ya existe y no se puede actualizar");
-        }
+public RespuestaRs actualizarMedicamento(MedicamentoRq medicamento) throws BadRequestException {
+    Medicamento medicamentoUpdate = this.buscarPorId(medicamento.getId());
+
+    Optional<Medicamento> optMedic = this.medicamentoRepository.findByNombre(medicamento.getNombre());
+
+    // 🔍 Verificar si el nombre ya existe en otro registro diferente
+    if (optMedic.isPresent() && !optMedic.get().getId().equals(medicamento.getId())) {
+        throw new BadRequestException("El medicamento ya existe y no se puede actualizar");
+    }
         medicamentoUpdate.setPresentacion(medicamento.getPresentacion() == null? medicamentoUpdate.getPresentacion() : medicamento.getPresentacion());
         medicamentoUpdate.setDescripcion(medicamento.getDescripcion() == null? medicamentoUpdate.getDescripcion() : medicamento.getDescripcion());
         medicamentoUpdate.setNombre(medicamento.getNombre() == null? medicamentoUpdate.getNombre() : medicamento.getNombre());
