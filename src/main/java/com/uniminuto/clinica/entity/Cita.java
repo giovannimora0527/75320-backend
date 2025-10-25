@@ -59,7 +59,6 @@ public class Cita implements Serializable{
      * Estado de la cita
      */
     @Column(length = 20)
-    @JsonIgnore
     private String estado;
 
     /**

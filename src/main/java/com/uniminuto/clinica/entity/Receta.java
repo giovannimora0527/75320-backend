@@ -63,7 +63,8 @@ public class Receta implements Serializable{
     /**
      * Fecha y hora de la creacion de la receta
      */
-    @Column(name = "fecha_hora", nullable = false)
-    private LocalDateTime fechaHora;
+    @Column(name = "fecha_hora", nullable = false, updatable = false)
+    private LocalDateTime fechaHora = LocalDateTime.now();
+
     
 }

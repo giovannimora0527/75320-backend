@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor   // ✅ genera un constructor con todos los argumentos
-@NoArgsConstructor    // ✅ genera un constructor vacío
+@AllArgsConstructor
+@NoArgsConstructor
 public class RespuestaRs {
     private String message;
     private boolean success;
-    private int status = 200; // opcional
-
-    // Puedes agregar métodos auxiliares si quieres
+    private int status = 200;
+    private Object data; // ✅ nuevo campo para enviar datos (ej: una receta)
 }

@@ -9,9 +9,12 @@ import com.uniminuto.clinica.repository.PacienteRepository;
 import com.uniminuto.clinica.service.CitaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +54,45 @@ public class CitaServiceImpl implements CitaService {
     @Override
     public List<Cita> listarCitaPorFechaHora() {
         return this.citaRepository.findAllByOrderByFechaHoraDesc();
+    }
+    
+    @Override
+    public RespuestaRs actualizarCita(Integer id, CitaRq citaRq) throws BadRequestException {
+        RespuestaRs respuesta = new RespuestaRs();
+        Optional<Cita> citaOpt = citaRepository.findById(id);
+
+        if (citaOpt.isEmpty()) {
+            throw new BadRequestException("No existe la Cita con ID " + id);
+        }
+
+        Cita cita = citaOpt.get();
+        cita.setFechaHora(citaRq.getFechaHora());
+
+        citaRepository.save(cita);
+
+        respuesta.setMessage("Cita actualizada correctamente");
+        respuesta.setStatus(201); // para creación
+        respuesta.setSuccess(true);
+
+        return respuesta;
+    }
+    
+    @Override
+    public RespuestaRs eliminarCita(Integer id) throws BadRequestException {
+        RespuestaRs respuesta = new RespuestaRs();
+        Optional<Cita> citaOpt = citaRepository.findById(id);
+
+        if (citaOpt.isEmpty()) {
+            throw new BadRequestException("La Cita con ID " + id + " no existe");
+        }
+
+        citaRepository.deleteById(id);
+
+        respuesta.setMessage("Cita eliminada correctamente");
+        respuesta.setStatus(201); // para creación
+        respuesta.setSuccess(true);
+
+        return respuesta;
     }
 
 }

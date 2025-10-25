@@ -6,6 +6,8 @@ import com.uniminuto.clinica.model.CitaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.CitaService;
 import java.util.List;
+import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +36,16 @@ public class CitaApiController implements CitaApi {
     @Override
     public ResponseEntity<List<Cita>> listarCitaPorFechaHora() {
         return ResponseEntity.ok(citaService.listarCitaPorFechaHora());
+    }
+    
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarCita(Integer id, CitaRq citaRq) throws BadRequestException {
+        return ResponseEntity.ok(citaService.actualizarCita(id, citaRq));
+        
+    }
+    
+    @Override
+    public ResponseEntity<RespuestaRs> eliminarCita(Integer id) throws BadRequestException {
+        return ResponseEntity.ok(citaService.eliminarCita(id));
     }
 }

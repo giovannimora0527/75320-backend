@@ -1,33 +1,46 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.api;
 
-import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.entity.Receta;
-import com.uniminuto.clinica.entity.Medicamento;
 import com.uniminuto.clinica.model.RecetaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
-import java.util.List;
+import jakarta.validation.Valid;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-/**
- *
- * @author PC
- */
+import java.util.List;
 
 @CrossOrigin(origins = "*")
-@RequestMapping("/receta")
+@RequestMapping("/api/recetas")
 public interface RecetaApi {
-    
-    @PostMapping(value = "/guardar",
-            produces = {"application/json"},
-            consumes = {"application/json"})
-    ResponseEntity<RespuestaRs> guardarReceta(@RequestBody RecetaRq recetaRq);
-    
-    @GetMapping(value = "/listar", produces = {"application/json"})
+
+    // ✅ Crear o guardar receta
+    @PostMapping(
+        value = "/guardar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> guardarReceta(@Valid @RequestBody RecetaRq recetaRq) throws BadRequestException;
+
+    // ✅ Listar recetas
+    @GetMapping(
+        value = "/listar",
+        produces = "application/json"
+    )
     ResponseEntity<List<Receta>> listarRecetas();
-    
+
+    // ✅ Eliminar receta
+    @PostMapping(
+        value = "/eliminar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> eliminarReceta(@RequestParam Integer id) throws BadRequestException;
+
+    // ✅ Actualizar receta
+    @PostMapping(
+        value = "/actualizar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> actualizarReceta(@RequestParam Integer id, @RequestBody RecetaRq recetaRq);
 }
