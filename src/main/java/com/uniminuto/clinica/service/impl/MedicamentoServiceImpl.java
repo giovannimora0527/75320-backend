@@ -8,10 +8,16 @@ import com.uniminuto.clinica.service.MedicamentoService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+/**
+* Implementacion del servicio de medicamento
+*/
+/**
+* @author Anderson
+*/
 
 @Service
 public class MedicamentoServiceImpl implements MedicamentoService {
@@ -50,17 +56,19 @@ public class MedicamentoServiceImpl implements MedicamentoService {
     }
 
     @Override
-    public RespuestaRs actualizarMedicamento(MedicamentoRq medicamento) throws BadRequestException {
-        Medicamento medicamentoUpdate = this.buscarPorId(medicamento.getId());
-        Optional<Medicamento> optMedic = this.medicamentoRepository
-                .findByNombre(medicamento.getNombre());
-        if (optMedic.isPresent()) {
-            throw new BadRequestException("El medicamento ya existe y no se puede actualizar");
-        }
+public RespuestaRs actualizarMedicamento(MedicamentoRq medicamento) throws BadRequestException {
+    Medicamento medicamentoUpdate = this.buscarPorId(medicamento.getId());
+
+    Optional<Medicamento> optMedic = this.medicamentoRepository.findByNombre(medicamento.getNombre());
+
+    // 🔍 Verificar si el nombre ya existe en otro registro diferente
+    if (optMedic.isPresent() && !optMedic.get().getId().equals(medicamento.getId())) {
+        throw new BadRequestException("El medicamento ya existe y no se puede actualizar");
+    }
         medicamentoUpdate.setPresentacion(medicamento.getPresentacion() == null? medicamentoUpdate.getPresentacion() : medicamento.getPresentacion());
         medicamentoUpdate.setDescripcion(medicamento.getDescripcion() == null? medicamentoUpdate.getDescripcion() : medicamento.getDescripcion());
         medicamentoUpdate.setNombre(medicamento.getNombre() == null? medicamentoUpdate.getNombre() : medicamento.getNombre());
-        medicamentoUpdate.setFechaCompra(medicamento.getFechaCmpra() == null? medicamentoUpdate.getFechaCompra() : medicamento.getFechaCmpra());
+        medicamentoUpdate.setFechaCompra(medicamento.getFechaCompra() == null? medicamentoUpdate.getFechaCompra() : medicamento.getFechaCompra());
         medicamentoUpdate.setFechaVence(medicamento.getFechaVence() == null? medicamentoUpdate.getFechaVence() : medicamento.getFechaVence());
         medicamentoUpdate.setFechaModificacionRegistro(LocalDateTime.now());
         this.medicamentoRepository.save(medicamentoUpdate);
@@ -83,21 +91,20 @@ public class MedicamentoServiceImpl implements MedicamentoService {
                 medicamento.getPresentacion().isEmpty()) {
             throw new BadRequestException("Presentación es obligatoria");
         }
-        if (medicamento.getFechaCmpra() == null) {
-            throw new BadRequestException("Fecha de compra es obligarorio es obligatoria");
+        if (medicamento.getFechaCompra() == null) {
+            throw new BadRequestException("Fecha de compra es obligaroria");
         }
         if (medicamento.getFechaVence() == null) {
             throw new BadRequestException("Fecha vencimiento es obligatoria");
         }
     }
 
-
     private Medicamento convertirAMedicamentoClass(MedicamentoRq medicamentoRq) {
         Medicamento nuevo = new Medicamento();
         nuevo.setDescripcion(medicamentoRq.getDescripcion());
         nuevo.setNombre(medicamentoRq.getNombre());
         nuevo.setPresentacion(medicamentoRq.getPresentacion());
-        nuevo.setFechaCompra(medicamentoRq.getFechaCmpra());
+        nuevo.setFechaCompra(medicamentoRq.getFechaCompra());
         nuevo.setFechaVence(medicamentoRq.getFechaVence());
         nuevo.setFechaCreacionRegistro(LocalDateTime.now());
         return nuevo;

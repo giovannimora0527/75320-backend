@@ -6,11 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repositorio de datos para la tabla usuario.
- * @author lmora
+ * Repositorio de usuario
  */
+/**
+ * @author Anderson
+ */
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+    /**
+     * Metodo buscar por username de usuario
+     */
     Optional<Usuario> findByUsername(String username);
-    
 }

@@ -9,51 +9,71 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 
+/**
+ * Entidad de paciente de la base de datos
+ */
+/**
+ * @author Anderson
+ */
+
 @Data
 @Entity
 @Table(name = "paciente")
 public class Paciente implements Serializable {
-    
-       /**
-     * Id serializable.
-     */
+    /**
+    * serializable
+    */
     private static final long serialVersionUID = 1L;
     /**
-     * Id.
+     * id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    
     private Integer id;
+    /**
+     * usuario_id
+     */
     @Column(name = "usuario_id")
-    
     private  Integer usuarioId;
-    
-     @Column(name = "tipo_documento")
-    
+    /**
+     * tipo_documento
+     */
+    @Column(name = "tipo_documento")
     private  String tipoDocumento;
-    
-      @Column(name = "numero_documento")
-    
+    /**
+     * numero_documento
+     */
+    @Column(name = "numero_documento")
     private  String numeroDocumento;
-           @Column(name = "nombres")
-    
+    /**
+     * nombres
+     */
+    @Column(name = "nombres")
     private  String nombres ; 
-                 @Column(name = "apellidos")
-    
+    /**
+     * apellidos
+     */
+    @Column(name = "apellidos")
     private  String apellidos ; 
-                       @Column(name = "fecha_nacimiento")
-    
-    private  String fechaNacimiento ;            
-                        @Column(name = "genero")
-    
-    private  String genero ;            
-                                @Column(name = "telefono")
-    
+    /**
+     * fecha_nacimiento
+     */
+    @Column(name = "fecha_nacimiento")
+    private  String fechaNacimiento ; 
+    /**
+     * genero
+     */
+    @Column(name = "genero")
+    private  String genero ;
+    /**
+     * telefono
+     */
+    @Column(name = "telefono")
     private  String telefono ;    
-                                @Column(name = "direccion")
-    
-    private  String direccion ;                                
-                       
+    /**
+     * direccion
+     */
+    @Column(name = "direccion")
+    private  String direccion ;                                       
 }
