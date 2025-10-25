@@ -11,50 +11,49 @@ import javax.persistence.Table;
 import lombok.Data;
 
 /**
- * Entidad de usuario de la base de datos
+ *
+ * @author lmora
  */
-/**
- * @author Anderson
- */
-
 @Data
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
     /**
-     * serializable
+     * Id serializable.
      */
     private static final long serialVersionUID = 1L;
     /**
-     * id
+     * Id.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     /**
-     * username
+     * Username.
      */
     @Column(name = "username")
     private String username;
     /**
-     * password
+     * Password.
      */
     @Column(name = "password_hash")
     private String password;
     /**
-     * rol
+     * Rol.
      */
     @Column(name = "rol")
-    private String rol;    
+    private String rol;
     /**
-     * fecha_creacion
+     * Fecha Creacion.
      */
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
+
     /**
-     * activo
+     * Activo.
      */
     @Column(name = "activo")
-    private boolean activo;   
+    private boolean activo;
+
 }

@@ -1,64 +1,44 @@
 package com.uniminuto.clinica.entity;
 
+import lombok.Data;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import lombok.Data;  
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
-import javax.persistence.JoinColumn;
 
 /**
- * Entidad de cita de la base de datos
+ * Entidad que representa una cita médica en el sistema.
+ * Corresponde a la tabla 'cita' en la base de datos.
  */
-/**
- * @author Anderson
- */
-
-@Data
 @Entity
-@Table(name="cita")
-public class Cita implements Serializable{
-    /**
-     * serializable
-     */
-    public static final long serialVersionUID = 1L;
-    /**
-     * id
-     */
+@Table(name = "cita")
+@Data
+public class Cita implements Serializable {
+    /** Identificador único de la cita */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private  Long id;
-    /**
-     * paciente_id
-     */
+    private Long id;
+
+    /** Identificador del paciente asociado a la cita */
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
-    private  Paciente paciente;
-    /**
-    * medico_id
-    */
+    @JoinColumn(name = "paciente_id", nullable = false)
+    private Paciente paciente;
+
+    /** Identificador del médico asociado a la cita */
     @ManyToOne
-    @JoinColumn(name = "medico_id")
-    private  Medico medico;
-    /**
-    * fecha_hora
-    */
-    @Column(name = "fecha_hora")
-    private  LocalDateTime fechaHora;
-    /**
-    * estado
-    */
-    @Column(name = "estado")
-    private  String estado ; 
-    /**
-    * motivo
-    */
+    @JoinColumn(name = "medico_id", nullable = false)
+    private Medico medico;
+
+    /** Fecha y hora de la cita */
+    @Column(name = "fecha_hora", nullable = false)
+    private LocalDateTime fechaHora;
+
+    /** Estado de la cita (ejemplo: programada, realizada, cancelada) */
+    @Column(name = "estado", nullable = false, length = 20)
+    private String estado;
+
+    /** Motivo de la cita */
     @Column(name = "motivo")
-    private  String motivo ;
+    private String motivo;
 }

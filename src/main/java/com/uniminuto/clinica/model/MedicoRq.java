@@ -27,5 +27,5 @@ public class MedicoRq {
     private String registroProfesional;
 
     @NotNull(message = "La especialización es obligatoria")
-    private Long especializacionId;
+    private Integer especializacionId;
 }

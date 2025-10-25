@@ -14,18 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
-* Implementacion del servicio de medico
-*/
-/**
-* @author Anderson
-*/
-
+ *
+ * @author lmora
+ */
 @Service
 public class MedicoServiceImpl implements MedicoService {
-    
+
     @Autowired
     private MedicoRepository medicoRepository;
-    
+
     @Autowired
     private EspecializacionRepository especializacionRepository;
 
@@ -36,25 +33,24 @@ public class MedicoServiceImpl implements MedicoService {
 
     @Override
     public List<Medico> buscarMedicosPorEspecializacion(
-            String codEspecializacion) 
+            String codEspecializacion)
             throws BadRequestException {
         Optional<Especializacion> optEsp = this.especializacionRepository
                 .findByCodigoEspecializacion(codEspecializacion);
-        
+
         if (!optEsp.isPresent()) {
             throw new BadRequestException("Codigo de especializacion no valido.");
         }
-        
+
         return this.medicoRepository.findByEspecializacion(optEsp.get());
-    }   
-    
+    }
+
     @Override
     public RespuestaRs guardarMedico(MedicoRq medicoRq) throws BadRequestException {
         Optional<Medico> optMedico = this.medicoRepository
                 .findByNumeroDocumento(medicoRq.getNumeroDocumento());
         if (optMedico.isPresent()) {
-            throw new BadRequestException("El médico con el numero de " +
-                    "documento: " + medicoRq.getNumeroDocumento() + " ya existe.");
+            throw new BadRequestException("El médico con el numero de " + "documento: " + medicoRq.getNumeroDocumento() + " ya existe.");
         }
 
         optMedico = this.medicoRepository.findByRegistroProfesional(medicoRq.getRegistroProfesional());
@@ -103,8 +99,7 @@ public class MedicoServiceImpl implements MedicoService {
             Optional<Medico> optMedico = this.medicoRepository
                     .findByNumeroDocumento(medicoRq.getNumeroDocumento());
             if (optMedico.isPresent()) {
-                throw new BadRequestException("El médico con el numero de " +
-                        "documento: " + medicoRq.getNumeroDocumento() + " ya existe.");
+                throw new BadRequestException("El médico con el numero de " + "documento: " + medicoRq.getNumeroDocumento() + " ya existe.");
             }
         }
 
@@ -113,8 +108,7 @@ public class MedicoServiceImpl implements MedicoService {
             Optional<Medico> optMedico = this.medicoRepository
                     .findByRegistroProfesional(medicoRq.getRegistroProfesional());
             if (optMedico.isPresent()) {
-                throw new BadRequestException("El médico con el numero de " +
-                        "registro profesional: " + medicoRq.getRegistroProfesional() + " ya existe.");
+                throw new BadRequestException("El médico con el numero de " + "registro profesional: " + medicoRq.getRegistroProfesional() + " ya existe.");
             }
         }
 
@@ -138,4 +132,5 @@ public class MedicoServiceImpl implements MedicoService {
         rta.setMessage("Médico actualizado con éxito.");
         return rta;
     }
+
 }

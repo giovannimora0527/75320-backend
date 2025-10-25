@@ -5,37 +5,27 @@ import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.model.CitaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.CitaService;
-import java.util.List;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Controlador de la Api de cita
- */
-/**
- * @author Anderson
- */
+import java.util.List;
 
 @RestController
-public class CitaApiController implements CitaApi{
-    
+public class CitaApiController implements CitaApi {
+
     @Autowired
     private CitaService citaService;
 
+
     @Override
-    public ResponseEntity<List<Cita>> listarCita() {
-        return ResponseEntity.ok(this.citaService.listarCita());  
+    public ResponseEntity<List<Cita>> listarCitas() {
+        return ResponseEntity.ok(this.citaService.listarCitasOrdenadas());
     }
 
     @Override
-    public ResponseEntity<RespuestaRs> guardarCita(CitaRq citaRq) throws BadRequestException {
-       return ResponseEntity.ok(this.citaService.guardarCita(citaRq));
-    }
-    
-     @Override
-    public ResponseEntity<List<Cita>> ListarCitasOrdenadas() {
-        return ResponseEntity.ok(this.citaService.ListarCitasOrdenadas());  
+    public ResponseEntity<RespuestaRs> guardarCitas(CitaRq citaRq) throws BadRequestException {
+        return ResponseEntity.ok(this.citaService.guardarCita(citaRq));
     }
 }

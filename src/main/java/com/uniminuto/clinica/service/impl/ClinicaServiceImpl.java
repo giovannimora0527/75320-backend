@@ -5,12 +5,9 @@ import com.uniminuto.clinica.service.ClinicaService;
 import org.springframework.stereotype.Service;
 
 /**
-* Implementacion del servicio de clinica
-*/
-/**
-* @author Anderson
-*/
-
+ *
+ * @author lmora
+ */
 @Service
 public class ClinicaServiceImpl implements ClinicaService {
 
@@ -18,6 +15,8 @@ public class ClinicaServiceImpl implements ClinicaService {
     public RespuestaRs test() {
         RespuestaRs rta = new RespuestaRs();
         rta.setMessage("HOOLAAAAAAAAAAAAAAAAA MUNDOOOOOOOOOOOOOOO");
+
         return rta; 
     }
+    
 }

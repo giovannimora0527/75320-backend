@@ -1,9 +1,11 @@
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Medico;
+import java.util.List;
+
 import com.uniminuto.clinica.model.MedicoRq;
 import com.uniminuto.clinica.model.RespuestaRs;
-import java.util.List;
+import com.uniminuto.clinica.model.UsuarioRq;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,35 +15,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Api de medico
+ *
+ * @author lmora
  */
-/**
- * @author Anderson
- */
-
 @CrossOrigin(origins = "*")
 @RequestMapping("/medico")
 public interface MedicoApi {
     /**
-     * Endpoint para listar los medicos
+     * Lista los usuarios de la bd.
+     *
+     * @return
      */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Medico>> listarMedicos();
+
+
     /**
-     * Endpoint para listar los medicos por especializacion
+     * Lista los medicos por especializacion de la bd.
+     *
+     * @return
      */
     @RequestMapping(value = "/listar-por-especializacion",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Medico>> listarMedicosPorEspecialidad(
-       @RequestParam String codigo
+            @RequestParam String codigo
     )  throws BadRequestException;
-    
-     /**
+
+
+    /**
      * Guarda un medico en la bd.
      * @param medicoRq medico de entrada.
      * @return respuesta del servicio.

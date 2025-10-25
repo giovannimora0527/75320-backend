@@ -8,12 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador de la Api de Clinica
+ *
+ * @author lmora
  */
-/**
- * @author Anderson
- */
-
 @RestController
 public class ClinicaApiController implements ClinicaApi {
 
@@ -24,4 +21,5 @@ public class ClinicaApiController implements ClinicaApi {
     public ResponseEntity<RespuestaRs> testService() {
         return ResponseEntity.ok(clinicaService.test());
     }
+
 }

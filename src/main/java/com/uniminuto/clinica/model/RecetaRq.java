@@ -1,32 +1,21 @@
 package com.uniminuto.clinica.model;
 
-import java.time.LocalDateTime;
-import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
-/**
- * Se utiliza como objeto de entrada en los controladores REST.
- */
-/**
- * @author Anderson
- */
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class RecetaRq {
-    /**
-     * Otros campos para el objeto de entrada
-     */
-    private Long id;
-    
-    @NotBlank(message = "El id de cita es obligatorio")
-    private Long cita;
-    
-    @NotBlank(message = "El id de medicamento es obligatorio")
-    private Integer medicamento;
+    @NotNull(message = "El campo citaId es obligatorio")
+    private Long citaId;
 
-    @NotBlank(message = "La dosis es obligatoria")
+    @NotNull(message = "El campo medicamentoId es obligatorio")
+    private Integer medicamentoId;
+
+    @NotBlank(message = "El campo dosis es obligatorio")
     private String dosis;
 
-    @NotBlank(message = "Las indicaciones son obligatorias")
+    @NotBlank(message = "El campo indicaciones es obligatorio")
     private String indicaciones;
 }

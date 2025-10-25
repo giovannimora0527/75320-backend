@@ -5,33 +5,32 @@ import com.uniminuto.clinica.entity.Medico;
 import com.uniminuto.clinica.model.MedicoRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.MedicoService;
+
 import java.util.List;
+
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador de la Api de medico
+ *
+ * @author lmora
  */
-/**
- * @author Anderson
- */
-
 @RestController
 public class MedicoApiController implements MedicoApi {
-    
+
     @Autowired
     private MedicoService medicoService;
 
     @Override
     public ResponseEntity<List<Medico>> listarMedicos() {
-       return ResponseEntity.ok(medicoService.buscarMedicos());
+        return ResponseEntity.ok(medicoService.buscarMedicos());
     }
 
     @Override
-    public ResponseEntity<List<Medico>> 
-        listarMedicosPorEspecialidad(String codigo)  throws BadRequestException {
+    public ResponseEntity<List<Medico>>
+    listarMedicosPorEspecialidad(String codigo) throws BadRequestException {
         return ResponseEntity.ok(this.medicoService
                 .buscarMedicosPorEspecializacion(codigo));
     }
@@ -45,4 +44,5 @@ public class MedicoApiController implements MedicoApi {
     public ResponseEntity<RespuestaRs> actualizarMedico(MedicoRq medicoRq) throws BadRequestException {
         return ResponseEntity.ok(this.medicoService.actualizarMedico(medicoRq));
     }
+
 }

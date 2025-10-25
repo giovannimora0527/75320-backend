@@ -2,6 +2,7 @@ package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Usuario;
 import java.util.List;
+
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.model.UsuarioRq;
 import org.apache.coyote.BadRequestException;
@@ -9,35 +10,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Api de usuario
+ * ApiRest para logica de usuarios.
+ *
+ * @author lmora
  */
-/**
- * @author Anderson
- */
-
 @CrossOrigin(origins = "*")
 @RequestMapping("/usuario")
 public interface UsuarioApi {
+
     /**
-     * Endpoint para listar los usuarios
+     * Lista los usuarios de la bd.
+     *
+     * @return
      */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Usuario>> listarUsuarios();
+
     /**
-     * Endpoint para buscar los usuarios por username
+     * Lista los usuarios de la bd.
+     *
+     * @return
      */
     @RequestMapping(value = "/buscar-usuario",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Usuario> buscarUsuarioXUsername(
-            @RequestParam String username) 
+            @RequestParam String username)
             throws BadRequestException;
+
     /**
-     * Endpoint para guardar usuario en la bd
+     * Guarda un usuario nuevo en la bd.
+     * @param usuarioRq Usuario de entrada.
+     * @return respuesta del servicio.
+     * @throws BadRequestException excepcion.
      */
     @RequestMapping(value = "/guardar",
             produces = {"application/json"},
@@ -46,7 +55,7 @@ public interface UsuarioApi {
     ResponseEntity<RespuestaRs> guardarUsuario(
             @RequestBody UsuarioRq usuarioRq)
             throws BadRequestException;
-    
+
     /**
      * Guarda un usuario nuevo en la bd.
      * @param usuarioRq Usuario de entrada.
@@ -60,4 +69,5 @@ public interface UsuarioApi {
     ResponseEntity<RespuestaRs> actualizarUsuario(
             @RequestBody UsuarioRq usuarioRq)
             throws BadRequestException;
+
 }
