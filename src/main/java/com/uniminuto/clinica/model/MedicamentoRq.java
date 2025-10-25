@@ -1,18 +1,22 @@
 package com.uniminuto.clinica.model;
 
 import lombok.Data;
-
 import java.time.LocalDate;
+
+/**
+ * Se utiliza como objeto de entrada en los controladores REST.
+ */
+/**
+ * @author Anderson
+ */
 
 @Data
 public class MedicamentoRq {
     /**
-     * Id del medicamento.
+     * Otros campos para el objeto de entrada
      */
     private Integer id;
-    /**
-     * Nombre.
-     */
+
     private String nombre;
 
     private String descripcion;

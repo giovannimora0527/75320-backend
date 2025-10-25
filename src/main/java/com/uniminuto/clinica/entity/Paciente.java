@@ -1,93 +1,79 @@
 package com.uniminuto.clinica.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 import lombok.Data;
 
 /**
- * Entidad Paciente.
+ * Entidad de paciente de la base de datos
  */
+/**
+ * @author Anderson
+ */
+
 @Data
 @Entity
 @Table(name = "paciente")
 public class Paciente implements Serializable {
     /**
-     * Id serializable.
-     */
+    * serializable
+    */
     private static final long serialVersionUID = 1L;
-
     /**
-     * Identificador único del paciente.
+     * id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
-
+    private Integer id;
     /**
-     * Usuario asociado al paciente.
+     * usuario_id
      */
-    // Antes (problema):
-// private int usuarioId;  // o private long usuarioId;
-
-// Después (acepta null):
-    @Column(name = "usuario_id", nullable = true)
-    private Integer usuarioId;
-
-
+    @Column(name = "usuario_id")
+    private  Integer usuarioId;
     /**
-     * Tipo de documento del paciente (CC, TI, CE, etc.).
+     * tipo_documento
      */
-    @Column(name = "tipo_documento", length = 10, nullable = false)
-    private String tipoDocumento;
-
+    @Column(name = "tipo_documento")
+    private  String tipoDocumento;
     /**
-     * Número de documento del paciente.
+     * numero_documento
      */
-    @Column(name = "numero_documento", length = 20, nullable = false, unique = true)
-    private String numeroDocumento;
-
+    @Column(name = "numero_documento")
+    private  String numeroDocumento;
     /**
-     * Nombres del paciente.
+     * nombres
      */
-    @Column(name = "nombres", length = 100, nullable = false)
-    private String nombres;
-
+    @Column(name = "nombres")
+    private  String nombres ; 
     /**
-     * Apellidos del paciente.
+     * apellidos
      */
-    @Column(name = "apellidos", length = 100, nullable = false)
-    private String apellidos;
-
+    @Column(name = "apellidos")
+    private  String apellidos ; 
     /**
-     * Fecha de nacimiento del paciente.
+     * fecha_nacimiento
      */
-    @Column(name = "fecha_nacimiento", nullable = false)
-    private LocalDate fechaNacimiento;
-
+    @Column(name = "fecha_nacimiento")
+    private  String fechaNacimiento ; 
     /**
-     * Género del paciente (M/F/O).
+     * genero
      */
-    @Column(name = "genero", length = 1)
-    private String genero;
-
+    @Column(name = "genero")
+    private  String genero ;
     /**
-     * Teléfono de contacto del paciente.
+     * telefono
      */
-    @Column(name = "telefono", length = 20)
-    private String telefono;
-
+    @Column(name = "telefono")
+    private  String telefono ;    
     /**
-     * Dirección de residencia del paciente.
+     * direccion
      */
-    @Column(name = "direccion", columnDefinition = "TEXT")
-    private String direccion;
+    @Column(name = "direccion")
+    private  String direccion ;                                       
 }

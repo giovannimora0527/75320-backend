@@ -1,18 +1,15 @@
 package com.uniminuto.clinica.model;
 
-import lombok.Data;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import lombok.Data;
 
 @Data
 public class PacienteRq {
-
-    private Long id;
-
-    @NotNull(message = "El usuario es obligatorio")
-    private Long usuarioId;
-
+    private Integer id;
+    
+    @NotBlank(message = "El id de usuario es obligatorio")
+    private Integer usuarioId;
+    
     @NotBlank(message = "El tipo de documento es obligatorio")
     private String tipoDocumento;
 
@@ -24,12 +21,15 @@ public class PacienteRq {
 
     @NotBlank(message = "Los apellidos son obligatorios")
     private String apellidos;
-
-    @NotNull(message = "La fecha de nacimiento es obligatoria")
-    private LocalDate fechaNacimiento;
-
-    // Opcionales
-    private String genero;     // M / F / O
+    
+    @NotBlank(message = "La fecha de nacimiento es obligatoria")
+    private String fechaNacimiento;
+    
+    @NotBlank(message = "El genero es obligatorio")
+    private String genero;
+    
     private String telefono;
+    
+    @NotBlank(message = "La direccion es obligatoria")
     private String direccion;
 }

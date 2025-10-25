@@ -7,18 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- *
- * @author lmora
+ * Api de Clinica
  */
+/**
+ * @author Anderson
+ */
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/clinica")
 public interface ClinicaApi {
-
+    /**
+     * Endpoint para hacer test de la clinica
+     */
     @RequestMapping(value = "/test",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<RespuestaRs> testService();
-
 }
-

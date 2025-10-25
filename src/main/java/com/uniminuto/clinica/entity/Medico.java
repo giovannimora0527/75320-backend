@@ -12,64 +12,59 @@ import javax.persistence.JoinColumn;
 import lombok.Data;
 
 /**
- *
- * @author lmora
+ * Entidad de medico de la base de datos
  */
+/**
+ * @author Anderson
+ */
+
 @Data
 @Entity
 @Table(name = "medico")
 public class Medico implements Serializable {
     /**
-     * Id serializable.
-     */
+     * serializable
+     */    
     private static final long serialVersionUID = 1L;
-
     /**
-     * Identificador único del médico.
+     * id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
-
+    private Long id;    
     /**
-     * Tipo de documento del médico (por ejemplo, CC, TI, CE).
+     * tipo_documento
      */
     @Column(name = "tipo_documento")
     private String tipoDocumento;
-
     /**
-     * Número de documento del médico.
+     * número_documento
      */
     @Column(name = "numero_documento")
     private String numeroDocumento;
-
     /**
-     * Nombres del médico.
+     * nombres
      */
     @Column(name = "nombres")
     private String nombres;
-
     /**
-     * Apellidos del médico.
+     * apellidos
      */
     @Column(name = "apellidos")
     private String apellidos;
-
     /**
-     * Número de teléfono de contacto del médico.
+     * teléfono
      */
     @Column(name = "telefono")
     private String telefono;
-
     /**
-     * Número de registro profesional del médico.
+     * registro_profesional
      */
     @Column(name = "registro_profesional")
     private String registroProfesional;
-
     /**
-     * Especializacion del medico.
+     * especializacion_id
      */
     @ManyToOne
     @JoinColumn(name = "especializacion_id")

@@ -5,7 +5,6 @@ import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.model.UsuarioRq;
 import com.uniminuto.clinica.repository.UsuarioRepository;
 import com.uniminuto.clinica.service.UsuarioService;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +15,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *
- * @author lmora
- */
-@Service
-public class UsuarioServiceImpl implements UsuarioService {
+* Implementacion del servicio de usuario
+*/
+/**
+* @author Anderson
+*/
 
+@Service
+public class UsuarioServiceImpl implements UsuarioService {   
     /**
      * UsuarioRepository.
      */
@@ -29,19 +30,19 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public List<Usuario> encontrarTodosLosUsuarios() {
+    public List<Usuario> encontrarTodosLosUsuarios() {        
         return this.usuarioRepository.findAll();
     }
 
     @Override
-    public Usuario encontrarUsuarioPorNombre(String username)
+    public Usuario encontrarUsuarioPorNombre(String username) 
             throws BadRequestException {
         Optional<Usuario> optUser = this.usuarioRepository
                 .findByUsername(username);
         if (!optUser.isPresent()) {
             throw new BadRequestException("No se encuentra el usuario.");
         }
-
+        
         return optUser.get();
     }
 
@@ -139,5 +140,4 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new RuntimeException("Algoritmo no soportado: " + algoritmo, e);
         }
     }
-
 }

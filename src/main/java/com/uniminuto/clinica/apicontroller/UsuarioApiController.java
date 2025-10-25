@@ -12,9 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
- * @author lmora
+ * Controlador de la Api de usuario
  */
+/**
+ * @author Anderson
+ */
+
 @RestController
 public class UsuarioApiController implements UsuarioApi {
 
@@ -37,10 +40,9 @@ public class UsuarioApiController implements UsuarioApi {
     public ResponseEntity<RespuestaRs> guardarUsuario(UsuarioRq usuarioRq) throws BadRequestException {
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuarioRq));
     }
-
+    
     @Override
     public ResponseEntity<RespuestaRs> actualizarUsuario(UsuarioRq usuarioRq) throws BadRequestException {
         return ResponseEntity.ok(this.usuarioService.actualizarUsuario(usuarioRq));
     }
-
 }
