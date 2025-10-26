@@ -5,12 +5,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author lmora
- */
+
 @Repository
-public interface EspecializacionRepository 
-        extends JpaRepository<Especializacion, Integer> {
+public interface EspecializacionRepository
+        extends JpaRepository<Especializacion, Long> {
     Optional<Especializacion> findByCodigoEspecializacion(String codigo);
+    Optional<Especializacion> findByNombre(String codigo);
 }

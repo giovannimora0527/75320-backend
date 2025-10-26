@@ -10,16 +10,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- * Clase de configuracion para la seguridad.
- *
- * @author lmora
- */
+
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-   /**
+    /**
      * Filtro de seguridad.
      *
      * @param http peticion de entrada.
@@ -33,14 +29,12 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable() // Deshabilita CSRF si estás probando con Postman
                 .authorizeHttpRequests((requests) -> requests
-                .antMatchers("/**").permitAll() // Permitir todas las rutas
-                .anyRequest().authenticated()
+                        .antMatchers("/**").permitAll() // Permitir todas las rutas
+                        .anyRequest().authenticated()
                 )
                 .logout((logout) -> logout.permitAll());
-
         return http.build();
     }
-
     /**
      * Configuracion del cors.
      *
@@ -65,5 +59,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-
 }
