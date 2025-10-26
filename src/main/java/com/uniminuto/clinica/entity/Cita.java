@@ -1,47 +1,59 @@
 package com.uniminuto.clinica.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Data;
+import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
+import javax.persistence.JoinColumn;
+
+
 
 @Data
 @Entity
-@Table(name = "cita")
-public class Cita implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+@Table(name="cita")
+public class Cita implements Serializable{
     /**
-     * Identificador único de la cita.
+     * serializable
+     */
+    public static final long serialVersionUID = 1L;
+    /**
+     * id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(name = "id")
+    private  Long id;
     /**
-     * Fecha y hora de la cita.
-     */
-    @Column(name = "fecha_cita")
-    private LocalDateTime fechaCita;
-
-    /**
-     * Motivo de la cita.
-     */
-    @Column(name = "motivo")
-    private String motivo;
-
-    /**
-     * Relación con el paciente.
+     * paciente_id
      */
     @ManyToOne
     @JoinColumn(name = "paciente_id")
-    private Paciente paciente;
-
+    private  Paciente paciente;
     /**
-     * Relación con el médico.
+     * medico_id
      */
     @ManyToOne
     @JoinColumn(name = "medico_id")
-    private Medico medico;
+    private  Medico medico;
+    /**
+     * fecha_hora
+     */
+    @Column(name = "fecha_hora")
+    private  LocalDateTime fechaHora;
+    /**
+     * estado
+     */
+    @Column(name = "estado")
+    private  String estado ;
+    /**
+     * motivo
+     */
+    @Column(name = "motivo")
+    private  String motivo ;
 }

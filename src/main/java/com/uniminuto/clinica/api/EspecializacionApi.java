@@ -1,47 +1,45 @@
 package com.uniminuto.clinica.api;
 
-import com.uniminuto.clinica.entity.Receta;
-import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.entity.Especializacion;
+import com.uniminuto.clinica.entity.Medico;
+import com.uniminuto.clinica.model.EspecializacionRq;
 import com.uniminuto.clinica.model.RespuestaRs;
-import java.util.List;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import java.util.List;
+import org.apache.coyote.BadRequestException;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = "*")
-@RequestMapping("/receta")
-public interface RecetaApi {
+@RequestMapping("/especializacion")
+public interface EspecializacionApi {
+
     /**
-     * Endpoint para listar las recetas
+     * Listar especializaciones
+     * @return List<Especializacion> lista.
      */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<List<Receta>> listarRecetas();
-    /**
-     * Endpoint para guardar las recetas
-     */
+    ResponseEntity<List<Especializacion>> listarEspecializaciones();
+
     @RequestMapping(value = "/guardar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<RespuestaRs> guardarReceta(
-            @RequestBody RecetaRq recetaRq)
-            throws BadRequestException;
-    /**
-     * Endpoint para actualizar las recetas
-     */
+    ResponseEntity<RespuestaRs> guardarEspecializacion(
+            @RequestBody EspecializacionRq especializacionRq
+    ) throws BadRequestException;
+
     @RequestMapping(value = "/actualizar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<RespuestaRs> actualizarReceta(
-            @RequestBody RecetaRq recetaRq)
-            throws BadRequestException;
+    ResponseEntity<RespuestaRs> actualizarEspecializacion(
+            @RequestBody EspecializacionRq especializacionRq
+    ) throws BadRequestException;
 }

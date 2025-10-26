@@ -1,29 +1,36 @@
 package com.uniminuto.clinica.apicontroller;
 
+import com.uniminuto.clinica.api.CitaApi;
 import com.uniminuto.clinica.entity.Cita;
+import com.uniminuto.clinica.model.CitaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.CitaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+
 
 @RestController
-@RequestMapping("/clinica/v1/api/citas")
-public class CitaApiController {
+public class CitaApiController implements CitaApi{
 
     @Autowired
     private CitaService citaService;
 
-    @PostMapping("/crear")
-    public Cita crearCita(@RequestBody Cita cita) {
-        return citaService.crearCita(cita);
+    @Override
+    public ResponseEntity<List<Cita>> listarCita() {
+        return ResponseEntity.ok(this.citaService.listarCita());
     }
 
-    @GetMapping("/listar")
-    public List<Cita> listarCitas() {
-        return citaService.listarCitasRecientes();
+    @Override
+    public ResponseEntity<RespuestaRs> guardarCita(CitaRq citaRq) throws BadRequestException {
+        return ResponseEntity.ok(this.citaService.guardarCita(citaRq));
+    }
+
+    @Override
+    public ResponseEntity<List<Cita>> ListarCitasOrdenadas() {
+        return ResponseEntity.ok(this.citaService.ListarCitasOrdenadas());
     }
 }
-
-
-
-

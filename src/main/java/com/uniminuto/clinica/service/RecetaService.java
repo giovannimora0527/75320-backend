@@ -1,29 +1,22 @@
 package com.uniminuto.clinica.service;
 
 import com.uniminuto.clinica.entity.Receta;
-import com.uniminuto.clinica.repository.RecetaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import java.util.List;
+import org.apache.coyote.BadRequestException;
 
-@Service
-public class RecetaService {
 
-    @Autowired
-    private RecetaRepository recetaRepository;
 
-    // Crear receta
-    public Receta crearReceta(Receta receta) {
-        return recetaRepository.save(receta); // La fecha se llenará automáticamente
-    }
+public interface RecetaService {
+    /**
+     * Servicio para listar las recetas
+     */
+    List<Receta> listarRecetas();
+    /**
+     * Servicio para guardar receta
+     */
+    RespuestaRs guardarReceta(RecetaRq recetaRp) throws BadRequestException;
 
-    // Listar todas las recetas
-    public List<Receta> listarRecetas() {
-        return recetaRepository.findAll();
-    }
+    RespuestaRs actualizarReceta(RecetaRq recetaRq) throws BadRequestException;
 }
-
-
-
-

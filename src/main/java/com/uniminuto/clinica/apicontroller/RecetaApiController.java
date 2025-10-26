@@ -1,59 +1,36 @@
 package com.uniminuto.clinica.apicontroller;
 
+import com.uniminuto.clinica.api.RecetaApi;
 import com.uniminuto.clinica.entity.Receta;
-import com.uniminuto.clinica.entity.Cita;
-import com.uniminuto.clinica.repository.RecetaRepository;
-import com.uniminuto.clinica.repository.CitaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import java.time.LocalDateTime;
+import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.service.RecetaService;
 import java.util.List;
+import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
 
 
 @RestController
-@RequestMapping("/api/recetas")
-public class RecetaApiController {
+public class RecetaApiController implements RecetaApi{
 
     @Autowired
-    private RecetaRepository recetaRepository;
+    private RecetaService recetaService;
 
-    @Autowired
-    private CitaRepository citaRepository;
-
-    @PostMapping("/crear")
-    public Receta crearReceta(@RequestBody Receta recetaInput) {
-        Cita cita = citaRepository.findById(recetaInput.getCita().getId())
-                .orElseThrow(() -> new RuntimeException("Cita no encontrada"));
-
-        recetaInput.setCita(cita);
-        recetaInput.setFechaCreacionRegistro(LocalDateTime.now());
-
-        return recetaRepository.save(recetaInput);
+    @Override
+    public ResponseEntity<List<Receta>> listarRecetas() {
+        return ResponseEntity.ok(this.recetaService.listarRecetas());
     }
 
-    @GetMapping("/{id}")
-    public Receta obtenerReceta(@PathVariable Long id) {
-        Receta receta = recetaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Receta no encontrada"));
-
-        // Forzar carga de paciente y médico completos
-        receta.getCita().getPaciente().getNombres();
-        receta.getCita().getMedico().getNombres();
-
-        return receta;
+    @Override
+    public ResponseEntity<RespuestaRs> guardarReceta(RecetaRq recetaRq) throws BadRequestException {
+        return ResponseEntity.ok(this.recetaService.guardarReceta(recetaRq));
     }
 
-    @GetMapping("/listar")
-    public List<Receta> listarRecetas() {
-        List<Receta> recetas = recetaRepository.findAll();
-
-        // Forzar carga de paciente y médico completos
-        recetas.forEach(r -> {
-            r.getCita().getPaciente().getNombres();
-            r.getCita().getMedico().getNombres();
-        });
-
-        return recetas;
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarReceta(RecetaRq recetaRq) throws BadRequestException {
+        return ResponseEntity.ok(this.recetaService.actualizarReceta(recetaRq));
     }
-
 }

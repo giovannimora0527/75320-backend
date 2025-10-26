@@ -1,143 +1,109 @@
 package com.uniminuto.clinica.service.impl;
 
 import com.uniminuto.clinica.entity.Paciente;
+import com.uniminuto.clinica.model.PacienteRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.repository.PacienteRepository;
 import com.uniminuto.clinica.service.PacienteService;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Implementación del servicio para la gestión de pacientes.
- *
- * @author lmora
- */
+
+
 @Service
-@Transactional
 public class PacienteServiceImpl implements PacienteService {
 
     @Autowired
     private PacienteRepository pacienteRepository;
 
     @Override
-    public List<Paciente> listarPacientesOrdenadosPorFechaNacimiento() {
-        return pacienteRepository.findAllByOrderByFechaNacimientoDesc();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public List<Paciente> encontrarTodosLosPacientes() {
-        return pacienteRepository.findAll();
+        return this.pacienteRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Paciente> encontrarPacientesActivos() {
-        return pacienteRepository.findByActivoTrue();
-    }
+    public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
 
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Paciente> encontrarPacientePorId(Long id) {
-        return pacienteRepository.findById(id);
-    }
+        Optional<Paciente> optPaciente = this.pacienteRepository.findByNumeroDocumento(documento);
+        if (!optPaciente.isPresent()) {
+            throw new BadRequestException("No se encuentra el paciente");
 
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Paciente> encontrarPacientePorDocumento(String numeroDocumento) {
-        return pacienteRepository.findByNumeroDocumento(numeroDocumento);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Paciente> buscarPacientesPorNombre(String nombre) {
-        return pacienteRepository.buscarPorNombre(nombre);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Paciente> buscarPacientesPorTipoDocumento(String tipoDocumento) {
-        return pacienteRepository.findByTipoDocumento(tipoDocumento);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Paciente> buscarPacientesPorRangoEdad(int edadMinima, int edadMaxima) {
-        return pacienteRepository.buscarPorRangoEdad(edadMinima, edadMaxima);
-    }
-
-    @Override
-    public Paciente guardarPaciente(Paciente paciente) {
-        // Validar que no exista otro paciente con el mismo número de documento
-        if (paciente.getId() == null && existePacientePorDocumento(paciente.getNumeroDocumento())) {
-            throw new IllegalArgumentException("Ya existe un paciente con el número de documento: " + paciente.getNumeroDocumento());
         }
-        
-        // Establecer fecha de registro si es un nuevo paciente
-        if (paciente.getId() == null) {
-            paciente.setFechaRegistro(LocalDateTime.now());
+        return optPaciente.get();
+    }
+
+    @Override
+    public List<Paciente> listarPacientesPorFechaNacimiento (){
+        return this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+    }
+
+    @Override
+    public RespuestaRs guardarPaciente(PacienteRq pacienteRq) throws BadRequestException {
+        Optional<Paciente> optPaciente = this.pacienteRepository
+                .findByNumeroDocumento(pacienteRq.getNumeroDocumento());
+        if (optPaciente.isPresent()) {
+            throw new BadRequestException("El paciente con el numero de " +
+                    "documento: " + pacienteRq.getNumeroDocumento() + " ya existe.");
         }
-        
-        return pacienteRepository.save(paciente);
+
+        Paciente paciente = this.convertirRqToEntity(pacienteRq);
+        this.pacienteRepository.save(paciente);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setStatus(200);
+        rta.setMessage("Paciente guardado con éxito.");
+        return rta;
+    }
+
+    private Paciente convertirRqToEntity(PacienteRq pacienteRq) {
+        Paciente paciente = new Paciente();
+        paciente.setUsuarioId(pacienteRq.getUsuarioId());
+        paciente.setTipoDocumento(pacienteRq.getTipoDocumento());
+        paciente.setNumeroDocumento(pacienteRq.getNumeroDocumento());
+        paciente.setNombres(pacienteRq.getNombres());
+        paciente.setApellidos(pacienteRq.getApellidos());
+        paciente.setFechaNacimiento(pacienteRq.getFechaNacimiento());
+        paciente.setGenero(pacienteRq.getGenero());
+        paciente.setTelefono(pacienteRq.getTelefono());
+        paciente.setDireccion(pacienteRq.getDireccion());
+        return paciente;
     }
 
     @Override
-    public Paciente actualizarPaciente(Paciente paciente) {
-        // Verificar que el paciente existe
-        if (!pacienteRepository.existsById(paciente.getId())) {
-            throw new IllegalArgumentException("No se encontró el paciente con ID: " + paciente.getId());
+    public RespuestaRs actualizarPaciente(PacienteRq pacienteRq) throws BadRequestException {
+        Optional<Paciente> pacienteExiste = this.pacienteRepository
+                .findById(pacienteRq.getId());
+        if (pacienteExiste.isEmpty()) {
+            throw new BadRequestException("El paciente no existe y no se puede actualizar.");
         }
-        
-        // Validar que no exista otro paciente con el mismo número de documento (excluyendo el actual)
-        Optional<Paciente> pacienteExistente = pacienteRepository.findByNumeroDocumento(paciente.getNumeroDocumento());
-        if (pacienteExistente.isPresent() && !pacienteExistente.get().getId().equals(paciente.getId())) {
-            throw new IllegalArgumentException("Ya existe otro paciente con el número de documento: " + paciente.getNumeroDocumento());
+
+        Paciente pacienteActual = pacienteExiste.get();
+        if (!pacienteActual.getNumeroDocumento().toLowerCase()
+                .equals(pacienteRq.getNumeroDocumento())) {
+            Optional<Paciente> optPaciente = this.pacienteRepository
+                    .findByNumeroDocumento(pacienteRq.getNumeroDocumento());
+            if (optPaciente.isPresent()) {
+                throw new BadRequestException("El paciente con el numero de " +
+                        "documento: " + pacienteRq.getNumeroDocumento() + " ya existe.");
+            }
         }
-        
-        return pacienteRepository.save(paciente);
+
+        //pacienteRq
+        pacienteActual.setUsuarioId(pacienteRq.getUsuarioId());
+        pacienteActual.setTipoDocumento(pacienteRq.getTipoDocumento());
+        pacienteActual.setNumeroDocumento(pacienteRq.getNumeroDocumento());
+        pacienteActual.setNombres(pacienteRq.getNombres());
+        pacienteActual.setApellidos(pacienteRq.getApellidos());
+        pacienteActual.setFechaNacimiento(pacienteRq.getFechaNacimiento());
+        pacienteActual.setGenero(pacienteRq.getGenero());
+        pacienteActual.setTelefono(pacienteRq.getTelefono());
+        pacienteActual.setDireccion(pacienteRq.getDireccion());
+        this.pacienteRepository.save(pacienteActual);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setStatus(200);
+        rta.setMessage("Paciente actualizado con éxito.");
+        return rta;
     }
-
-    @Override
-    public void eliminarPaciente(Long id) {
-        if (!pacienteRepository.existsById(id)) {
-            throw new IllegalArgumentException("No se encontró el paciente con ID: " + id);
-        }
-        pacienteRepository.deleteById(id);
-    }
-
-    @Override
-    public Paciente desactivarPaciente(Long id) {
-        Paciente paciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el paciente con ID: " + id));
-        
-        paciente.setActivo(false);
-        return pacienteRepository.save(paciente);
-    }
-
-    @Override
-    public Paciente activarPaciente(Long id) {
-        Paciente paciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el paciente con ID: " + id));
-        
-        paciente.setActivo(true);
-        return pacienteRepository.save(paciente);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean existePacientePorDocumento(String numeroDocumento) {
-        return pacienteRepository.existsByNumeroDocumento(numeroDocumento);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public long contarPacientesActivos() {
-        return pacienteRepository.countByActivoTrue();
-    }
-
-
 }
-

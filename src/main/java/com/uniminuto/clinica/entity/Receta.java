@@ -1,68 +1,59 @@
 package com.uniminuto.clinica.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Data;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+
+
+@Data
 @Entity
-@Table(name = "receta")
-public class Receta {
-
+@Table(name="Receta")
+public class Receta implements Serializable{
+    /**
+     * serializable
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
-    private String descripcion;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    /**
+     * cita_id
+     */
+    @ManyToOne
     @JoinColumn(name = "cita_id")
     private Cita cita;
-
+    /**
+     * medicamento_id
+     */
+    @ManyToOne
+    @JoinColumn(name = "medicamento_id")
+    private Medicamento medicamento;
+    /**
+     * dosis
+     */
+    @Column(name = "dosis")
+    private String dosis;
+    /**
+     * indicaciones
+     */
+    @Column(name = "indicaciones")
+    private String indicaciones;
+    /**
+     * fecha_creacion_registros
+     */
+    @Column(name = "fecha_creacion_registro")
     private LocalDateTime fechaCreacionRegistro;
-
-    // Constructor vacío
-    public Receta() {
-        this.fechaCreacionRegistro = LocalDateTime.now();
-    }
-
-    // Constructor completo
-    public Receta(String descripcion, Cita cita) {
-        this.descripcion = descripcion;
-        this.cita = cita;
-        this.fechaCreacionRegistro = LocalDateTime.now();
-    }
-
-    // Getters y Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Cita getCita() {
-        return cita;
-    }
-
-    public void setCita(Cita cita) {
-        this.cita = cita;
-    }
-
-    public LocalDateTime getFechaCreacionRegistro() {
-        return fechaCreacionRegistro;
-    }
-
-    public void setFechaCreacionRegistro(LocalDateTime fechaCreacionRegistro) {
-        this.fechaCreacionRegistro = fechaCreacionRegistro;
-    }
 }
-
-

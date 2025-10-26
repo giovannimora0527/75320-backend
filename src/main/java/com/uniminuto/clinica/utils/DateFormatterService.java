@@ -8,10 +8,8 @@ import java.util.Date;
 import java.util.Locale;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author lmora
- */
+
+
 @Service
 public class DateFormatterService {
 
