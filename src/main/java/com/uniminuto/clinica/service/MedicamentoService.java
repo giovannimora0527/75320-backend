@@ -12,4 +12,5 @@ public interface MedicamentoService {
     RespuestaRs guardarMedicamento(MedicamentoRq medicamentoRq) throws BadRequestException;
     RespuestaRs eliminarMedicamento(Integer id) throws BadRequestException;
     RespuestaRs actualizarMedicamento(Integer id, MedicamentoRq medicamentoRq) throws BadRequestException;
+    RespuestaRs actualizarCantidad(Integer id, Integer cantidad) throws BadRequestException;
 }

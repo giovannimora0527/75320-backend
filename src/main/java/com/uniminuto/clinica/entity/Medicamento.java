@@ -25,6 +25,9 @@ public class Medicamento implements Serializable {
 
     @Column(name = "presentacion")
     private String presentacion;
+    
+    @Column(name = "cantidad")
+    private Integer cantidad;
 
     @Column(name = "fecha_compra")
     private LocalDate fechaCompra;

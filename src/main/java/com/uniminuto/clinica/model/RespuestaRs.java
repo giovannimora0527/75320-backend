@@ -11,5 +11,5 @@ public class RespuestaRs {
     private String message;
     private boolean success;
     private int status = 200;
-    private Object data; // ✅ nuevo campo para enviar datos (ej: una receta)
+    private Object data;
 }

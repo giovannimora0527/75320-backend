@@ -97,4 +97,16 @@ public class MedicamentoServiceImpl implements MedicamentoService {
         respuesta.setSuccess(true);
         return respuesta;
     }
+    
+    @Override
+    public RespuestaRs actualizarCantidad(Integer id, Integer cantidad) throws BadRequestException {
+        if (cantidad < 0) {
+            throw new BadRequestException("La cantidad no puede ser negativa");
+        }
+        Medicamento medicamento = medicamentoRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("Medicamento con ID " + id + " no encontrado"));
+        medicamento.setCantidad(cantidad);
+        Medicamento updatedMedicamento = medicamentoRepository.save(medicamento);
+        return new RespuestaRs("Cantidad del medicamento actualizada exitosamente", true, 200, updatedMedicamento);
+}
 }

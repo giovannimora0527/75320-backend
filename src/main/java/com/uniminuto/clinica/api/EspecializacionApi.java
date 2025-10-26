@@ -27,4 +27,22 @@ public interface EspecializacionApi {
             method = RequestMethod.GET)
     ResponseEntity<List<Especializacion>> listarEspecializaciones();
     
+    @RequestMapping(value = "/guardar",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> guardarEspecializacion(@RequestBody EspecializacionRq especializacionRq) throws BadRequestException;
+
+    @RequestMapping(value = "/eliminar",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> eliminarEspecializacion(@RequestParam Integer id) throws BadRequestException;
+
+    @RequestMapping(value = "/actualizar",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarEspecializacion(@RequestParam Integer id, @RequestBody EspecializacionRq especializacionRq) throws BadRequestException;
+    
 }

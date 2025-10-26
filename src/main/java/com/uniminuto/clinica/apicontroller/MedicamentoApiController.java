@@ -41,4 +41,9 @@ public class MedicamentoApiController implements MedicamentoApi {
     public ResponseEntity<RespuestaRs> actualizarMedicamento(Integer id, MedicamentoRq medicamentoRq) throws BadRequestException {
         return ResponseEntity.ok(medicamentoService.actualizarMedicamento(id, medicamentoRq));
     }
+    
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarCantidad(Integer id, Integer cantidad) throws BadRequestException {
+        return ResponseEntity.ok(medicamentoService.actualizarCantidad(id, cantidad));
+    }
 }

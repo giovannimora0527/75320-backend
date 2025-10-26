@@ -1,7 +1,8 @@
 package com.uniminuto.clinica.model;
 
-import lombok.Data;
 import java.time.LocalDate;
+import lombok.Data;
+import java.time.LocalDateTime;
 
 @Data
 public class MedicamentoRq {
@@ -10,4 +11,5 @@ public class MedicamentoRq {
     private String presentacion;
     private LocalDate fechaCompra;
     private LocalDate fechaVence;
+    private Integer cantidad;
 }

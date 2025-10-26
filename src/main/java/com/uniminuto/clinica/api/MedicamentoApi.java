@@ -41,4 +41,10 @@ public interface MedicamentoApi {
         consumes = {"application/json"},
         method = RequestMethod.POST)
     ResponseEntity<RespuestaRs> actualizarMedicamento(@RequestParam Integer id, @RequestBody MedicamentoRq medicamentoRq) throws BadRequestException;
+    
+    @RequestMapping(value = "/actualizar-cantidad",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarCantidad(@RequestParam Integer id, @RequestParam Integer cantidad) throws BadRequestException;
 }

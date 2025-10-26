@@ -13,5 +13,8 @@ import org.apache.coyote.BadRequestException;
 public interface EspecializacionService {
     
     List<Especializacion> buscarEspecializacion();
+    RespuestaRs guardarEspecializacion(EspecializacionRq especializacionRq) throws BadRequestException;
+    RespuestaRs eliminarEspecializacion(Integer id) throws BadRequestException;
+    RespuestaRs actualizarEspecializacion(Integer id, EspecializacionRq especializacionRq) throws BadRequestException;
     
 }

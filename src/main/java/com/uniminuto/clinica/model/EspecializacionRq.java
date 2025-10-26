@@ -13,6 +13,6 @@ public class EspecializacionRq {
     private Integer id;
     private String nombre;
     private String descripcion;
-    private String codigo_especialidad;
+    private String codigoEspecialidad;
     
 }
