@@ -6,6 +6,11 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class CitaRq {
+    /**
+     * Id de la cita.
+     */
+    private Long id;
+
     @NotNull(message = "El campo pacienteId es obligatorio")
     private Integer pacienteId;
 

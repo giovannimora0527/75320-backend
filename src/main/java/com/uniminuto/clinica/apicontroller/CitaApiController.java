@@ -28,4 +28,9 @@ public class CitaApiController implements CitaApi {
     public ResponseEntity<RespuestaRs> guardarCitas(CitaRq citaRq) throws BadRequestException {
         return ResponseEntity.ok(this.citaService.guardarCita(citaRq));
     }
+
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarCitas(CitaRq citaRq) throws BadRequestException {
+        return ResponseEntity.ok(this.citaService.actualizarCita(citaRq));
+    }
 }

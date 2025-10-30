@@ -69,6 +69,69 @@ public class CitaServiceImpl implements CitaService {
         return rta;
     }
 
+    @Override
+    public RespuestaRs actualizarCita(CitaRq citaRq) throws BadRequestException {
+        Optional<Cita> optCita = this.citaRepository.findById(citaRq.getId());
+        if (optCita.isEmpty()) {
+            throw new BadRequestException("La cita con ID " + citaRq.getId() + " no existe.");
+        }
+        Cita cita = optCita.get();
+        if (!citaRq.getPacienteId().equals(cita.getPaciente().getId())) {
+            throw new BadRequestException("No se puede cambiar el paciente de la cita.");
+        }
+
+        Optional<Medico> optMedico;
+        Medico medico = cita.getMedico();
+        if (!citaRq.getMedicoId().equals(cita.getMedico().getId())) {
+            optMedico = this.medicoRepository.findById(citaRq.getMedicoId());
+            if (optMedico.isEmpty()) {
+                throw new BadRequestException("El médico con ID " + citaRq.getMedicoId() + " no existe.");
+            }
+            medico = optMedico.get();
+        }
+
+        LocalDateTime fechaCita = LocalDateTime.parse(citaRq.getFechaHora(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:m:ss"));
+        LocalDateTime fechaActual = LocalDateTime.now();
+        if (fechaCita.isBefore(fechaActual)) {
+            throw new BadRequestException("No se puede modificar una cita con fecha anterior a la fecha actual.");
+        }
+        if (citaRq.getFechaHora() != null && !citaRq.getFechaHora().isEmpty()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime nuevaFechaHora = LocalDateTime.parse(citaRq.getFechaHora(), formatter);
+            LocalDateTime nuevaFechaFinCita = nuevaFechaHora.plusMinutes(15);
+
+            List<Cita> citasMedico = this.citaRepository.findByMedicoAndFechaHoraBetween(medico, nuevaFechaHora, nuevaFechaFinCita);
+            citasMedico.removeIf(c -> c.getId().equals(cita.getId()));
+            if (!citasMedico.isEmpty()) {
+                throw new BadRequestException("El médico ya tiene una cita programada en este horario.");
+            }
+            List<Cita> citasPaciente = this.citaRepository.findByPacienteAndFechaHoraBetween(cita.getPaciente(), nuevaFechaHora, nuevaFechaFinCita);
+            citasPaciente.removeIf(c -> c.getId().equals(cita.getId()));
+            if (!citasPaciente.isEmpty()) {
+                throw new BadRequestException("El paciente ya tiene una cita programada en este horario.");
+            }
+            cita.setFechaHora(nuevaFechaHora);
+        }
+
+        if (!medico.getId().equals(cita.getMedico().getId())) {
+            cita.setMedico(medico);
+        }
+        if (citaRq.getEstado() != null && !citaRq.getEstado().isEmpty()) {
+            cita.setEstado(citaRq.getEstado());
+        }
+
+        if (citaRq.getFechaHora() != null && !citaRq.getFechaHora().isEmpty()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            cita.setFechaHora(LocalDateTime.parse(citaRq.getFechaHora(), formatter));
+        }
+
+        this.citaRepository.save(cita);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMessage("Cita actualizada exitosamente.");
+        rta.setStatus(200);
+        return rta;
+    }
+
 
     private Cita convertCitaRqToCitaEntity(CitaRq citaRq, Paciente paciente, Medico medico) {
         Cita cita = new Cita();

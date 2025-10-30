@@ -40,4 +40,8 @@ public class Receta implements Serializable {
     /** Fecha de creación del registro de la receta */
     @Column(name = "fecha_creacion_registro")
     private LocalDateTime fechaCreacionRegistro;
+
+    /** Fecha de actualizacion del registro de la receta */
+    @Column(name = "fecha_actualizacion_registro")
+    private LocalDateTime fechaActualizacionRegistro;
 }

@@ -57,9 +57,18 @@ public class MedicamentoServiceImpl implements MedicamentoService {
         if (optMedic.isPresent()) {
             throw new BadRequestException("El medicamento ya existe y no se puede actualizar");
         }
+
+        if (!medicamentoUpdate.getNombre().equalsIgnoreCase(medicamento.getNombre())) {
+            Optional<Medicamento> optMedicamento = this.medicamentoRepository
+                    .findByNombre(medicamento.getNombre());
+            if (optMedicamento.isPresent()) {
+                throw new BadRequestException("El nombre del medicamento ya existe");
+            }
+            medicamentoUpdate.setNombre(medicamento.getNombre());
+        }
+
         medicamentoUpdate.setPresentacion(medicamento.getPresentacion() == null? medicamentoUpdate.getPresentacion() : medicamento.getPresentacion());
         medicamentoUpdate.setDescripcion(medicamento.getDescripcion() == null? medicamentoUpdate.getDescripcion() : medicamento.getDescripcion());
-        medicamentoUpdate.setNombre(medicamento.getNombre() == null? medicamentoUpdate.getNombre() : medicamento.getNombre());
         medicamentoUpdate.setFechaCompra(medicamento.getFechaCmpra() == null? medicamentoUpdate.getFechaCompra() : medicamento.getFechaCmpra());
         medicamentoUpdate.setFechaVence(medicamento.getFechaVence() == null? medicamentoUpdate.getFechaVence() : medicamento.getFechaVence());
         medicamentoUpdate.setFechaModificacionRegistro(LocalDateTime.now());

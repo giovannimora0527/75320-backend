@@ -13,6 +13,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,45 @@ public class RecetaServiceImpl implements RecetaService {
         RespuestaRs rta = new RespuestaRs();
         rta.setStatus(200);
         rta.setMessage("Receta guardada con éxito.");
+        return rta;
+    }
+
+    @Override
+    public RespuestaRs actualizarReceta(RecetaRq recetaRq) throws BadRequestException {
+        if (recetaRq.getId() == null) {
+            throw new BadRequestException("El ID de la receta es obligatorio para actualizar.");
+        }
+        Optional<Receta> optReceta = this.recetaRepository.findById(recetaRq.getId());
+        if (optReceta.isEmpty()) {
+            throw new BadRequestException("La receta con ID " + recetaRq.getId() + " no existe.");
+        }
+        Receta recetaActual = optReceta.get();
+        if (recetaRq.getMedicamentoId() == null) {
+            throw new BadRequestException("El ID del medicamento es obligatorio para actualizar.");
+        }
+
+        /**
+         * El medicamento no puede ser cambiado en la actualización de la receta
+         */
+        if (!recetaActual.getMedicamento().getId().equals(recetaRq.getMedicamentoId())) {
+            // Busco si el medicamento existe por el id.
+            Optional<Medicamento> optMedicamento = this.medicamentoRepository
+                    .findById(recetaRq.getMedicamentoId());
+            if (optMedicamento.isEmpty()) {
+                throw new BadRequestException("El medicamento con ID " + recetaRq.getMedicamentoId() + " no existe.");
+            }
+            //Cambio el medicamento
+            recetaActual.setMedicamento(optMedicamento.get());
+        }
+
+        recetaActual.setIndicaciones(recetaRq.getIndicaciones());
+        recetaActual.setDosis(recetaRq.getDosis());
+        recetaActual.setFechaActualizacionRegistro(LocalDateTime.now());
+        this.recetaRepository.save(recetaActual);
+
+        RespuestaRs rta = new RespuestaRs();
+        rta.setStatus(200);
+        rta.setMessage("Receta actualizada con éxito.");
         return rta;
     }
 
