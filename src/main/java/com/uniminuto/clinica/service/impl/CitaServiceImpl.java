@@ -12,8 +12,6 @@ import com.uniminuto.clinica.service.CitaService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -130,6 +128,15 @@ public class CitaServiceImpl implements CitaService {
         rta.setMessage("Cita actualizada exitosamente.");
         rta.setStatus(200);
         return rta;
+    }
+
+    @Override
+    public List<Cita> listarCitasByPaciente(Integer pacienteId) throws BadRequestException {
+        Optional<Paciente> paciente = this.pacienteRepository.findById(pacienteId);
+        if (paciente.isEmpty()) {
+              throw new BadRequestException("El pacientecon ID " + pacienteId + " no existe.");
+        }
+        return this.citaRepository.findByPacienteOrderByFechaHoraDesc(paciente.get());
     }
 
 

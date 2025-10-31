@@ -104,6 +104,7 @@ public class RecetaServiceImpl implements RecetaService {
         receta.setMedicamento(medicamento);
         receta.setDosis(recetaRq.getDosis());
         receta.setIndicaciones(recetaRq.getIndicaciones());
+        receta.setFechaCreacionRegistro(LocalDateTime.now());
         return receta;
     }
 

@@ -13,4 +13,6 @@ public interface CitaService {
     RespuestaRs guardarCita(CitaRq citaRq) throws BadRequestException;
 
     RespuestaRs actualizarCita(CitaRq citaRq) throws BadRequestException;
+
+    List<Cita> listarCitasByPaciente(Integer pacienteId) throws BadRequestException;
 }
