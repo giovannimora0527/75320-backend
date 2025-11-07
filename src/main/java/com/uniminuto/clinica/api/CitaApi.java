@@ -18,37 +18,39 @@ import java.util.List;
 @RequestMapping("/cita")
 public interface CitaApi {
 
+    /**
+     * Api para listar todas las citas del sistema.
+     * @return listado de citas.
+     */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Cita>> listarCitas();
 
-
+    /**
+     * Api para guardar una cita nueva.
+     * @param citaRq cita de entrada.
+     * @return Respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
     @RequestMapping(value = "/guardar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<RespuestaRs> guardarCitas(
+    ResponseEntity<RespuestaRs> guardarCita(
             @RequestBody @Valid CitaRq citaRq
-    ) throws BadRequestException;
+            ) throws BadRequestException;
 
-
-    @RequestMapping(value = "/actualizar",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.POST)
-    ResponseEntity<RespuestaRs> actualizarCitas(
-            @RequestBody @Valid CitaRq citaRq
-    ) throws BadRequestException;
-
-
-    @RequestMapping(value = "/listar-x-paciente",
+    /**
+     * Api para listar todas las citas del sistema.
+     * @return listado de citas.
+     */
+    @RequestMapping(value = "/listar-citas-paciente",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<List<Cita>> listarCitasByPaciente(
-            @RequestParam Integer pacienteId
+    ResponseEntity<List<Cita>> listarCitasPorPaciente(
+            @RequestParam Integer pacienteIds
     ) throws BadRequestException;
-
 }

@@ -5,9 +5,7 @@ import com.uniminuto.clinica.entity.Medico;
 import com.uniminuto.clinica.model.MedicoRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.MedicoService;
-
 import java.util.List;
-
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,24 +23,20 @@ public class MedicoApiController implements MedicoApi {
 
     @Override
     public ResponseEntity<List<Medico>> listarMedicos() {
-        return ResponseEntity.ok(medicoService.buscarMedicos());
+        return ResponseEntity.ok(this.medicoService.listarMedicos());
     }
 
     @Override
     public ResponseEntity<List<Medico>>
-    listarMedicosPorEspecialidad(String codigo) throws BadRequestException {
+            listarMedicosporEspecialidad(String codigo)
+            throws BadRequestException {
         return ResponseEntity.ok(this.medicoService
-                .buscarMedicosPorEspecializacion(codigo));
+                .buscarPorEspecialidad(codigo));
     }
 
     @Override
     public ResponseEntity<RespuestaRs> guardarMedico(MedicoRq medicoRq) throws BadRequestException {
         return ResponseEntity.ok(this.medicoService.guardarMedico(medicoRq));
-    }
-
-    @Override
-    public ResponseEntity<RespuestaRs> actualizarMedico(MedicoRq medicoRq) throws BadRequestException {
-        return ResponseEntity.ok(this.medicoService.actualizarMedico(medicoRq));
     }
 
 }

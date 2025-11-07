@@ -1,7 +1,6 @@
 package com.uniminuto.clinica.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +43,7 @@ public class Paciente implements Serializable {
     private String apellidos;
 
     @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
 
     @Column(name = "genero")
     private String genero;
@@ -54,5 +53,4 @@ public class Paciente implements Serializable {
 
     @Column(name = "direccion")
     private String direccion;
-
 }

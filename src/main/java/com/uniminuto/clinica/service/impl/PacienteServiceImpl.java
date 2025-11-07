@@ -26,18 +26,20 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Paciente buscarPacientePorDocumento(String documento) throws BadRequestException {
-        
         Optional<Paciente> optPaciente = this.pacienteRepository.findByNumeroDocumento(documento);
         if (!optPaciente.isPresent()) {
             throw new BadRequestException("No se encuentra el paciente");
-        
         }
         return optPaciente.get();
     }
 
     @Override
-    public List<Paciente> listarPacientesPorEdad() {
-        return this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+    public List<Paciente> listarOrdenadoPorFechaNacimiento(boolean ascendente) {
+        if (ascendente) {
+            return this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+        } else {
+            return this.pacienteRepository.findAllByOrderByFechaNacimientoDesc();
+        }
     }
 
 }

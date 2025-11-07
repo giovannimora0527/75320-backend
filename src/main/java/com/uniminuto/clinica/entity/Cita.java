@@ -7,38 +7,37 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * Entidad que representa una cita médica en el sistema.
- * Corresponde a la tabla 'cita' en la base de datos.
+ * Clase que mapea la tabla cita en la base de datos.
  */
+@Data
 @Entity
 @Table(name = "cita")
-@Data
 public class Cita implements Serializable {
-    /** Identificador único de la cita */
+
+    /**
+     * Id serializable.
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
-    /** Identificador del paciente asociado a la cita */
-    @ManyToOne
-    @JoinColumn(name = "paciente_id", nullable = false)
-    private Paciente paciente;
-
-    /** Identificador del médico asociado a la cita */
-    @ManyToOne
-    @JoinColumn(name = "medico_id", nullable = false)
-    private Medico medico;
-
-    /** Fecha y hora de la cita */
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "fecha_hora")
     private LocalDateTime fechaHora;
 
-    /** Estado de la cita (ejemplo: programada, realizada, cancelada) */
-    @Column(name = "estado", nullable = false, length = 20)
+    @Column(name = "estado")
     private String estado;
 
-    /** Motivo de la cita */
     @Column(name = "motivo")
     private String motivo;
+
+    @ManyToOne
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id")
+    private Paciente paciente;
+
+    @ManyToOne
+    @JoinColumn(name = "medico_id", referencedColumnName = "id")
+    private Medico medico;
 }

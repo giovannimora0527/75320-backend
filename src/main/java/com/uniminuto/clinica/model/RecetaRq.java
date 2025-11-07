@@ -1,24 +1,41 @@
 package com.uniminuto.clinica.model;
 
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
+/**
+ * Clase que representa la solicitud para crear o actualizar una receta médica.
+ */
 @Data
 public class RecetaRq {
 
-    private Long id;
+    /**
+     * Id de la receta.
+     */
+    private Integer id;
 
-    @NotNull(message = "El campo citaId es obligatorio")
-    private Long citaId;
+    /**
+     * Identificador de la cita asociada a la receta.
+     */
+    @NotNull(message = "El identificador de la cita es obligatorio.")
+    private Integer citaId;
 
-    @NotNull(message = "El campo medicamentoId es obligatorio")
+    /**
+     * Identificador del medicamento recetado.
+     */
+    @NotNull(message = "El identificador del medicamento es obligatorio.")
     private Integer medicamentoId;
 
-    @NotBlank(message = "El campo dosis es obligatorio")
+    /**
+     * Dosis prescrita del medicamento.
+     */
+    @NotBlank(message = "La dosis es obligatoria.")
     private String dosis;
 
-    @NotBlank(message = "El campo indicaciones es obligatorio")
+    /**
+     * Indicaciones adicionales para el uso del medicamento.
+     */
+    @NotBlank(message = "Las indicaciones son obligatorias.")
     private String indicaciones;
 }

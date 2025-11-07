@@ -1,16 +1,20 @@
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Usuario;
-import java.util.List;
-
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.model.UsuarioRq;
+import java.util.List;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.mail.MessagingException;
 
 /**
- * ApiRest para logica de usuarios.
  *
  * @author lmora
  */
@@ -18,47 +22,53 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usuario")
 public interface UsuarioApi {
 
-    /**
-     * Lista los usuarios de la bd.
-     *
-     * @return
-     */
     @RequestMapping(value = "/listar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Usuario>> listarUsuarios();
-
-    /**
-     * Lista los usuarios de la bd.
-     *
-     * @return
-     */
-    @RequestMapping(value = "/buscar-usuario",
+    
+    
+    
+    @RequestMapping(value = "/listar-rol",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<Usuario> buscarUsuarioXUsername(
-            @RequestParam String username) 
-            throws BadRequestException;
-
-    /**
-     * Guarda un usuario nuevo en la bd.
-     * @param usuarioRq Usuario de entrada.
-     * @return respuesta del servicio.
-     * @throws BadRequestException excepcion.
-     */
+    ResponseEntity<List<Usuario>> listarUsuariosPorRol(
+       @RequestParam String rol
+    );
+    
+    
+    @RequestMapping(value = "/buscar-nombre",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<Usuario> buscarUsuarioPorNombre(
+       @RequestParam String nombre
+    ) throws BadRequestException;
+    
+    
+    
+    @RequestMapping(value = "/buscar-estado",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Usuario>> buscarUsuariosPorEstado(
+       @RequestParam Integer activo
+    ) throws BadRequestException;
+    
+    
     @RequestMapping(value = "/guardar",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
     ResponseEntity<RespuestaRs> guardarUsuario(
-            @RequestBody UsuarioRq usuarioRq)
-            throws BadRequestException;
+       @RequestBody UsuarioRq usuarioNuevo
+    ) throws BadRequestException, MessagingException;
 
     /**
-     * Guarda un usuario nuevo en la bd.
-     * @param usuarioRq Usuario de entrada.
+     * Actualizar usuario.
+     * @param usuario UsuarioRq de entrada.
      * @return respuesta del servicio.
      * @throws BadRequestException excepcion.
      */
@@ -66,8 +76,7 @@ public interface UsuarioApi {
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<RespuestaRs> actualizarUsuario(
-            @RequestBody UsuarioRq usuarioRq)
-            throws BadRequestException;
-        
+    ResponseEntity<RespuestaRs> actualizarrUsuario(
+            @RequestBody UsuarioRq usuario
+    ) throws BadRequestException;
 }

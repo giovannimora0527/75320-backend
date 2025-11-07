@@ -5,7 +5,10 @@ import com.uniminuto.clinica.model.MedicamentoRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -28,13 +31,6 @@ public interface MedicamentoApi {
             @RequestBody MedicamentoRq medicamentoRq
     ) throws BadRequestException;
 
-    @RequestMapping(value = "/buscar-por-id",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<Medicamento> buscarMedicamentoPorId(
-            @RequestParam Integer id
-    ) throws BadRequestException;
 
     @RequestMapping(value = "/actualizar",
             produces = {"application/json"},
