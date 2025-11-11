@@ -2,6 +2,8 @@ package com.uniminuto.clinica.service;
 
 import com.uniminuto.clinica.model.RespuestaRs;
 import org.apache.coyote.BadRequestException;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.mail.MessagingException;
 
 public interface EmailService {
@@ -51,4 +53,17 @@ public interface EmailService {
 
 
     RespuestaRs testEmail(String correoDestinatario) throws BadRequestException, MessagingException;
+
+    /**
+     * Metodo para enviar correos con adjuntos.
+     * @param to destinatario.
+     * @param subject asunto.
+     * @param body cuerpo del correo.
+     * @param from remitente.
+     * @param adjunto archivo adjunto.
+     * @param filename nombre del archivo adjunto.
+     * @throws BadRequestException excepcion.
+     */
+    void enviarCorreoConAdjuntos(String to, String subject, String body, String from,
+                                 MultipartFile adjunto, String filename) throws BadRequestException;
 }
