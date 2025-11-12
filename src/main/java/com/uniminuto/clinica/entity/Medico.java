@@ -1,29 +1,21 @@
 package com.uniminuto.clinica.entity;
 
-import java.io.Serializable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 
 /**
- *
+ * Entidad que representa a un médico en el sistema.
+ * 
+ * Contiene información personal, profesional y su especialización.
+ * 
  * @author lmora
  */
 @Data
 @Entity
 @Table(name = "medico")
 public class Medico implements Serializable {
-    /**
-     * Id serializable.
-     */    
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -31,47 +23,47 @@ public class Medico implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;    
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     /**
-     * Tipo de documento del médico (por ejemplo, CC, TI, CE).
+     * Tipo de documento de identificación (CC, CE, TI, etc.).
      */
-    @Column(name = "tipo_documento")
+    @Column(name = "tipo_documento", length = 10, nullable = false)
     private String tipoDocumento;
 
     /**
      * Número de documento del médico.
      */
-    @Column(name = "numero_documento")
-    private String numeroDocumento;
+    @Column(name = "numero_documento", length = 20, nullable = false, unique = true)
+    private String documento;
 
     /**
      * Nombres del médico.
      */
-    @Column(name = "nombres")
+    @Column(name = "nombres", length = 100, nullable = false)
     private String nombres;
 
     /**
      * Apellidos del médico.
      */
-    @Column(name = "apellidos")
+    @Column(name = "apellidos", length = 100, nullable = false)
     private String apellidos;
 
     /**
-     * Número de teléfono de contacto del médico.
+     * Teléfono de contacto del médico.
      */
-    @Column(name = "telefono")
+    @Column(name = "telefono", length = 20)
     private String telefono;
 
     /**
      * Número de registro profesional del médico.
      */
-    @Column(name = "registro_profesional")
+    @Column(name = "registro_profesional", length = 50, nullable = false, unique = true)
     private String registroProfesional;
-    
+
     /**
-     * Especializacion del medico.
+     * Especialización médica asociada.
      */
     @ManyToOne
     @JoinColumn(name = "especializacion_id", nullable = true)

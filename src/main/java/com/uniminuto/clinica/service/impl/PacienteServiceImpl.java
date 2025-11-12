@@ -5,8 +5,10 @@ import com.uniminuto.clinica.model.PacienteRq;
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.repository.PacienteRepository;
 import com.uniminuto.clinica.service.PacienteService;
+
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -51,7 +53,7 @@ public class PacienteServiceImpl implements PacienteService {
         this.pacienteRepository.save(nuevoPaciente);
 
         RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Se guardó el paciente satisfactoriamente");
+        rta.setMensaje("Se guardó el paciente satisfactoriamente");
         rta.setStatus(HttpStatus.OK.value());
         return rta;
     }
@@ -70,7 +72,7 @@ public class PacienteServiceImpl implements PacienteService {
         this.pacienteRepository.deleteById(id);
 
         RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Se eliminó el paciente satisfactoriamente");
+        rta.setMensaje("Se eliminó el paciente satisfactoriamente");
         rta.setStatus(HttpStatus.OK.value());
         return rta;
     }
@@ -108,16 +110,23 @@ public class PacienteServiceImpl implements PacienteService {
         this.pacienteRepository.save(pacienteExistente);
 
         RespuestaRs rta = new RespuestaRs();
-        rta.setMessage("Se actualizó el paciente satisfactoriamente");
+        rta.setMensaje("Se actualizó el paciente satisfactoriamente");
         rta.setStatus(HttpStatus.OK.value());
         return rta;
     }
 
     @Override
     public List<Paciente> listarPacientesPorEdad() {
-        // Asegúrate de que tu repositorio tenga este método:
-        // List<Paciente> findAllByOrderByFechaNacimientoAsc();
         return this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+    }
+
+    @Override
+    public List<Paciente> listarOrdenadoPorFechaNacimiento(boolean ascendente) {
+        if (ascendente) {
+            return this.pacienteRepository.findAllByOrderByFechaNacimientoAsc();
+        } else {
+            return this.pacienteRepository.findAllByOrderByFechaNacimientoDesc();
+        }
     }
 
     // ================= Métodos privados auxiliares =================

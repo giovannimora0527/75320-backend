@@ -1,70 +1,59 @@
 package com.uniminuto.clinica.entity;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumn;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
+ * Entidad que representa una cita médica en el sistema.
  *
- * @author PC
+ * @author
  */
-
 @Data
 @Entity
 @Table(name = "cita")
-public class Cita implements Serializable{
-    /**
-     * Id serializable.
-     */    
+public class Cita implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     /**
-     * ID de la cita
+     * ID de la cita (clave primaria).
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    
-    
+
     /**
-     * ID del Paciente
+     * Paciente asociado a la cita.
      */
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
     /**
-     * ID del medico
+     * Médico asignado a la cita.
      */
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
     /**
-     * Fecha y hora de la cita
+     * Fecha y hora de la cita.
      */
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
 
     /**
-     * Estado de la cita
+     * Estado actual de la cita (Ej: "Programada", "Completada", "Cancelada").
      */
-    @Column(length = 20)
+    @Column(name = "estado", length = 20)
     private String estado;
 
     /**
-     * Motivo de la cita
+     * Motivo o descripción de la cita médica.
      */
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "motivo", columnDefinition = "TEXT")
     private String motivo;
-    
 }

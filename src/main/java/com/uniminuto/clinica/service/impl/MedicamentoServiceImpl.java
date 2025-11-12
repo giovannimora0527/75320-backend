@@ -8,7 +8,7 @@ import com.uniminuto.clinica.service.MedicamentoService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import org.apache.coyote.BadRequestException;
+import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,47 +20,70 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 
     @Override
     public List<Medicamento> listarMedicamentos() {
-        return medicamentoRepository.findAll();
+        return medicamentoRepository.findAll()
+                .stream()
+                .sorted((m1, m2) -> m2.getFechaCompra().compareTo(m1.getFechaCompra()))
+                .toList();
     }
 
     @Override
     public Medicamento buscarPorNombre(String nombre) throws BadRequestException {
-        Medicamento medicamento = medicamentoRepository.findByNombre(nombre);
-        if (medicamento == null) {
+        Optional<Medicamento> medicamentoOpt = medicamentoRepository.findByNombre(nombre);
+        if (medicamentoOpt.isEmpty()) {
             throw new BadRequestException("No se encontró medicamento con nombre: " + nombre);
         }
-        return medicamento;
+        return medicamentoOpt.get();
     }
 
     @Override
     public RespuestaRs guardarMedicamento(MedicamentoRq medicamentoRq) throws BadRequestException {
-        RespuestaRs respuesta = new RespuestaRs();
+        validarFormulario(medicamentoRq);
 
-        try {
-            Medicamento medicamento = new Medicamento();
-            medicamento.setNombre(medicamentoRq.getNombre());
-            medicamento.setDescripcion(medicamentoRq.getDescripcion());
-            medicamento.setPresentacion(medicamentoRq.getPresentacion());
-            medicamento.setFechaCompra(medicamentoRq.getFechaCompra());
-            medicamento.setFechaVence(medicamentoRq.getFechaVence());
-            medicamento.setFechaCreacionRegistro(LocalDateTime.now());
-            medicamento.setFechaModificacionRegistro(LocalDateTime.now());
-
-            medicamentoRepository.save(medicamento);
-
-            respuesta.setMessage("Medicamento guardado exitosamente");
-            respuesta.setSuccess(true);
-        } catch (Exception e) {
-            respuesta.setMessage("Error al guardar el medicamento: " + e.getMessage());
-            respuesta.setSuccess(false);
+        Optional<Medicamento> optMedicamento = medicamentoRepository.findByNombre(medicamentoRq.getNombre());
+        if (optMedicamento.isPresent()) {
+            throw new BadRequestException("El medicamento ya existe");
         }
 
-        return respuesta;
+        Medicamento nuevo = mapearAMedicamento(medicamentoRq);
+        medicamentoRepository.save(nuevo);
+
+        return new RespuestaRs("Medicamento guardado exitosamente", true, 200, nuevo);
+    }
+
+    @Override
+    public RespuestaRs actualizarMedicamento(Integer id, MedicamentoRq medicamentoRq) throws BadRequestException {
+        if (id == null) {
+            throw new BadRequestException("El id del medicamento es obligatorio");
+        }
+
+        Optional<Medicamento> optMedicamento = medicamentoRepository.findById(id);
+        if (optMedicamento.isEmpty()) {
+            throw new BadRequestException("El medicamento con ID " + id + " no existe");
+        }
+
+        Medicamento medicamento = optMedicamento.get();
+
+        if (!medicamento.getNombre().equalsIgnoreCase(medicamentoRq.getNombre())) {
+            Optional<Medicamento> existeNombre = medicamentoRepository.findByNombre(medicamentoRq.getNombre());
+            if (existeNombre.isPresent()) {
+                throw new BadRequestException("El nombre del medicamento ya existe");
+            }
+        }
+
+        medicamento.setNombre(medicamentoRq.getNombre() != null ? medicamentoRq.getNombre() : medicamento.getNombre());
+        medicamento.setDescripcion(medicamentoRq.getDescripcion() != null ? medicamentoRq.getDescripcion() : medicamento.getDescripcion());
+        medicamento.setPresentacion(medicamentoRq.getPresentacion() != null ? medicamentoRq.getPresentacion() : medicamento.getPresentacion());
+        medicamento.setFechaCompra(medicamentoRq.getFechaCompra() != null ? medicamentoRq.getFechaCompra() : medicamento.getFechaCompra());
+        medicamento.setFechaVence(medicamentoRq.getFechaVence() != null ? medicamentoRq.getFechaVence() : medicamento.getFechaVence());
+        medicamento.setFechaModificacionRegistro(LocalDateTime.now());
+
+        medicamentoRepository.save(medicamento);
+
+        return new RespuestaRs("Medicamento actualizado correctamente", true, 200, medicamento);
     }
 
     @Override
     public RespuestaRs eliminarMedicamento(Integer id) throws BadRequestException {
-        RespuestaRs respuesta = new RespuestaRs();
         Optional<Medicamento> medicamentoOpt = medicamentoRepository.findById(id);
 
         if (medicamentoOpt.isEmpty()) {
@@ -68,45 +91,55 @@ public class MedicamentoServiceImpl implements MedicamentoService {
         }
 
         medicamentoRepository.deleteById(id);
-
-        respuesta.setMessage("Medicamento eliminado correctamente");
-        respuesta.setSuccess(true);
-        return respuesta;
+        return new RespuestaRs("Medicamento eliminado correctamente", true, 200, null);
     }
 
-    @Override
-    public RespuestaRs actualizarMedicamento(Integer id, MedicamentoRq medicamentoRq) throws BadRequestException {
-        RespuestaRs respuesta = new RespuestaRs();
-        Optional<Medicamento> medicamentoOpt = medicamentoRepository.findById(id);
-
-        if (medicamentoOpt.isEmpty()) {
-            throw new BadRequestException("No existe el medicamento con ID " + id);
-        }
-
-        Medicamento medicamento = medicamentoOpt.get();
-        medicamento.setNombre(medicamentoRq.getNombre());
-        medicamento.setDescripcion(medicamentoRq.getDescripcion());
-        medicamento.setPresentacion(medicamentoRq.getPresentacion());
-        medicamento.setFechaCompra(medicamentoRq.getFechaCompra());
-        medicamento.setFechaVence(medicamentoRq.getFechaVence());
-        medicamento.setFechaModificacionRegistro(LocalDateTime.now());
-
-        medicamentoRepository.save(medicamento);
-
-        respuesta.setMessage("Medicamento actualizado correctamente");
-        respuesta.setSuccess(true);
-        return respuesta;
-    }
-    
     @Override
     public RespuestaRs actualizarCantidad(Integer id, Integer cantidad) throws BadRequestException {
-        if (cantidad < 0) {
-            throw new BadRequestException("La cantidad no puede ser negativa");
+        if (cantidad == null || cantidad < 0) {
+            throw new BadRequestException("La cantidad no puede ser negativa ni nula");
         }
+
         Medicamento medicamento = medicamentoRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Medicamento con ID " + id + " no encontrado"));
+
         medicamento.setCantidad(cantidad);
-        Medicamento updatedMedicamento = medicamentoRepository.save(medicamento);
-        return new RespuestaRs("Cantidad del medicamento actualizada exitosamente", true, 200, updatedMedicamento);
-}
+        medicamento.setFechaModificacionRegistro(LocalDateTime.now());
+        medicamentoRepository.save(medicamento);
+
+        return new RespuestaRs("Cantidad del medicamento actualizada exitosamente", true, 200, medicamento);
+    }
+
+    // --- Métodos privados de apoyo ---
+
+    private Medicamento mapearAMedicamento(MedicamentoRq medicamentoRq) {
+        Medicamento nuevo = new Medicamento();
+        nuevo.setNombre(medicamentoRq.getNombre());
+        nuevo.setDescripcion(medicamentoRq.getDescripcion());
+        nuevo.setPresentacion(medicamentoRq.getPresentacion());
+        nuevo.setFechaCompra(medicamentoRq.getFechaCompra());
+        nuevo.setFechaVence(medicamentoRq.getFechaVence());
+        nuevo.setCantidad(medicamentoRq.getCantidad());
+        nuevo.setFechaCreacionRegistro(LocalDateTime.now());
+        nuevo.setFechaModificacionRegistro(LocalDateTime.now());
+        return nuevo;
+    }
+
+    private void validarFormulario(MedicamentoRq medicamentoRq) throws BadRequestException {
+        if (medicamentoRq.getNombre() == null || medicamentoRq.getNombre().isBlank()) {
+            throw new BadRequestException("El nombre es obligatorio");
+        }
+        if (medicamentoRq.getDescripcion() == null || medicamentoRq.getDescripcion().isBlank()) {
+            throw new BadRequestException("La descripción es obligatoria");
+        }
+        if (medicamentoRq.getPresentacion() == null || medicamentoRq.getPresentacion().isBlank()) {
+            throw new BadRequestException("La presentación es obligatoria");
+        }
+        if (medicamentoRq.getFechaCompra() == null) {
+            throw new BadRequestException("La fecha de compra es obligatoria");
+        }
+        if (medicamentoRq.getFechaVence() == null) {
+            throw new BadRequestException("La fecha de vencimiento es obligatoria");
+        }
+    }
 }

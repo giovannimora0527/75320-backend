@@ -6,38 +6,69 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Entidad que representa un medicamento en el sistema.
+ */
 @Data
 @Entity
 @Table(name = "medicamento")
 public class Medicamento implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Identificador único del medicamento.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, unique = true)
     private Integer id;
 
-    @Column(name = "nombre")
+    /**
+     * Nombre del medicamento.
+     */
+    @Column(name = "nombre", length = 100, nullable = false, unique = true)
     private String nombre;
 
-    @Column(name = "descripcion")
+    /**
+     * Descripción del medicamento.
+     */
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(name = "presentacion")
+    /**
+     * Presentación del medicamento (tableta, cápsula, jarabe, etc.).
+     */
+    @Column(name = "presentacion", length = 100)
     private String presentacion;
-    
+
+    /**
+     * Cantidad disponible en inventario.
+     */
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @Column(name = "fecha_compra")
+    /**
+     * Fecha en que se adquirió el medicamento.
+     */
+    @Column(name = "fecha_compra", nullable = false)
     private LocalDate fechaCompra;
 
-    @Column(name = "fecha_vence")
+    /**
+     * Fecha de vencimiento del medicamento.
+     */
+    @Column(name = "fecha_vence", nullable = false)
     private LocalDate fechaVence;
 
-    @Column(name = "fecha_creacion_registro")
+    /**
+     * Fecha y hora de creación del registro.
+     */
+    @Column(name = "fecha_creacion_registro", nullable = false)
     private LocalDateTime fechaCreacionRegistro;
 
+    /**
+     * Fecha y hora de última modificación del registro.
+     */
     @Column(name = "fecha_modificacion_registro")
     private LocalDateTime fechaModificacionRegistro;
 }

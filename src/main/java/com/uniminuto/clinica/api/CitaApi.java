@@ -1,22 +1,23 @@
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Cita;
-import com.uniminuto.clinica.entity.Paciente;
+import org.springframework.web.bind.annotation.*;
 import com.uniminuto.clinica.model.CitaRq;
 import com.uniminuto.clinica.model.RespuestaRs;
-import java.util.List;
-import org.apache.coyote.BadRequestException;
+import jakarta.validation.Valid;
+import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/cita")
 public interface CitaApi {
-
-    @PostMapping(value = "/guardar",
-            produces = {"application/json"},
-            consumes = {"application/json"})
-    ResponseEntity<RespuestaRs> guardarCita(@RequestBody CitaRq citaRq);
     
     @RequestMapping(value = "/por-fechahora",
             produces = {"application/json"},
@@ -35,4 +36,42 @@ public interface CitaApi {
         consumes = {"application/json"},
         method = RequestMethod.POST)
     ResponseEntity<RespuestaRs> eliminarCita(@RequestParam Integer id) throws BadRequestException;
+    
+    /**
+     * Api para listar todas las citas del sistema.
+     * @return listado de citas.
+     */
+    @RequestMapping(value = "/listar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Cita>> listarCitas();
+
+    /**
+     * Api para guardar una cita nueva.
+     * @param citaRq cita de entrada.
+     * @return Respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
+    @RequestMapping(value = "/guardar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> guardarCita(
+            @RequestBody @Valid CitaRq citaRq
+            ) throws BadRequestException;
+
+    /**
+     * Api para listar todas las citas del sistema.
+     * @param pacienteIds
+     * @return listado de citas.
+     * @throws BadRequestException
+     */
+    @RequestMapping(value = "/listar-citas-paciente",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Cita>> listarCitasPorPaciente(
+            @RequestParam Integer pacienteIds
+    ) throws BadRequestException;
 }
