@@ -58,6 +58,12 @@ public class EmailServiceImpl implements EmailService {
     public String getTo() {
         return this.emailConfig.getTo();
     }
+    
+    @Override
+    public String getFrom() {
+        // El remitente debe ser el username (email) configurado, no el "to"
+        return this.emailConfig.getUsername();
+    }
 
     @Override
     public void enviarCorreo(final String to,
@@ -92,37 +98,78 @@ public class EmailServiceImpl implements EmailService {
                               final String htmlBody,
                               final String from)
             throws MessagingException {
-
-        // Configuración de las propiedades del servidor SMTP
-        Properties properties = new Properties();
-        properties.put("mail.smtp.host", emailConfig.getSmtpHost());
-        properties.put("mail.smtp.port", emailConfig.getSmtpPort());
-        properties.put("mail.smtp.auth", emailConfig.getSmtpAuth());
-        properties.put("mail.smtp.starttls.enable", emailConfig.getStartTls());
-        properties.put("mail.smtp.ssl.enable", emailConfig.getSslEnable());
-
-        // Crear la sesión de correo con autenticación
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(emailConfig.getUsername(),
-                        emailConfig.getPassword());
+        try {
+            // Validar configuración
+            if (emailConfig == null) {
+                throw new MessagingException("EmailConfig no está configurado");
             }
-        });
+            
+            if (emailConfig.getSmtpHost() == null || emailConfig.getSmtpHost().isBlank()) {
+                throw new MessagingException("SMTP Host no está configurado");
+            }
+            
+            if (emailConfig.getUsername() == null || emailConfig.getUsername().isBlank()) {
+                throw new MessagingException("SMTP Username no está configurado");
+            }
+            
+            if (emailConfig.getPassword() == null || emailConfig.getPassword().isBlank()) {
+                throw new MessagingException("SMTP Password no está configurado");
+            }
 
-        // Crear el mensaje de correo
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(from));
-        message.setRecipients(Message.RecipientType.TO,
-                InternetAddress.parse(to));
-        message.setSubject(subject);
+            System.out.println("Configurando envío de correo:");
+            System.out.println("  SMTP Host: " + emailConfig.getSmtpHost());
+            System.out.println("  SMTP Port: " + emailConfig.getSmtpPort());
+            System.out.println("  Username: " + emailConfig.getUsername());
+            System.out.println("  From: " + from);
+            System.out.println("  To: " + to);
 
-        // Establecer el cuerpo del mensaje en formato HTML
-        message.setContent(htmlBody, "text/html; charset=utf-8");
+            // Configuración de las propiedades del servidor SMTP
+            Properties properties = new Properties();
+            properties.put("mail.smtp.host", emailConfig.getSmtpHost());
+            properties.put("mail.smtp.port", emailConfig.getSmtpPort());
+            properties.put("mail.smtp.auth", emailConfig.getSmtpAuth());
+            properties.put("mail.smtp.starttls.enable", emailConfig.getStartTls());
+            properties.put("mail.smtp.ssl.enable", emailConfig.getSslEnable());
+            // Agregar propiedades adicionales para mejor compatibilidad
+            properties.put("mail.smtp.ssl.trust", emailConfig.getSmtpHost());
+            properties.put("mail.smtp.connectiontimeout", "5000");
+            properties.put("mail.smtp.timeout", "5000");
 
-        // Enviar el correo
-        Transport.send(message);
-        System.out.println("Correo enviado con éxito a " + to);
+            // Crear la sesión de correo con autenticación
+            Session session = Session.getInstance(properties, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(emailConfig.getUsername(),
+                            emailConfig.getPassword());
+                }
+            });
+
+            // Crear el mensaje de correo
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
+            message.setSubject(subject);
+
+            // Establecer el cuerpo del mensaje en formato HTML
+            message.setContent(htmlBody, "text/html; charset=utf-8");
+
+            // Enviar el correo
+            Transport.send(message);
+            System.out.println("✓ Correo enviado con éxito a " + to);
+        } catch (MessagingException e) {
+            System.err.println("✗ Error al enviar correo a " + to);
+            System.err.println("  Mensaje: " + e.getMessage());
+            if (e.getCause() != null) {
+                System.err.println("  Causa: " + e.getCause().getMessage());
+            }
+            throw e;
+        } catch (Exception e) {
+            System.err.println("✗ Error inesperado al enviar correo a " + to);
+            System.err.println("  Tipo: " + e.getClass().getSimpleName());
+            System.err.println("  Mensaje: " + e.getMessage());
+            throw new MessagingException("Error al enviar correo: " + e.getMessage(), e);
+        }
     }
 
     @Override

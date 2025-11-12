@@ -52,9 +52,8 @@ public interface UsuarioService {
      * @param usuarioNuevo datos del nuevo usuario.
      * @return respuesta del servicio.
      * @throws BadRequestException si los datos son inválidos.
-     * @throws MessagingException si ocurre un error al enviar notificación por correo.
      */
-    RespuestaRs guardarUsuario(UsuarioRq usuarioNuevo) throws BadRequestException, MessagingException;
+    RespuestaRs guardarUsuario(UsuarioRq usuarioNuevo) throws BadRequestException;
 
     /**
      * Actualiza los datos de un usuario existente.

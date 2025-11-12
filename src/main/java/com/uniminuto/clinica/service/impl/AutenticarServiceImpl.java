@@ -44,17 +44,21 @@ public class AutenticarServiceImpl implements AutenticarService {
     public AutenticatorRs autenticar(AuthenticatorRq request)
             throws BadRequestException {
 
-        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(request.getUsername());
+        // Buscar usuario (case-insensitive como en otros servicios)
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(request.getUsername() != null ? request.getUsername().toLowerCase() : "");
         if (usuarioOpt.isEmpty()) {
             throw new BadRequestException("Usuario o contraseña incorrectos");
         }
         Usuario usuario = usuarioOpt.get();
+        
+        // Validar contraseña
         boolean passwordOk;
         if (passwordEncoder != null) {
             passwordOk = passwordEncoder.matches(request.getPassword(), usuario.getPassword());
         } else {
             passwordOk = usuario.getPassword().equals(this.cifrarService.encriptarPassword(request.getPassword()));
         }
+        
         if (!passwordOk) {
             throw new BadRequestException("Usuario o contraseña incorrectos");
         }

@@ -79,7 +79,7 @@ public interface UsuarioApi {
     )
     ResponseEntity<RespuestaRs> guardarUsuario(
         @RequestBody UsuarioRq usuarioRq
-    ) throws BadRequestException, MessagingException;
+    ) throws BadRequestException;
 
     /**
      * Actualiza un usuario existente.

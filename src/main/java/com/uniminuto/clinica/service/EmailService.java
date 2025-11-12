@@ -29,10 +29,16 @@ public interface EmailService {
             throws BadRequestException, MessagingException;
 
     /**
-     * Obtiene el remitente del correo.
+     * Obtiene el remitente del correo (destinatario por defecto).
      * @return Remitente.
      */
     String getTo();
+    
+    /**
+     * Obtiene el correo remitente (from) configurado.
+     * @return Correo remitente.
+     */
+    String getFrom();
 
     /**
      * Metodo para enviar correos html.

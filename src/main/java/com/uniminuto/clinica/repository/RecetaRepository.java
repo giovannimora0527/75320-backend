@@ -34,11 +34,11 @@ public interface RecetaRepository extends JpaRepository<Receta, Integer> {
     List<Receta> findByMedicamento_Id(Integer medicamentoId);
 
     /**
-     * Busca recetas por un rango de fechas.
+     * Busca recetas por un rango de fechas de la cita asociada.
      * @param inicio fecha y hora inicial.
      * @param fin fecha y hora final.
      */
-    List<Receta> findByFechaHoraBetween(LocalDateTime inicio, LocalDateTime fin);
+    List<Receta> findByCita_FechaHoraBetween(LocalDateTime inicio, LocalDateTime fin);
 
     /**
      * Busca recetas por cita y medicamento específicos.

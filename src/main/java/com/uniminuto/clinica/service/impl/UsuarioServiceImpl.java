@@ -10,10 +10,12 @@ import com.uniminuto.clinica.service.UsuarioService;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import jakarta.mail.MessagingException;
 import com.uniminuto.clinica.utils.BadRequestException;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,58 +61,136 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public RespuestaRs guardarUsuario(UsuarioRq usuarioNuevo)
-            throws BadRequestException, MessagingException {
-        validarCampos(usuarioNuevo);
+            throws BadRequestException {
+        try {
+            validarCampos(usuarioNuevo);
 
-        // Validar que no exista el usuario
-        if (usuarioRepository.findByUsername(usuarioNuevo.getUsername().toLowerCase()).isPresent()) {
-            throw new BadRequestException("El usuario ya existe.");
+            // Validar que no exista el usuario
+            if (usuarioRepository.findByUsername(usuarioNuevo.getUsername().toLowerCase()).isPresent()) {
+                throw new BadRequestException("El usuario ya existe.");
+            }
+
+            // Crear el usuario
+            Usuario nuevo = new Usuario();
+            nuevo.setActivo(true);
+            nuevo.setFechaCreacion(LocalDateTime.now());
+            nuevo.setRol(usuarioNuevo.getRol().toUpperCase());
+            nuevo.setUsername(usuarioNuevo.getUsername().toLowerCase());
+            nuevo.setEmail(usuarioNuevo.getEmail());
+
+            // Determinar la contraseña: usar la enviada desde el frontend o generar una automática
+            String password;
+            if (usuarioNuevo.getPassword() != null && !usuarioNuevo.getPassword().isBlank()) {
+                // Si el frontend envió una contraseña, usarla
+                password = usuarioNuevo.getPassword();
+            } else {
+                // Si no se envió contraseña, generar una automática
+                password = generarPass();
+            }
+            
+            // Validar que la contraseña tenga al menos 8 caracteres
+            if (password.length() < 8) {
+                throw new BadRequestException("La contraseña debe tener al menos 8 caracteres.");
+            }
+            
+            // Cifrar y guardar la contraseña
+            if (this.cifrarService == null) {
+                throw new BadRequestException("Error: Servicio de cifrado no disponible.");
+            }
+            nuevo.setPassword(this.cifrarService.encriptarPassword(password));
+            this.usuarioRepository.save(nuevo);
+            
+            // Log de la contraseña generada para referencia (solo en desarrollo)
+            System.out.println("==========================================");
+            System.out.println("USUARIO CREADO EXITOSAMENTE");
+            System.out.println("Username: " + nuevo.getUsername());
+            System.out.println("Email: " + nuevo.getEmail());
+            System.out.println("Contraseña: " + password);
+            System.out.println("==========================================");
+
+            // Enviar correo con credenciales (opcional, no bloquea la creación si falla)
+            try {
+                if (this.emailService != null) {
+                    System.out.println("Intentando enviar correo a: " + nuevo.getEmail());
+                    String html = String.format("""
+                        <html>
+                        <body>
+                            <h2>¡Bienvenido a la Clínica Uniminuto!</h2>
+                            <p>Hola <b>%s</b>,</p>
+                            <p>Tu cuenta ha sido creada exitosamente.</p>
+                            <p><b>Usuario:</b> %s</p>
+                            <p><b>Correo:</b> %s</p>
+                            <p><b>Contraseña temporal:</b> %s</p>
+                            <p>Por favor, inicia sesión y cambia tu contraseña lo antes posible.</p>
+                            <br>
+                            <hr>
+                            <small>Este mensaje fue generado automáticamente, por favor no respondas a este correo.</small>
+                        </body>
+                        </html>
+                        """, nuevo.getUsername(), nuevo.getUsername(), nuevo.getEmail(), password);
+
+                    // Usar el correo remitente configurado (dragnovith0111@gmail.com)
+                    String remitente = emailService.getFrom();
+                    System.out.println("Remitente (From) configurado: " + remitente);
+                    System.out.println("Destinatario (To): " + nuevo.getEmail());
+                    
+                    this.emailService.sendHtmlEmail(
+                            nuevo.getEmail(),
+                            "Credenciales de acceso - Clínica Uniminuto",
+                            html,
+                            remitente
+                    );
+                    System.out.println("Correo enviado exitosamente a: " + nuevo.getEmail());
+                } else {
+                    System.err.println("WARNING: EmailService no está disponible (null)");
+                }
+            } catch (MessagingException e) {
+                // Log detallado del error de mensajería
+                System.err.println("==========================================");
+                System.err.println("ERROR AL ENVIAR CORREO DE BIENVENIDA");
+                System.err.println("Destinatario: " + nuevo.getEmail());
+                System.err.println("Error: " + e.getMessage());
+                System.err.println("Causa: " + (e.getCause() != null ? e.getCause().getMessage() : "N/A"));
+                System.err.println("==========================================");
+                e.printStackTrace();
+            } catch (BadRequestException e) {
+                // Log del error de solicitud incorrecta
+                System.err.println("==========================================");
+                System.err.println("ERROR DE CONFIGURACIÓN DE CORREO");
+                System.err.println("Destinatario: " + nuevo.getEmail());
+                System.err.println("Error: " + e.getMessage());
+                System.err.println("==========================================");
+                e.printStackTrace();
+            } catch (Exception e) {
+                // Log de cualquier otro error
+                System.err.println("==========================================");
+                System.err.println("ERROR INESPERADO AL ENVIAR CORREO");
+                System.err.println("Destinatario: " + nuevo.getEmail());
+                System.err.println("Tipo de error: " + e.getClass().getSimpleName());
+                System.err.println("Error: " + e.getMessage());
+                System.err.println("==========================================");
+                e.printStackTrace();
+            }
+
+            // Respuesta - incluir la contraseña en los datos para que el frontend la muestre
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("usuario", nuevo);
+            responseData.put("password", password); // Incluir la contraseña en la respuesta
+            
+            RespuestaRs rta = new RespuestaRs();
+            rta.setMensaje("El usuario se ha guardado correctamente. Contraseña: " + password);
+            rta.setStatus(201);
+            rta.setData(responseData);
+            return rta;
+        } catch (BadRequestException e) {
+            // Re-lanzar BadRequestException para que sea manejada correctamente
+            throw e;
+        } catch (Exception e) {
+            // Capturar cualquier otra excepción y convertirla en BadRequestException
+            System.err.println("Error al guardar usuario: " + e.getMessage());
+            e.printStackTrace();
+            throw new BadRequestException("Error al guardar el usuario: " + e.getMessage());
         }
-
-        // Crear el usuario
-        Usuario nuevo = new Usuario();
-        nuevo.setActivo(true);
-        nuevo.setFechaCreacion(LocalDateTime.now());
-        nuevo.setRol(usuarioNuevo.getRol().toUpperCase());
-        nuevo.setUsername(usuarioNuevo.getUsername().toLowerCase());
-        nuevo.setEmail(usuarioNuevo.getEmail());
-
-        // Generar contraseña aleatoria y cifrar
-        String password = generarPass();
-        nuevo.setPassword(this.cifrarService.encriptarPassword(password));
-        this.usuarioRepository.save(nuevo);
-
-        // Enviar correo con credenciales
-        String html = String.format("""
-            <html>
-            <body>
-                <h2>¡Bienvenido a la Clínica Uniminuto!</h2>
-                <p>Hola <b>%s</b>,</p>
-                <p>Tu cuenta ha sido creada exitosamente.</p>
-                <p><b>Usuario:</b> %s</p>
-                <p><b>Correo:</b> %s</p>
-                <p><b>Contraseña temporal:</b> %s</p>
-                <p>Por favor, inicia sesión y cambia tu contraseña lo antes posible.</p>
-                <br>
-                <hr>
-                <small>Este mensaje fue generado automáticamente, por favor no respondas a este correo.</small>
-            </body>
-            </html>
-            """, nuevo.getUsername(), nuevo.getUsername(), nuevo.getEmail(), password);
-
-        this.emailService.sendHtmlEmail(
-                nuevo.getEmail(),
-                "Credenciales de acceso - Clínica Uniminuto",
-                html,
-                emailService.getTo()
-        );
-
-        // Respuesta
-        RespuestaRs rta = new RespuestaRs();
-        rta.setMensaje("El usuario se ha guardado correctamente.");
-        rta.setStatus(201);
-        rta.setData(nuevo);
-        return rta;
     }
 
     @Override

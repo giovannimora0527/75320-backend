@@ -9,7 +9,6 @@ import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -76,7 +75,7 @@ public class UsuarioApiController implements UsuarioApi {
      */
     @Override
     public ResponseEntity<RespuestaRs> guardarUsuario(UsuarioRq usuarioRq)
-            throws BadRequestException, MessagingException {
+            throws BadRequestException {
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuarioRq));
     }
 
