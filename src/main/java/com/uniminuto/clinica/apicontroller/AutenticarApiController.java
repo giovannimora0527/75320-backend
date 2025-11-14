@@ -27,7 +27,20 @@ public class AutenticarApiController implements AutenticarApi {
 
     @Override
     public ResponseEntity<AutenticatorRs> autenticar(AuthenticatorRq request) throws BadRequestException {
-        return ResponseEntity.ok(this.autenticarService.autenticar(request));
+        // Obtener IP del cliente desde la solicitud HTTP
+        String ipOrigen = null;
+        try {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (attributes != null) {
+                HttpServletRequest httpRequest = attributes.getRequest();
+                ipOrigen = obtenerIpCliente(httpRequest);
+            }
+        } catch (Exception e) {
+            // Si no se puede obtener la IP, continuar sin ella
+            System.out.println("No se pudo obtener la IP del cliente: " + e.getMessage());
+        }
+        
+        return ResponseEntity.ok(this.autenticarService.autenticar(request, ipOrigen));
     }
     
     @Override

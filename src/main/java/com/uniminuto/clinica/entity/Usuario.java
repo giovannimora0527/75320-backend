@@ -47,4 +47,16 @@ public class Usuario implements Serializable {
     @Column(name = "email")
     private String email;
     
+    /**
+     * Número de intentos fallidos consecutivos de inicio de sesión.
+     */
+    @Column(name = "intentos_fallidos", nullable = false)
+    private Integer intentosFallidos = 0;
+    
+    /**
+     * Fecha y hora hasta la cual el usuario está bloqueado (null si no está bloqueado).
+     */
+    @Column(name = "bloqueado_hasta")
+    private LocalDateTime bloqueadoHasta;
+    
 }
