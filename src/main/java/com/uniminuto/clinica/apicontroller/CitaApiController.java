@@ -90,8 +90,13 @@ public class CitaApiController implements CitaApi {
         return ResponseEntity.ok(citaService.eliminarCita(id));
     }
 
+    /**
+     * Lista todas las citas ordenadas por fecha y hora.
+     * Similar a listarCitas() pero con un endpoint específico.
+     */
     @Override
+    @GetMapping("/por-fechahora")
     public ResponseEntity<List<Cita>> listarCitaPorFechaHora() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return ResponseEntity.ok(citaService.listarCitas());
     }
 }

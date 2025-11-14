@@ -35,6 +35,8 @@ public class JwtUtil {
                 .withClaim("fecha_inicio_sesion", new Date())
                 .withClaim("fecha_fin_sesion", new Date(System.currentTimeMillis() + jwtExpiration))
                 .withClaim("correo", usuario.getEmail())
+                .withClaim("rol", usuario.getRol() != null ? usuario.getRol() : "USER")
+                .withExpiresAt(new Date(System.currentTimeMillis() + jwtExpiration))
                 //.withClaim("perfil_id", usuario.getEmail())
                 .sign(algorithm);
     }

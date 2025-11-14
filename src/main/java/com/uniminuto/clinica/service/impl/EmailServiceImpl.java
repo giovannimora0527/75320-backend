@@ -229,7 +229,7 @@ public class EmailServiceImpl implements EmailService {
             throw new BadRequestException("Error al enviar correo con adjunto. " + e.getMessage());
         } catch (IOException e) {
             Logger.getLogger(EmailServiceImpl.class.getName()).log(Level.SEVERE, null, e);
-            throw new BadRequestException(e);
+            throw new BadRequestException("Error al procesar archivo adjunto: " + e.getMessage(), e);
         }
     }
 }

@@ -84,11 +84,26 @@ public class AutenticarServiceImpl implements AutenticarService {
         }
         
         // Validar contraseña
-        boolean passwordOk;
+        boolean passwordOk = false;
+        String passwordHash = usuario.getPassword();
+        
+        // Verificar que el usuario tenga una contraseña configurada
+        if (passwordHash == null || passwordHash.trim().isEmpty()) {
+            System.out.println("ERROR: Usuario '" + username + "' no tiene contraseña configurada en la base de datos");
+            registrarIntentoFallido(username, "Usuario sin contraseña configurada", ipOrigen, usuario.getId());
+            throw new BadRequestException("Usuario o contraseña incorrectos");
+        }
+        
         if (passwordEncoder != null) {
-            passwordOk = passwordEncoder.matches(request.getPassword(), usuario.getPassword());
+            passwordOk = passwordEncoder.matches(request.getPassword(), passwordHash);
+            System.out.println("DEBUG: Usando PasswordEncoder para validar contraseña");
         } else {
-            passwordOk = usuario.getPassword().equals(this.cifrarService.encriptarPassword(request.getPassword()));
+            String passwordEncriptado = this.cifrarService.encriptarPassword(request.getPassword());
+            passwordOk = passwordHash.equals(passwordEncriptado);
+            System.out.println("DEBUG: Comparando contraseñas (MD5)");
+            System.out.println("DEBUG: Hash en BD: " + passwordHash);
+            System.out.println("DEBUG: Hash calculado: " + passwordEncriptado);
+            System.out.println("DEBUG: Coinciden: " + passwordOk);
         }
         
         if (!passwordOk) {
