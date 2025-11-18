@@ -28,17 +28,26 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    // Generar un token
+    // Generar el token JWT
     public String generateToken(Usuario usuario) {
+        Date now = new Date();
+        Date fechaFin = new Date(now.getTime() + jwtExpiration); // jwt.expiration en ms
+
         Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
+
         return JWT.create()
                 .withSubject(usuario.getUsername())
-                .withClaim("fecha_inicio_sesion", new Date())
-                .withClaim("fecha_fin_sesion", new Date(System.currentTimeMillis() + jwtExpiration))
+                .withIssuedAt(now)               // iat estándar
+                .withExpiresAt(fechaFin)         // exp estándar (útil para Angular)
+                .withClaim("rol", usuario.getRol())  // ← AQUÍ metemos el rol
+                .withClaim("fecha_inicio_sesion", now)
+                .withClaim("fecha_fin_sesion", fechaFin)
                 .withClaim("correo", usuario.getEmail())
-                //.withClaim("perfil_id", usuario.getEmail())
                 .sign(algorithm);
     }
+
+
+
 
     // Obtener el username del token
     public String extractUsername(String token) {

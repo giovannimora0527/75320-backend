@@ -14,6 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -104,11 +105,21 @@ public class JwtTokenFilter extends GenericFilterBean {
      */
     private boolean isTokenExpired(String token) {
         DecodedJWT jwt = JWT.decode(token);
-        // Extrae el claim personalizado "fecha_fin_sesion" como Date
-        java.util.Date fechaFinSesion = jwt.getClaim("fecha_fin_sesion").asDate();
-        if (fechaFinSesion == null) {
-            return false; // Si no tiene expiración, se considera válido
+
+        // 1. Intentar usar exp estándar del JWT
+        Date expDate = jwt.getExpiresAt();
+        if (expDate != null) {
+            return expDate.before(new Date());
         }
-        return fechaFinSesion.before(new java.util.Date());
+
+        // 2. Fallback al claim personalizado del profe
+        Date fechaFinSesion = jwt.getClaim("fecha_fin_sesion").asDate();
+        if (fechaFinSesion == null) {
+            // Si no hay info de expiración, lo consideramos válido
+            return false;
+        }
+
+        return fechaFinSesion.before(new Date());
     }
+
 }
