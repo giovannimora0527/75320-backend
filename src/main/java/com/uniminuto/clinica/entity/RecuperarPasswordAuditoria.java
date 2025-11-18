@@ -1,19 +1,15 @@
 package com.uniminuto.clinica.entity;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Data
 @Entity
-@Table(name="recuperacion_password_auditoria")
+@Table(name = "recuperacion_password_auditoria")
 public class RecuperarPasswordAuditoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,20 +19,38 @@ public class RecuperarPasswordAuditoria implements Serializable {
     @Column(name = "id_auditoria")
     private Long id;
 
-    @CreationTimestamp
-    @Column(name = "transaccion_fecha", updatable = false)
-    private LocalDateTime fechaCreacion;
-
     @Column(name = "usuario_ingresado")
     private String username;
 
     @Column(name = "error_descripcion")
     private String description;
 
-    public RecuperarPasswordAuditoria(String username, String description) {
-        this.username = username;
-        this.description = description;
-    }
+    @CreationTimestamp
+    @Column(name = "transaccion_fecha", updatable = false)
+    private LocalDateTime transaccionFecha;
+
+    // NUEVO CAMPO
+    @Column(name = "tipo_auditoria")
+    private String tipoAuditoria;
+
+    // NUEVO CAMPO
+    @Column(name = "ip_address")
+    private String ipAddress;
 
     public RecuperarPasswordAuditoria() {}
+
+    public RecuperarPasswordAuditoria(String username, String description, String tipoAuditoria, String ipAddress) {
+        this.username = username;
+        this.description = description;
+        this.tipoAuditoria = tipoAuditoria;
+        this.ipAddress = ipAddress;
+    }
+
+    public RecuperarPasswordAuditoria(String username, String description) {
+        this(username, description, "RECUPERACION", null);
+    }
+
+    public RecuperarPasswordAuditoria(String username, String description, String ipAddress) {
+        this(username, description, "LOGIN", ipAddress);
+    }
 }

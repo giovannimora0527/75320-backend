@@ -46,5 +46,18 @@ public class Usuario implements Serializable {
 
     @Column(name = "email")
     private String email;
+
+    // NUEVOS CAMPOS
+    @Column(name = "intentos_fallidos")
+    private Integer intentosFallidos = 0;
+
+    @Column(name = "bloqueado")
+    private boolean bloqueado = false;
+
+    @Column(name = "fecha_bloqueo")
+    private LocalDateTime fechaBloqueo;
+
+    @Column(name = "fecha_desbloqueo")
+    private LocalDateTime fechaDesbloqueo;
     
 }
