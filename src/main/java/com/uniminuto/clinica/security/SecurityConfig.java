@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .csrf().disable() // Deshabilita CSRF si estás probando con Postman
                 .authorizeHttpRequests((requests) -> requests
                     // Permitir acceso sin autenticación solo a login y recuperar-contrasena
-                    .antMatchers("/auth/login", "/recuperar/password").permitAll()
+                    .antMatchers("/auth/login", "/password/recuperar").permitAll()
                     // El resto de endpoints requieren autenticación
                     .anyRequest().authenticated()
                 )
