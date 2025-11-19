@@ -6,5 +6,6 @@ import org.apache.coyote.BadRequestException;
 
 public interface AutenticarService {
 
-    AutenticatorRs autenticar(AuthenticatorRq request) throws BadRequestException;
+    AutenticatorRs autenticar(AuthenticatorRq request, String ipOrigen) throws BadRequestException;
 }
+

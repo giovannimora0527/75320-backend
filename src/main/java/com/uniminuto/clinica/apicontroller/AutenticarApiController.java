@@ -1,3 +1,4 @@
+// java
 package com.uniminuto.clinica.apicontroller;
 
 import com.uniminuto.clinica.api.AutenticarApi;
@@ -25,9 +26,13 @@ public class AutenticarApiController implements AutenticarApi {
     @Autowired
     private PasswordRecoveryService passwordRecoveryService;
 
+    @Autowired
+    private javax.servlet.http.HttpServletRequest httpServletRequest;
+
     @Override
     public ResponseEntity<AutenticatorRs> autenticar(AuthenticatorRq request) throws BadRequestException {
-        return ResponseEntity.ok(this.autenticarService.autenticar(request));
+        String ip = httpServletRequest.getRemoteAddr();
+        return ResponseEntity.ok(this.autenticarService.autenticar(request, ip));
     }
 
     @PostMapping("/recuperar-contrasena")
