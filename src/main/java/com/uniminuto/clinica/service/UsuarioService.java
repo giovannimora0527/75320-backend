@@ -24,4 +24,5 @@ public interface UsuarioService {
   RespuestaRs guardarUsuario(UsuarioRq usuarioNuevo) throws BadRequestException, MessagingException;
 
   RespuestaRs actualizarUsuario(UsuarioRq usuarioNuevo) throws BadRequestException;
+  
 }

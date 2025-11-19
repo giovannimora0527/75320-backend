@@ -1,0 +1,62 @@
+2025-11-18 22:32:27 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 24556 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-18 22:32:27 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-18 22:32:27 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-18 22:32:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-18 22:32:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-18 22:32:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-18 22:32:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 139 ms. Found 10 JPA repository interfaces.
+2025-11-18 22:32:30 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-18 22:32:30 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-18 22:32:30 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-18 22:32:30 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-18 22:32:30 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2685 ms
+2025-11-18 22:32:30 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-18 22:32:30 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-18 22:32:30 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-18 22:32:31 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-18 22:32:31 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-18 22:32:31 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-18 22:32:31 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-18 22:32:32 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-18 22:32:32 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-18 22:32:33 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: b0720d11-377e-4220-a097-9f073fb0ca23
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-18 22:32:33 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@188d4ec2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@54024527, org.springframework.security.web.context.SecurityContextPersistenceFilter@4d766b9, org.springframework.security.web.header.HeaderWriterFilter@121bd0a4, org.springframework.web.filter.CorsFilter@7052b5c9, org.springframework.security.web.authentication.logout.LogoutFilter@44db6fe, com.uniminuto.clinica.security.JwtTokenFilter@33d90405, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@11cb5f07, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13bc07be, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@90bb848, org.springframework.security.web.session.SessionManagementFilter@4c9972de, org.springframework.security.web.access.ExceptionTranslationFilter@605078e6, org.springframework.security.web.access.intercept.AuthorizationFilter@38038ee0]
+2025-11-18 22:32:33 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-18 22:32:34 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-18 22:32:34 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-18 22:32:34 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 7.155 seconds (JVM running for 7.792)
+2025-11-18 22:33:11 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-18 22:33:11 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-18 22:33:11 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 33 ms
+2025-11-18 22:33:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:33:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:33:12 [http-nio-8000-exec-3] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: false, IP: 0:0:0:0:0:0:0:1
+2025-11-18 22:33:12 [http-nio-8000-exec-3] WARN  c.u.clinica.security.JwtTokenFilter - Error en la petición: Usuario o contraseña incorrectos. Intentos restantes: 2
+2025-11-18 22:33:12 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
+2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:34:29 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/recuperar-contrasena
+2025-11-18 22:34:29 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/recuperar-contrasena
+2025-11-18 22:34:33 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:34:33 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
+2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
+2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-18 22:35:06 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/usuario/listar
+2025-11-18 22:35:06 [http-nio-8000-exec-10] WARN  o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [133] milliseconds.
+2025-11-18 22:35:06 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/usuario/listar

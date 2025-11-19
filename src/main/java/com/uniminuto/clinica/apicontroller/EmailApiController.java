@@ -18,6 +18,6 @@ public class EmailApiController implements EmailApi {
 
     @Override
     public ResponseEntity<RespuestaRs> testEmail() throws BadRequestException, MessagingException {
-        return ResponseEntity.ok(emailService.testEmail("giovannimora0527@gmail.com"));
+        return ResponseEntity.ok(emailService.testEmail("andrestco.16@gmail.com"));
     }
 }

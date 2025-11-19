@@ -47,4 +47,14 @@ public class Usuario implements Serializable {
     @Column(name = "email")
     private String email;
     
+    /*Nuevos campos*/
+    
+    @Column(name = "intentos_fallidos")
+    private Integer intentosFallidos;
+
+    @Column(name = "cuenta_bloqueada_hasta")
+    private LocalDateTime cuentaBloqueadaHasta;
+    
+    
+    
 }
