@@ -29,15 +29,15 @@ public class RecuperarPasswordAuditoria implements Serializable {
     @Column(name = "transaccion_fecha", updatable = false)
     private LocalDateTime transaccionFecha;
 
-    // NUEVO CAMPO
     @Column(name = "tipo_auditoria")
     private String tipoAuditoria;
 
-    // NUEVO CAMPO
     @Column(name = "ip_address")
     private String ipAddress;
 
-    public RecuperarPasswordAuditoria() {}
+    // CONSTRUCTOR VACÍO OBLIGATORIO PARA JPA
+    public RecuperarPasswordAuditoria() {
+    }
 
     public RecuperarPasswordAuditoria(String username, String description, String tipoAuditoria, String ipAddress) {
         this.username = username;

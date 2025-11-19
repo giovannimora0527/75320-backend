@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,11 +33,15 @@ public class RecuperarServiceImpl implements RecuperarService {
     private EmailService emailService;
 
     @Override
+    public List<RecuperarPasswordAuditoria> listarTodosLosRegistros() {
+        return this.recuperarRepository.findAll();
+    }
+
+    @Override
     public RespuestaRs recuperarPassword(RecuperarPasswordRq request) {
         Optional<Usuario> optUser = usuarioRepository.findByUsername(request.getUsername());
 
         if (!optUser.isPresent()) {
-            // Registrar en auditoría - usuario no encontrado
             registrarAuditoriaSafe(request.getUsername(), "Usuario no encontrado en el sistema");
             return crearRespuestaGenerica();
         }
@@ -44,46 +49,36 @@ public class RecuperarServiceImpl implements RecuperarService {
         Usuario usuario = optUser.get();
 
         if (!usuario.isActivo()) {
-            // Registrar en auditoría - usuario inactivo
             registrarAuditoriaSafe(request.getUsername(), "Usuario inactivo");
             return crearRespuestaGenerica();
         }
 
         try {
-            // Generar contraseña temporal
             String passwordTemporal = generarPasswordTemporal();
 
-            // Actualizar contraseña del usuario
             usuario.setPassword(cifrarService.encriptarPassword(passwordTemporal));
             usuarioRepository.save(usuario);
 
-            // Enviar correo con contraseña temporal
             enviarCorreoPasswordTemporal(usuario, passwordTemporal);
 
             return crearRespuestaExito();
 
         } catch (BadRequestException | MessagingException e) {
-            // Registrar error en auditoría - error en el proceso
             registrarAuditoriaSafe(request.getUsername(), "Error al procesar la recuperación: " + e.getMessage());
             return crearRespuestaGenerica();
         } catch (Exception e) {
-            // Registrar error en auditoría - error inesperado
             registrarAuditoriaSafe(request.getUsername(), "Error inesperado al procesar la recuperación: " + e.getMessage());
             return crearRespuestaGenerica();
         }
     }
 
-    /**
-     * Método seguro para registrar auditoría que nunca lanza excepción
-     */
     private void registrarAuditoriaSafe(String username, String descripcion) {
         try {
             RecuperarPasswordAuditoria auditoria = new RecuperarPasswordAuditoria(username, descripcion);
+            auditoria.setTipoAuditoria("RECUPERACION");
             recuperarRepository.save(auditoria);
         } catch (Exception e) {
-            // Solo log el error pero no propago la excepción para mantener el mensaje genérico al usuario
             System.err.println("Error al guardar auditoría: " + e.getMessage());
-            // No se lanza excepción para mantener el flujo de respuesta genérica
         }
     }
 
@@ -139,7 +134,7 @@ public class RecuperarServiceImpl implements RecuperarService {
     private RespuestaRs crearRespuestaExito() {
         RespuestaRs respuesta = new RespuestaRs();
         respuesta.setStatus(200);
-        respuesta.setMensaje("Si el usuario existe, recibirá un correo con las instrucciones para recuperar su contraseña.");
+        respuesta.setMensaje("Se ha enviado una contraseña temporal a su correo electrónico."); // Mensaje corregido
         return respuesta;
     }
 }

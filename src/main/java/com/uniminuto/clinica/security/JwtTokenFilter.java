@@ -24,30 +24,20 @@ import java.util.Collections;
 @Component
 public class JwtTokenFilter extends GenericFilterBean {
 
-    /**
-     * Log.
-     */
     private static final Logger LOG = Logger.getLogger(JwtTokenFilter.class.getName());
 
-    /**
-     * Filtro JWT.
-     * @param req Request.
-     * @param res Response.
-     * @param filterChain Filter chain.
-     * @throws IOException IOException.
-     * @throws ServletException ServletException.
-     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         String authHeader = request.getHeader("Authorization");
+        String requestURI = request.getRequestURI();
+
         LOG.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
-        String requestURI = request.getRequestURI();
-        if (requestURI != null && (requestURI.contains("/auth/recuperar-contrasena")
-                || requestURI.contains("/auth/login"))) {
+        // Rutas públicas que NO requieren token JWT
+        if (isPublicEndpoint(requestURI)) {
             try {
                 filterChain.doFilter(req, res);
             } catch (BadRequestException e) {
@@ -59,56 +49,85 @@ public class JwtTokenFilter extends GenericFilterBean {
                         + " \"message\": \"" + e.getMessage() + "\"}");
                 return;
             }
-            LOG.info("Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.");
+            LOG.info("Petición a endpoint público, se permite sin token.");
             return;
-        } else if (authHeader != null && authHeader.startsWith("Bearer ")) {
+        }
+
+        // Para rutas protegidas, validar el token JWT
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             try {
                 if (isTokenExpired(token)) {
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    response.setContentType("application/json");
-                    response.getWriter().write("{\"error\":\"Token expirado. Por favor, inicie sesión nuevamente.\"}");
-                    response.flushBuffer();
+                    sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED,
+                            "Token expirado. Por favor, inicie sesión nuevamente.");
                     return;
                 }
+
                 // Si el token es válido, establecer autenticación en el contexto de Spring
                 DecodedJWT jwt = JWT.decode(token);
                 String username = jwt.getSubject();
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        username, null, Collections.singletonList(new SimpleGrantedAuthority("USER"))
+                            username, null, Collections.singletonList(new SimpleGrantedAuthority("USER"))
                     );
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
+
+                // Continuar con la cadena de filtros
+                filterChain.doFilter(req, res);
+
             } catch (ExpiredJwtException eje) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.setContentType("application/json");
-                response.getWriter().write("{\"error\":\"Token expirado. Por favor, inicie sesión nuevamente.\"}");
-                response.flushBuffer();
+                sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED,
+                        "Token expirado. Por favor, inicie sesión nuevamente.");
                 return;
             } catch (Exception e) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.setContentType("application/json");
-                response.getWriter().write("{\"error\":\"Token inválido.\"}");
-                response.flushBuffer();
+                sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, "Token inválido.");
                 return;
             }
+        } else {
+            // No hay token en una ruta protegida
+            sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED,
+                    "Token JWT requerido. Por favor, incluya el header Authorization: Bearer <token>");
+            return;
         }
-        filterChain.doFilter(req, res);
+    }
+
+    /**
+     * Verifica si la URI es un endpoint público
+     */
+    private boolean isPublicEndpoint(String requestURI) {
+        return requestURI != null && (
+                requestURI.contains("/auth/login") ||
+                        requestURI.contains("/auth/recuperar-contrasena") ||
+                        requestURI.contains("/recuperar/password")  // NUEVO: Endpoint de recuperación
+        );
     }
 
     /**
      * Valida si el token JWT está expirado.
-     * @param token JWT.
-     * @return true si está expirado, false si es válido.
      */
     private boolean isTokenExpired(String token) {
-        DecodedJWT jwt = JWT.decode(token);
-        // Extrae el claim personalizado "fecha_fin_sesion" como Date
-        java.util.Date fechaFinSesion = jwt.getClaim("fecha_fin_sesion").asDate();
-        if (fechaFinSesion == null) {
-            return false; // Si no tiene expiración, se considera válido
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            java.util.Date fechaFinSesion = jwt.getClaim("fecha_fin_sesion").asDate();
+            if (fechaFinSesion == null) {
+                return false; // Si no tiene expiración, se considera válido
+            }
+            return fechaFinSesion.before(new java.util.Date());
+        } catch (Exception e) {
+            return true; // Si hay error al decodificar, considerar como expirado
         }
-        return fechaFinSesion.before(new java.util.Date());
+    }
+
+    /**
+     * Envía una respuesta de error JSON
+     */
+    private void sendErrorResponse(HttpServletResponse response, int status, String message)
+            throws IOException {
+        response.setStatus(status);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"error\":\"" + message + "\"}");
+        response.flushBuffer();
     }
 }

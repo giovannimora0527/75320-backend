@@ -12,11 +12,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- * Clase de configuracion para la seguridad.
- *
- * @author lmora
- */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -24,24 +19,21 @@ public class SecurityConfig {
     @Autowired
     private JwtTokenFilter jwtTokenFilter;
 
-   /**
-     * Filtro de seguridad.
-     *
-     * @param http peticion de entrada.
-     * @return Autorizado.
-     * @throws Exception Excepcion.
-     */
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         http
-                .cors() // Habilita CORS
+                .cors()
                 .and()
-                .csrf().disable() // Deshabilita CSRF si estás probando con Postman
+                .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                    // Permitir acceso sin autenticación solo a login y recuperar-contrasena
-                    .antMatchers("/auth/login", "/password/recuperar").permitAll()
-                    // El resto de endpoints requieren autenticación
-                    .anyRequest().authenticated()
+                        // Permitir acceso sin autenticación solo a endpoints públicos
+                        .antMatchers(
+                                "/auth/login",
+                                "/recuperar/password",
+                                "/auth/recuperar-contrasena"
+                        ).permitAll()
+                        // TODOS los demás endpoints requieren autenticación
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout((logout) -> logout.permitAll());
@@ -49,11 +41,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /**
-     * Configuracion del cors.
-     *
-     * @return configuracion.
-     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -71,5 +58,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-
 }
