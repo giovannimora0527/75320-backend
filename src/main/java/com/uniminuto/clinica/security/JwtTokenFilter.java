@@ -97,9 +97,7 @@ public class JwtTokenFilter extends GenericFilterBean {
      */
     private boolean isPublicEndpoint(String requestURI) {
         return requestURI != null && (
-                requestURI.contains("/auth/login") ||
-                        requestURI.contains("/auth/recuperar-contrasena") ||
-                        requestURI.contains("/recuperar/password")  // NUEVO: Endpoint de recuperación
+                requestURI.contains("/auth/login") || requestURI.contains("/auth/recuperar")  // NUEVO: Endpoint de recuperación
         );
     }
 

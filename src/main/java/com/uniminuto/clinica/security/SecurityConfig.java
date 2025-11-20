@@ -29,8 +29,7 @@ public class SecurityConfig {
                         // Permitir acceso sin autenticación solo a endpoints públicos
                         .antMatchers(
                                 "/auth/login",
-                                "/recuperar/password",
-                                "/auth/recuperar-contrasena"
+                                "/auth/recuperar"
                         ).permitAll()
                         // TODOS los demás endpoints requieren autenticación
                         .anyRequest().authenticated()

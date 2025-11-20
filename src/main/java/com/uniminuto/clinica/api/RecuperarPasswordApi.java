@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
-@RequestMapping("/password")
+@RequestMapping("/auth")
 public interface RecuperarPasswordApi {
 
     @RequestMapping(value = "/recuperar",
