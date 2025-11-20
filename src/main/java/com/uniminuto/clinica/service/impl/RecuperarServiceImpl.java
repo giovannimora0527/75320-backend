@@ -134,7 +134,7 @@ public class RecuperarServiceImpl implements RecuperarService {
     private RespuestaRs crearRespuestaExito() {
         RespuestaRs respuesta = new RespuestaRs();
         respuesta.setStatus(200);
-        respuesta.setMensaje("Se ha enviado una contraseña temporal a su correo electrónico."); // Mensaje corregido
+        respuesta.setMensaje("Si el usuario existe, recibirá un correo con las instrucciones para recuperar su contraseña."); // Mensaje corregido
         return respuesta;
     }
 }
