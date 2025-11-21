@@ -1,0 +1,49 @@
+package com.uniminuto.clinica.apicontroller;
+
+import com.uniminuto.clinica.api.MedicamentoApi;
+import com.uniminuto.clinica.entity.Medicamento;
+import com.uniminuto.clinica.model.MedicamentoRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.service.MedicamentoService;
+import java.util.List;
+import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MedicamentoApiController implements MedicamentoApi {
+
+    @Autowired
+    private MedicamentoService medicamentoService;
+
+    @Override
+    public ResponseEntity<List<Medicamento>> listarMedicamentos() {
+        return ResponseEntity.ok(medicamentoService.listarMedicamentos());
+    }
+
+    @Override
+    public ResponseEntity<Medicamento> buscarPorNombre(String nombre) throws BadRequestException {
+        return ResponseEntity.ok(medicamentoService.buscarPorNombre(nombre));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> guardarMedicamento(MedicamentoRq medicamentoRq) throws BadRequestException {
+        return ResponseEntity.ok(medicamentoService.guardarMedicamento(medicamentoRq));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> eliminarMedicamento(Integer id) throws BadRequestException {
+        return ResponseEntity.ok(medicamentoService.eliminarMedicamento(id));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarMedicamento(Integer id, MedicamentoRq medicamentoRq) throws BadRequestException {
+        return ResponseEntity.ok(medicamentoService.actualizarMedicamento(id, medicamentoRq));
+    }
+    
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarCantidad(Integer id, Integer cantidad) throws BadRequestException {
+        return ResponseEntity.ok(medicamentoService.actualizarCantidad(id, cantidad));
+    }
+}
