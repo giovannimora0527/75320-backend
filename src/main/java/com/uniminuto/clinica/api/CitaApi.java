@@ -1,28 +1,56 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.model.CitaRq;
-import java.util.List;
+import com.uniminuto.clinica.model.RespuestaRs;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author Oskr
- */
+import javax.validation.Valid;
+import java.util.List;
+
+@CrossOrigin(origins = "*")
 @RequestMapping("/cita")
 public interface CitaApi {
-    
-    @PostMapping("/creacionCita")
-    ResponseEntity<Cita> creacionCita(@RequestBody Cita cita);
-    @GetMapping("/listadoCita")
-    ResponseEntity<List<Cita>> listadoCitas();
-    
+
+    /**
+     * Api para listar todas las citas del sistema.
+     * @return listado de citas.
+     */
+    @RequestMapping(value = "/listar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Cita>> listarCitas();
+
+    /**
+     * Api para guardar una cita nueva.
+     * @param citaRq cita de entrada.
+     * @return Respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
+    @RequestMapping(value = "/guardar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> guardarCita(
+            @RequestBody @Valid CitaRq citaRq
+            ) throws BadRequestException;
+
+    /**
+     * Api para listar todas las citas del sistema.
+     * @return listado de citas.
+     */
+    @RequestMapping(value = "/listar-citas-paciente",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Cita>> listarCitasPorPaciente(
+            @RequestParam Integer pacienteIds
+    ) throws BadRequestException;
 }

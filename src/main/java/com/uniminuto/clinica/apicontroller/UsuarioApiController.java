@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
+
 /**
  *
  * @author lmora
@@ -23,19 +25,36 @@ public class UsuarioApiController implements UsuarioApi {
 
     @Override
     public ResponseEntity<List<Usuario>> listarUsuarios() {
-        return ResponseEntity.ok(usuarioService.encontrarTodosLosUsuarios());
+        return ResponseEntity.ok(this.usuarioService.listarTodosLosUsuarios());
     }
 
     @Override
-    public ResponseEntity<Usuario> buscarUsuarioXUsername(String username)
+    public ResponseEntity<List<Usuario>> listarUsuariosPorRol(String rol) {
+        return ResponseEntity.ok(this.usuarioService.encontrarPorRol(rol));
+    }
+
+    @Override
+    public ResponseEntity<Usuario> buscarUsuarioPorNombre(String nombre)
             throws BadRequestException {
-        return ResponseEntity.ok(usuarioService
-                .encontrarUsuarioPorNombre(username));
+        return ResponseEntity.ok(this.usuarioService.encontrarPorNombre(nombre));
     }
 
     @Override
-    public ResponseEntity<RespuestaRs> guardarUsuario(UsuarioRq usuarioRq) throws BadRequestException {
-        return ResponseEntity.ok(usuarioService.guardarUsuario(usuarioRq));
+    public ResponseEntity<List<Usuario>> buscarUsuariosPorEstado(Integer activo)
+            throws BadRequestException {
+        return ResponseEntity.ok(this.usuarioService.buscarPorEstado(activo));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> guardarUsuario(UsuarioRq usuarioNuevo)
+            throws BadRequestException, MessagingException {
+        return ResponseEntity.ok(this.usuarioService.guardarUsuario(usuarioNuevo));
+    }
+
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarrUsuario(UsuarioRq usuario)
+            throws BadRequestException {
+        return ResponseEntity.ok(this.usuarioService.actualizarUsuario(usuario));
     }
 
 }

@@ -1,21 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.uniminuto.clinica.service;
-import java.util.List;
+
 import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.model.CitaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import org.apache.coyote.BadRequestException;
 
-/**
- *
- * @author Oskr
- */
+import java.util.List;
+
 public interface CitaService {
-    
-    Cita guardadoCita(Cita cita); 
-    
-    List<Cita> listadodeCitasRecientes();
 
-    
+    /**
+     * lista las citas del sistema.
+     * @return lista de citas.
+     */
+    List<Cita> listarCitas();
+
+    /**
+     * Guarda una nueva cita en el sistema.
+     * @param citaRq Cita a guardar.
+     * @return Respuesta del servicio.
+     * @throws BadRequestException excepcion.
+     */
+    RespuestaRs guardarCita(CitaRq citaRq) throws BadRequestException;
+
+    /**
+     * Lista las citas por paciente.
+     * @param pacienteId ID del paciente.
+     * @return Lista de citas del paciente.
+     * @throws BadRequestException excepcion.
+     */
+    List<Cita> listarCitasporPaciente(Integer pacienteId) throws BadRequestException;
 }

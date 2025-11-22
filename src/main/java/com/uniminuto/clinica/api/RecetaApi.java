@@ -1,37 +1,54 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Receta;
-import java.util.List;
+import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
+import java.util.List;
 
-/**
- *
- * @author Oskr
- */
+@CrossOrigin(origins = "*")
 @RequestMapping("/receta")
 public interface RecetaApi {
-    
-    @PostMapping("Creacion_de_Receta")
-    ResponseEntity<Receta>creacionReceta(@RequestBody Receta receta);
-    
-        
-    @GetMapping("/listaReceta")
-    ResponseEntity<List<Receta>> listadeReceta();
 
-    @PutMapping("{id}")
-    ResponseEntity<Receta> actualizarReceta(@PathVariable Long id, @RequestBody Receta receta);
+    /**
+     * Api para listar todas las recetas del sistema.
+     * @return listado de recetas.
+     */
+    @RequestMapping(value = "/listar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Receta>> listarRecetas();
 
-    @DeleteMapping("/{id}")
-    ResponseEntity<Void> eliminarReceta(@PathVariable Long id);
-    
+
+    /**
+     * Api para guardar una receta en el sistema.
+     * @return respuesta del servicio.
+     */
+    @RequestMapping(value = "/guardar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> guardarReceta(
+           @RequestBody @Valid RecetaRq recetaRq
+    ) throws BadRequestException;
+
+    /**
+     * Api para acualizar una receta en el sistema.
+     * @return respuesta del servicio.
+     */
+    @RequestMapping(value = "/actualizar",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<RespuestaRs> actualizarReceta(
+            @RequestBody @Valid RecetaRq recetaRq
+    ) throws BadRequestException;
 }

@@ -20,22 +20,16 @@ public class MedicamentoApiController implements MedicamentoApi {
 
     @Override
     public ResponseEntity<List<Medicamento>> listarMedicamentos() {
-        return ResponseEntity.ok(this.medicamentoService.listarAllMedicamentos());
+        return ResponseEntity.ok(this.medicamentoService.listarMedicamentos());
     }
 
     @Override
-    public ResponseEntity<RespuestaRs> guardarMedicamento(MedicamentoRq medicamentoRq)
-            throws BadRequestException {
-        return ResponseEntity.ok(this.medicamentoService.guardarMedicamento(medicamentoRq));
-    }
-
-    @Override
-    public ResponseEntity<Medicamento> buscarMedicamentoPorId(Integer id) throws BadRequestException {
-        return ResponseEntity.ok(this.medicamentoService.buscarPorId(id));
+    public ResponseEntity<RespuestaRs> guardarMedicamento(MedicamentoRq medicamentoRq) throws BadRequestException {
+        return ResponseEntity.ok(medicamentoService.guardarMedicamento(medicamentoRq));
     }
 
     @Override
     public ResponseEntity<RespuestaRs> actualizarMedicamento(MedicamentoRq medicamentoRq) throws BadRequestException {
-        return ResponseEntity.ok(this.medicamentoService.actualizarMedicamento(medicamentoRq));
+        return ResponseEntity.ok(medicamentoService.actualizarMedicamento(medicamentoRq));
     }
 }

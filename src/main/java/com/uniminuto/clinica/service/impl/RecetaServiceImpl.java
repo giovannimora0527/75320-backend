@@ -3,88 +3,112 @@ package com.uniminuto.clinica.service.impl;
 import com.uniminuto.clinica.entity.Cita;
 import com.uniminuto.clinica.entity.Medicamento;
 import com.uniminuto.clinica.entity.Receta;
+import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.repository.CitaRepository;
 import com.uniminuto.clinica.repository.MedicamentoRepository;
 import com.uniminuto.clinica.repository.RecetaRepository;
 import com.uniminuto.clinica.service.RecetaService;
-import org.springframework.http.HttpStatus;
+import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecetaServiceImpl implements RecetaService {
 
-    private final RecetaRepository recetaRepository;
-    private final CitaRepository citaRepository;
-    private final MedicamentoRepository medicamentoRepository;
+    /**
+     * Repositorio de datos para recetas médicas.
+     */
+    @Autowired
+    private RecetaRepository recetaRepository;
 
-    public RecetaServiceImpl(RecetaRepository recetaRepository,
-                             CitaRepository citaRepository,
-                             MedicamentoRepository medicamentoRepository) {
-        this.recetaRepository = recetaRepository;
-        this.citaRepository = citaRepository;
-        this.medicamentoRepository = medicamentoRepository;
+    /**
+     * CitaRepository.
+     */
+    @Autowired
+    private CitaRepository citaRepository;
+
+    /**
+     * MedicamentoRepository.
+     */
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
+
+    @Override
+    public List<Receta> listarRecetas() {
+        return this.recetaRepository.findAll();
     }
 
     @Override
-    public Receta creacionReceta(Receta receta) {
-        // 🔍 Validar que tenga cita y medicamento
-        if (receta.getCita() == null || receta.getMedicamento() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debe tener cita y medicamento válidos");
+    public RespuestaRs guardarReceta(RecetaRq recetaRq) throws BadRequestException {
+        Optional<Medicamento> optMedicamento = this.medicamentoRepository.findById(recetaRq.getMedicamentoId());
+        if (optMedicamento.isEmpty()) {
+            throw new BadRequestException("El medicamento con ID " + recetaRq.getMedicamentoId() + " no existe.");
         }
 
-        // ⚠️ Verificar que la cita exista
-        Cita cita = citaRepository.findById(receta.getCita().getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "La cita no existe"));
+        Optional<Cita> optCita = this.citaRepository.findById(recetaRq.getCitaId());
+        if(optCita.isEmpty()) {
+            throw new BadRequestException("La cita con ID " + recetaRq.getCitaId() + " no existe.");
+        }
 
-        // ⚠️ Verificar que el medicamento exista
-        Medicamento medicamento = medicamentoRepository.findById(receta.getMedicamento().getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "El medicamento no existe"));
+        Cita cita = optCita.get();
+        Medicamento medicamento = optMedicamento.get();
+        List<Receta> recetasExistentes = this.recetaRepository.findByCitaAndMedicamento(cita, medicamento);
+        if (!recetasExistentes.isEmpty()) {
+            throw new BadRequestException("Ya existe una receta para la cita con ID " + recetaRq.getCitaId() +
+                    " y el medicamento con ID " + recetaRq.getMedicamentoId() + ".");
+        }
 
+        Receta receta = this.convertirRqAEntidad(recetaRq, optCita.get(), optMedicamento.get());
+        this.recetaRepository.save(receta);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMensaje("Receta guardada exitosamente.");
+        rta.setStatus(200);
+        return rta;
+    }
+
+    @Override
+    public RespuestaRs actualizarReceta(RecetaRq recetaRq) throws BadRequestException {
+        Optional<Receta> optReceta = this.recetaRepository.findById(recetaRq.getId());
+        if (optReceta.isEmpty()) {
+            throw new BadRequestException("La receta con ID " + recetaRq.getId() + " no existe.");
+        }
+
+        Receta recetaActual = optReceta.get();
+        if (!recetaActual.getMedicamento().getId().equals(recetaRq.getMedicamentoId())) {
+            Optional<Medicamento> optMedicamento = this.medicamentoRepository.findById(recetaRq.getMedicamentoId());
+            if (optMedicamento.isEmpty()) {
+                throw new BadRequestException("El medicamento con ID " + recetaRq.getMedicamentoId() + " no existe.");
+            }
+            recetaActual.setMedicamento(optMedicamento.get());
+        }
+
+        recetaActual.setDosis(recetaRq.getDosis());
+        recetaActual.setIndicaciones(recetaRq.getIndicaciones());
+        recetaActual.setFechaActualizacionRegistro(LocalDateTime.now());
+        this.recetaRepository.save(recetaActual);
+        RespuestaRs rta = new RespuestaRs();
+        rta.setMensaje("Receta actualizada exitosamente.");
+        rta.setStatus(200);
+        return rta;
+    }
+
+    /**
+     * Convierte un objeto RecetaRq a una entidad Receta.
+     * @param recetaRq receta de entrada.
+     * @return entidad receta.
+     */
+    private Receta convertirRqAEntidad(RecetaRq recetaRq, Cita cita, Medicamento medicamento) {
+        Receta receta = new Receta();
         receta.setCita(cita);
         receta.setMedicamento(medicamento);
-        receta.setFechaRegistro(LocalDateTime.now()); // fecha actual al crear
-
-        return recetaRepository.save(receta);
-    }
-
-    @Override
-    public List<Receta> listadeReceta() {
-        return recetaRepository.findAll();
-    }
-
-    @Override
-    public Receta actualizarReceta(Long id, Receta receta) {
-        Receta existente = recetaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Receta no encontrada"));
-
-        if (receta.getCita() != null) {
-            Cita cita = citaRepository.findById(receta.getCita().getId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "La cita no existe"));
-            existente.setCita(cita);
-        }
-
-        if (receta.getMedicamento() != null) {
-            Medicamento medicamento = medicamentoRepository.findById(receta.getMedicamento().getId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "El medicamento no existe"));
-            existente.setMedicamento(medicamento);
-        }
-
-        existente.setDosis(receta.getDosis());
-        existente.setIndicaciones(receta.getIndicaciones());
-        existente.setFechaRegistro(LocalDateTime.now()); // actualizar fecha
-
-        return recetaRepository.save(existente);
-    }
-
-    @Override
-    public void eliminarReceta(Long id) {
-        if (!recetaRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Receta no encontrada");
-        }
-        recetaRepository.deleteById(id);
+        receta.setDosis(recetaRq.getDosis());
+        receta.setIndicaciones(recetaRq.getIndicaciones());
+        receta.setFechaCreacionRegistro(LocalDateTime.now());
+        return receta;
     }
 }

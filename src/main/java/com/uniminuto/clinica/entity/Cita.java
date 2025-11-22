@@ -1,50 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.entity;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import lombok.Data;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
- *
- * @author Oskr
+ * Clase que mapea la tabla cita en la base de datos.
  */
+@Data
+@Entity
+@Table(name = "cita")
+public class Cita implements Serializable {
 
-    @Data
-    @Entity
-    @Table(name = "cita")
-    public class Cita implements Serializable {
+    /**
+     * Id serializable.
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "paciente_id")
-    private Paciente paciente;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "medico_id")
-    private Medico medico;
-
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "fecha_hora")
     private LocalDateTime fechaHora;
 
-    @Column(nullable = false)
+    @Column(name = "estado")
     private String estado;
 
-    @Column
+    @Column(name = "motivo")
     private String motivo;
+
+    @ManyToOne
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id")
+    private Paciente paciente;
+
+    @ManyToOne
+    @JoinColumn(name = "medico_id", referencedColumnName = "id")
+    private Medico medico;
 }

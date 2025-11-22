@@ -11,49 +11,49 @@ import javax.persistence.Table;
 import lombok.Data;
 
 /**
- *
+ * Entidad Usuario con campos adicionales para seguridad.
  * @author lmora
  */
 @Data
 @Entity
-@Table(name = "usuario")
+@Table(name="usuario")
 public class Usuario implements Serializable {
-    /**
-     * Id serializable.
-     */
+    
     private static final long serialVersionUID = 1L;
-    /**
-     * Id.
-     */
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
-    /**
-     * Username.
-     */
+    private Long id;
+    
     @Column(name = "username")
     private String username;
-    /**
-     * Password.
-     */
+    
     @Column(name = "password_hash")
     private String password;
-    /**
-     * Rol.
-     */
+    
     @Column(name = "rol")
-    private String rol;    
-    /**
-     * Fecha Creacion.
-     */
+    private String rol;
+    
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
     
-    /**
-     * Activo.
-     */
     @Column(name = "activo")
     private boolean activo;
-    
+
+    @Column(name = "email")
+    private String email;
+
+    // Nuevos campos para control de seguridad
+    @Column(name = "intentos_fallidos")
+    private Integer intentosFallidos = 0;
+
+    @Column(name = "fecha_bloqueo")
+    private LocalDateTime fechaBloqueo;
+
+    @Column(name = "password_temporal")
+    private String passwordTemporal;
+
+    @Column(name = "fecha_expiracion_temp")
+    private LocalDateTime fechaExpiracionTemp;
 }

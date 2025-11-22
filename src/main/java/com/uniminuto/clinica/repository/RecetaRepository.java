@@ -1,17 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.uniminuto.clinica.repository;
 
+import com.uniminuto.clinica.entity.Cita;
+import com.uniminuto.clinica.entity.Medicamento;
 import com.uniminuto.clinica.entity.Receta;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author Oskr
- */
-public interface RecetaRepository extends JpaRepository<Receta,Long>{
-    
+@Repository
+public interface RecetaRepository extends JpaRepository<Receta, Integer> {
+    List<Receta> findByCitaAndMedicamento(Cita cita, Medicamento medicamento);
+
 }
-
