@@ -1,59 +1,108 @@
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Usuario;
-import java.util.List;
-
 import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.model.UsuarioRq;
-import org.apache.coyote.BadRequestException;
+import java.util.List;
+import jakarta.mail.MessagingException;
+import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * ApiRest para logica de usuarios.
- *
- * @author lmora
+ * API para la gestión de usuarios.
+ * 
+ * Endpoints:
+ *  - GET  /usuario/listar → Lista todos los usuarios.
+ *  - GET  /usuario/listar-rol → Lista usuarios por rol.
+ *  - GET  /usuario/buscar-nombre → Busca usuario por nombre.
+ *  - GET  /usuario/buscar-estado → Lista usuarios por estado.
+ *  - POST /usuario/guardar → Crea un nuevo usuario.
+ *  - POST /usuario/actualizar → Actualiza un usuario existente.
+ *  - POST /usuario/eliminar → Elimina un usuario.
+ * 
+ * @author 
  */
 @CrossOrigin(origins = "*")
 @RequestMapping("/usuario")
 public interface UsuarioApi {
 
     /**
-     * Lista los usuarios de la bd.
-     *
-     * @return
+     * Lista todos los usuarios del sistema.
      */
-    @RequestMapping(value = "/listar",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.GET)
+    @GetMapping(
+        value = "/listar",
+        produces = "application/json"
+    )
     ResponseEntity<List<Usuario>> listarUsuarios();
 
     /**
-     * Lista los usuarios de la bd.
-     *
-     * @return
+     * Lista usuarios por rol.
      */
-    @RequestMapping(value = "/buscar-usuario",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<Usuario> buscarUsuarioXUsername(
-            @RequestParam String username) 
-            throws BadRequestException;
+    @GetMapping(
+        value = "/listar-rol",
+        produces = "application/json"
+    )
+    ResponseEntity<List<Usuario>> listarUsuariosPorRol(
+        @RequestParam String rol
+    );
 
     /**
-     * Guarda un usuario nuevo en la bd.
-     * @param usuarioRq Usuario de entrada.
-     * @return respuesta del servicio.
-     * @throws BadRequestException excepcion.
+     * Busca un usuario por nombre.
      */
-    @RequestMapping(value = "/guardar",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.POST)
+    @GetMapping(
+        value = "/buscar-nombre",
+        produces = "application/json"
+    )
+    ResponseEntity<Usuario> buscarUsuarioPorNombre(
+        @RequestParam String nombre
+    ) throws BadRequestException;
+
+    /**
+     * Busca usuarios por estado (activo/inactivo).
+     */
+    @GetMapping(
+        value = "/buscar-estado",
+        produces = "application/json"
+    )
+    ResponseEntity<List<Usuario>> buscarUsuariosPorEstado(
+        @RequestParam Integer activo
+    ) throws BadRequestException;
+
+    /**
+     * Guarda un nuevo usuario en el sistema.
+     */
+    @PostMapping(
+        value = "/guardar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
     ResponseEntity<RespuestaRs> guardarUsuario(
-            @RequestBody UsuarioRq usuarioRq)
-            throws BadRequestException;
-        
+        @RequestBody UsuarioRq usuarioRq
+    ) throws BadRequestException;
+
+    /**
+     * Actualiza un usuario existente.
+     */
+    @PostMapping(
+        value = "/actualizar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> actualizarUsuario(
+        @RequestParam Integer id,
+        @RequestBody UsuarioRq usuarioRq
+    ) throws BadRequestException;
+
+    /**
+     * Elimina un usuario por su ID.
+     */
+    @PostMapping(
+        value = "/eliminar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> eliminarUsuario(
+        @RequestParam Integer id
+    ) throws BadRequestException;
 }

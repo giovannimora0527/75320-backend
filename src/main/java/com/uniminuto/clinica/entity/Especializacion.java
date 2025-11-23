@@ -1,12 +1,12 @@
 package com.uniminuto.clinica.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
@@ -18,25 +18,19 @@ import lombok.Data;
 @Table(name = "especializacion")
 public class Especializacion implements Serializable {
     /**
-     * Id serializable.
-     */
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Id.
+     * Id de la entidad.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     
     @Column(name = "nombre")
     private String nombre;
-   
+    
     @Column(name = "descripcion")
     private String descripcion;
     
     @Column(name = "codigo_especializacion")
     private String codigoEspecializacion;
-    
 }

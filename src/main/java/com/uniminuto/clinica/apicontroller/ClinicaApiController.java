@@ -19,7 +19,7 @@ public class ClinicaApiController implements ClinicaApi {
 
     @Override
     public ResponseEntity<RespuestaRs> testService() {
-        return ResponseEntity.ok(clinicaService.test());
+        return ResponseEntity.ok(clinicaService.testearApp());
     }
 
 }
