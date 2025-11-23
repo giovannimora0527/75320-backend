@@ -20,10 +20,23 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 
     @Override
     public List<Medicamento> listarMedicamentos() {
-        return medicamentoRepository.findAll()
-                .stream()
-                .sorted((m1, m2) -> m2.getFechaCompra().compareTo(m1.getFechaCompra()))
-                .toList();
+        try {
+            List<Medicamento> medicamentos = medicamentoRepository.findAll();
+            if (medicamentos == null || medicamentos.isEmpty()) {
+                return new java.util.ArrayList<>();
+            }
+            return medicamentos.stream()
+                    .sorted((m1, m2) -> {
+                        if (m1.getFechaCompra() == null && m2.getFechaCompra() == null) return 0;
+                        if (m1.getFechaCompra() == null) return 1;
+                        if (m2.getFechaCompra() == null) return -1;
+                        return m2.getFechaCompra().compareTo(m1.getFechaCompra());
+                    })
+                    .collect(java.util.stream.Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new java.util.ArrayList<>();
+        }
     }
 
     @Override

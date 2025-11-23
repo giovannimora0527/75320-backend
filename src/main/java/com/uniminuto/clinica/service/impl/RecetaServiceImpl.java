@@ -32,9 +32,16 @@ public class RecetaServiceImpl implements RecetaService {
 
     @Override
     public List<Receta> listarRecetas() {
-        // Si tu repositorio tiene ordenamiento por fecha de cita, usa:
-        // return recetaRepository.findAllByOrderByCita_FechaHoraDesc();
-        return recetaRepository.findAll();
+        try {
+            List<Receta> recetas = recetaRepository.findAll();
+            if (recetas == null) {
+                return new java.util.ArrayList<>();
+            }
+            return recetas;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new java.util.ArrayList<>();
+        }
     }
 
     @Override

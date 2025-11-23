@@ -7,10 +7,12 @@ import com.uniminuto.clinica.model.RespuestaRs;
 import jakarta.validation.Valid;
 import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/auth")
 public interface AutenticarApi {
     @PostMapping("/login")

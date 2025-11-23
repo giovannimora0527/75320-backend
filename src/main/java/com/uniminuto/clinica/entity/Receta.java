@@ -1,5 +1,7 @@
 package com.uniminuto.clinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.io.Serializable;
@@ -29,15 +31,17 @@ public class Receta implements Serializable {
     /**
      * Cita asociada a la receta.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cita_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Cita cita;
 
     /**
      * Medicamento prescrito.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "medicamento_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Medicamento medicamento;
 
     /**
@@ -56,11 +60,13 @@ public class Receta implements Serializable {
      * Fecha y hora de creación de la receta.
      */
     @Column(name = "fecha_creacion", nullable = false, updatable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     /**
      * Fecha y hora de la última modificación (si aplica).
      */
     @Column(name = "fecha_modificacion")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime fechaModificacion;
 }

@@ -39,7 +39,13 @@ public class MedicamentoApiController implements MedicamentoApi {
      */
     @Override
     public ResponseEntity<List<Medicamento>> listarMedicamentos() {
-        return ResponseEntity.ok(medicamentoService.listarMedicamentos());
+        try {
+            List<Medicamento> medicamentos = medicamentoService.listarMedicamentos();
+            return ResponseEntity.ok(medicamentos);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     /**

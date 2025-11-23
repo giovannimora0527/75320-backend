@@ -43,6 +43,13 @@ public class JwtTokenFilter extends GenericFilterBean {
         String authHeader = request.getHeader("Authorization");
         LOG.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
+        // Permitir peticiones OPTIONS (preflight CORS) sin autenticación
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(req, res);
+            LOG.info("Petición OPTIONS (preflight CORS), se permite sin token.");
+            return;
+        }
+
         String requestURI = request.getRequestURI();
         if (requestURI != null && (requestURI.contains("/auth/recuperar-contrasena")
                 || requestURI.contains("/auth/login"))) {

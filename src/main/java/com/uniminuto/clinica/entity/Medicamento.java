@@ -1,5 +1,6 @@
 package com.uniminuto.clinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.io.Serializable;
@@ -52,23 +53,27 @@ public class Medicamento implements Serializable {
      * Fecha en que se adquirió el medicamento.
      */
     @Column(name = "fecha_compra", nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaCompra;
 
     /**
      * Fecha de vencimiento del medicamento.
      */
     @Column(name = "fecha_vence", nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaVence;
 
     /**
      * Fecha y hora de creación del registro.
      */
     @Column(name = "fecha_creacion_registro", nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime fechaCreacionRegistro;
 
     /**
      * Fecha y hora de última modificación del registro.
      */
     @Column(name = "fecha_modificacion_registro")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime fechaModificacionRegistro;
 }

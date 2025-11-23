@@ -55,8 +55,10 @@ public class RecetaApiController implements RecetaApi {
     @Override
     public ResponseEntity<List<Receta>> listarRecetas() {
         try {
-            return ResponseEntity.ok(recetaService.listarRecetas());
+            List<Receta> recetas = recetaService.listarRecetas();
+            return ResponseEntity.ok(recetas);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
