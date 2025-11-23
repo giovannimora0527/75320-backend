@@ -62,3 +62,4 @@ public class Cita implements Serializable{
     @Column(name = "motivo")
     private  String motivo ;
 }
+
