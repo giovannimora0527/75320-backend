@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+
+
+  clinica-db:
+    image: mysql:8.0
+    container_name: clinica-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clinica
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/clinica.sql:/docker-entrypoint-initdb.d/clinica.sql
+    networks:
+      - clinica-net
+
+  clinica-backend:
+    build: ./75320-backend
+    container_name: clinica-backend
+    depends_on:
+      - clinica-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://clinica-db:3306/clinica
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8000:8000"
+    networks:
+      - clinica-net
+
+  clinica-frontend:
+    build: ./75320-frontend
+    container_name: clinica-frontend
+    depends_on:
+      - clinica-backend
+    ports:
+      - "4200:80"
+    networks:
+      - clinica-net
+
+volumes:
+  mysql_data:
+
+networks:
+  clinica-net:
