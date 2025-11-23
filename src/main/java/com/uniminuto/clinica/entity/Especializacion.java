@@ -18,25 +18,19 @@ import lombok.Data;
 @Table(name = "especializacion")
 public class Especializacion implements Serializable {
     /**
-     * Id serializable.
-     */
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Id.
+     * Id de la entidad.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     
     @Column(name = "nombre")
     private String nombre;
-   
+    
     @Column(name = "descripcion")
     private String descripcion;
     
     @Column(name = "codigo_especializacion")
     private String codigoEspecializacion;
-    
 }

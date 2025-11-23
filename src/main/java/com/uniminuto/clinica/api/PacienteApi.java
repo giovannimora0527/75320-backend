@@ -9,15 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author lmora
- */
 @CrossOrigin(origins = "*")
 @RequestMapping("/paciente")
 public interface PacienteApi {
-    
-        /**
+
+    /**
      * Lista los usuarios de la bd.
      *
      * @return
@@ -27,15 +23,27 @@ public interface PacienteApi {
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Paciente>> listarPacientes();
-    
-    
-        @RequestMapping(value = "/buscar-paciente-documento",
+
+
+    @RequestMapping(value = "/buscar-paciente-documento",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<Paciente> buscarPacienteXIdentificacion(
-            @RequestParam String numeroDocumento) 
+            @RequestParam String numeroDocumento)
             throws BadRequestException;
+
+
+    /**
+     * Lista los usuarios de la bd.
+     *
+     * @return
+     */
+    @RequestMapping(value = "/listar-orden-fecha-nacimiento",
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Paciente>> listarPacientesXOrden(
+            @RequestParam String orden
+    );
 }
-
-
