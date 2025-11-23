@@ -1,63 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.service;
 
 import com.uniminuto.clinica.entity.Receta;
+import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.utils.BadRequestException;
+
 import java.util.List;
 
 /**
- * Servicio para gestionar operaciones relacionadas con recetas médicas.
- *
- * @author anago
+ * Servicio para la gestión de recetas médicas.
+ * Define las operaciones CRUD y consultas relacionadas.
  */
 public interface RecetaService {
 
     /**
-     * Obtiene todas las recetas ordenadas por fecha de creación descendente.
+     * Lista todas las recetas médicas registradas.
      *
-     * @return Lista de recetas ordenadas de más recientes a más antiguas
+     * @return lista de recetas.
      */
-    List<Receta> getAllRecetasOrdenadas();
+    List<Receta> listarRecetas();
 
     /**
-     * Obtiene recetas por ID de cita.
+     * Guarda una nueva receta médica.
      *
-     * @param citaId ID de la cita
-     * @return Lista de recetas de la cita
+     * @param recetaRq datos de la receta.
+     * @return respuesta del servicio.
+     * @throws BadRequestException si los datos son inválidos.
      */
-    List<Receta> getRecetasPorCita(Long citaId);
+    RespuestaRs guardarReceta(RecetaRq recetaRq) throws BadRequestException;
 
     /**
-     * Crea una nueva receta médica.
+     * Obtiene una receta por su identificador.
      *
-     * @param receta Objeto Receta a crear
-     * @return Receta creada y guardada
+     * @param id identificador de la receta.
+     * @return la receta encontrada.
+     * @throws BadRequestException si la receta no existe.
      */
-    Receta crearReceta(Receta receta);
+    Receta obtenerPorId(Integer id) throws BadRequestException;
 
     /**
-     * Busca una receta por su ID.
+     * Actualiza los datos de una receta existente.
      *
-     * @param id ID de la receta
-     * @return Receta encontrada
+     * @param id identificador de la receta.
+     * @param recetaRq datos actualizados.
+     * @return respuesta del servicio.
+     * @throws BadRequestException si la receta no existe o los datos son inválidos.
      */
-    Receta getRecetaPorId(Long id);
+    RespuestaRs actualizarReceta(Integer id, RecetaRq recetaRq) throws BadRequestException;
 
     /**
-     * Elimina una receta por su ID.
+     * Elimina una receta por su identificador.
      *
-     * @param id ID de la receta a eliminar
+     * @param id identificador de la receta.
+     * @return respuesta del servicio.
+     * @throws BadRequestException si la receta no existe.
      */
-    void eliminarReceta(Long id);
-
-    /**
-     * Actualiza una receta existente.
-     *
-     * @param id ID de la receta a actualizar
-     * @param receta Receta con los datos actualizados
-     * @return Receta actualizada
-     */
-    Receta actualizarReceta(Long id, Receta receta);
+    RespuestaRs eliminarReceta(Integer id) throws BadRequestException;
 }

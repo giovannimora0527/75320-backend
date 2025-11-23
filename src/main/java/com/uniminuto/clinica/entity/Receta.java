@@ -1,36 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.entity;
 
+import jakarta.persistence.*;
+import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
- * Entidad que representa una receta médica en el sistema de clínica.
- * Una receta está asociada a una cita médica y un medicamento específico.
- *
- * @author anago
+ * Entidad que representa una receta médica.
+ * Cada receta está asociada a una cita y un medicamento.
+ * 
+ * @author 
  */
-@Getter
-@Setter
-@Table(name = "receta", schema = "clinica")
+@Data
+@Entity
+@Table(name = "receta")
 public class Receta implements Serializable {
 
-    /**
-     * Id serializable.
-     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -38,64 +23,44 @@ public class Receta implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     /**
-     * Cita médica asociada a esta receta.
+     * Cita asociada a la receta.
      */
     @ManyToOne
     @JoinColumn(name = "cita_id", nullable = false)
     private Cita cita;
-    /**
-     * Medicamento prescrito en la receta.
-     */
 
     /**
-     * Dosis del medicamento.
+     * Medicamento prescrito.
      */
-    @Column(name = "dosis", nullable = false, length = 100)
-    public String dosis;
+    @ManyToOne
+    @JoinColumn(name = "medicamento_id", nullable = false)
+    private Medicamento medicamento;
 
     /**
-     * Indicaciones para el uso del medicamento.
+     * Dosis recomendada para el medicamento.
      */
-    @Column(name = "indicaciones", length = 500)
-    public String indicaciones;
+    @Column(name = "dosis", columnDefinition = "TEXT", nullable = false)
+    private String dosis;
 
     /**
-     * Fecha y hora de creación del registro de la receta.
+     * Indicaciones adicionales para el uso del medicamento.
      */
-    @Column(name = "fecha_creacion_registro", nullable = false)
-    private LocalDateTime fechaCreacionRegistro = LocalDateTime.now();
+    @Column(name = "indicaciones", columnDefinition = "TEXT")
+    private String indicaciones;
 
     /**
-     * Constructor por defecto que inicializa la fecha de creación.
+     * Fecha y hora de creación de la receta.
      */
-    public Receta() {
-        this.fechaCreacionRegistro = LocalDateTime.now();
-    }
-
-    public void setFechaCreacionRegistro(LocalDateTime now) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String getdosis() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setDosis(String dosis) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    @Column(name = "fecha_creacion_registro", nullable = false, updatable = false)
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     /**
-     * Constructor con parámetros básicos.
-     *
-     * @param cita Cita asociada a la receta
-     * @param medicamento Medicamento prescrito
-     * @param dosis Dosis del medicamento
-     * @param indicaciones Indicaciones para el paciente
+     * Fecha y hora de la última modificación (si aplica).
      */
-  
-    
+    @Column(name = "fecha_actualizacion_registro")
+    private LocalDateTime fechaModificacion;
 }

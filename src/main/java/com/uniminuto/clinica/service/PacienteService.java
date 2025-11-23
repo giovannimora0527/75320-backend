@@ -1,140 +1,74 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.service;
 
 import com.uniminuto.clinica.entity.Paciente;
+import com.uniminuto.clinica.model.PacienteRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.utils.BadRequestException;
+
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Interfaz de servicio para la gestión de pacientes.
- *
- * @author lmora
+ * Servicio para la gestión de pacientes.
+ * Define las operaciones CRUD y consultas específicas.
  */
 public interface PacienteService {
 
     /**
-     * Obtiene todos los pacientes.
+     * Lista todos los pacientes registrados.
      *
-     * @return Lista de todos los pacientes
+     * @return lista de pacientes.
      */
     List<Paciente> encontrarTodosLosPacientes();
 
     /**
-     * Obtiene todos los pacientes activos.
+     * Busca un paciente por su número de documento.
      *
-     * @return Lista de pacientes activos
+     * @param documento número de documento.
+     * @return paciente encontrado.
+     * @throws BadRequestException si el paciente no existe.
      */
-    List<Paciente> encontrarPacientesActivos();
-
-    /**
-     * Busca un paciente por su ID.
-     *
-     * @param id ID del paciente
-     * @return Optional con el paciente encontrado
-     */
-    Optional<Paciente> encontrarPacientePorId(Long id);
-
-    /**
-     * Busca un paciente por número de documento.
-     *
-     * @param numeroDocumento Número de documento del paciente
-     * @return Optional con el paciente encontrado
-     */
-    Optional<Paciente> encontrarPacientePorDocumento(String numeroDocumento);
-
-    /**
-     * Busca pacientes por nombre (nombres o apellidos).
-     *
-     * @param nombre Nombre a buscar
-     * @return Lista de pacientes que coinciden con el nombre
-     */
-    List<Paciente> buscarPacientesPorNombre(String nombre);
-
-    /**
-     * Busca pacientes por tipo de documento.
-     *
-     * @param tipoDocumento Tipo de documento
-     * @return Lista de pacientes con el tipo de documento especificado
-     */
-    List<Paciente> buscarPacientesPorTipoDocumento(String tipoDocumento);
-
-    /**
-     * Busca pacientes por rango de edad.
-     *
-     * @param edadMinima Edad mínima
-     * @param edadMaxima Edad máxima
-     * @return Lista de pacientes en el rango de edad especificado
-     */
-    List<Paciente> buscarPacientesPorRangoEdad(int edadMinima, int edadMaxima);
+    Paciente buscarPacientePorDocumento(String documento) throws BadRequestException;
 
     /**
      * Guarda un nuevo paciente.
      *
-     * @param paciente Paciente a guardar
-     * @return Paciente guardado
+     * @param pacienteRq datos del paciente.
+     * @return respuesta del servicio.
+     * @throws BadRequestException si los datos son inválidos.
      */
-    Paciente guardarPaciente(Paciente paciente);
-
-    /**
-     * Actualiza un paciente existente.
-     *
-     * @param paciente Paciente con los datos actualizados
-     * @return Paciente actualizado
-     */
-    Paciente actualizarPaciente(Paciente paciente);
+    RespuestaRs guardarPaciente(PacienteRq pacienteRq) throws BadRequestException;
 
     /**
      * Elimina un paciente por su ID.
      *
-     * @param id ID del paciente a eliminar
+     * @param id identificador del paciente.
+     * @return respuesta del servicio.
+     * @throws BadRequestException si el paciente no existe.
      */
-    void eliminarPaciente(Long id);
+    RespuestaRs eliminarPaciente(Integer id) throws BadRequestException;
 
     /**
-     * Desactiva un paciente (cambio de estado activo a false).
+     * Actualiza la información de un paciente existente.
      *
-     * @param id ID del paciente a desactivar
-     * @return Paciente desactivado
+     * @param id identificador del paciente.
+     * @param pacienteRq datos actualizados.
+     * @return respuesta del servicio.
+     * @throws BadRequestException si el paciente no existe o los datos son inválidos.
      */
-    Paciente desactivarPaciente(Long id);
+    RespuestaRs actualizarPaciente(Integer id, PacienteRq pacienteRq) throws BadRequestException;
 
     /**
-     * Activa un paciente (cambio de estado activo a true).
+     * Lista los pacientes ordenados por fecha de nacimiento.
      *
-     * @param id ID del paciente a activar
-     * @return Paciente activado
+     * @param ascendente si es true, los ordena ascendentemente; si es false, descendentemente.
+     * @return lista de pacientes ordenada.
      */
-    Paciente activarPaciente(Long id);
+    List<Paciente> listarOrdenadoPorFechaNacimiento(boolean ascendente);
 
     /**
-     * Verifica si existe un paciente con el número de documento especificado.
+     * Lista los pacientes ordenados por edad (fecha de nacimiento ascendente).
      *
-     * @param numeroDocumento Número de documento
-     * @return true si existe, false en caso contrario
+     * @return lista de pacientes ordenada por edad.
      */
-    boolean existePacientePorDocumento(String numeroDocumento);
-
-    /**
-     * Cuenta el número total de pacientes activos.
-     *
-     * @return Número de pacientes activos
-     */
-    long contarPacientesActivos();
-    
-    /**
-     * Obtiene todos los pacientes ordenados por fecha de nacimiento ascendente (de mayor a menor edad).
-     *
-     * @return Lista de pacientes ordenados por fecha de nacimiento ascendente
-     */
-    List<Paciente> encontrarPacientesOrdenadosPorEdadDesc();
-
-    /**
-     * Obtiene todos los pacientes ordenados por fecha de nacimiento descendente (de menor a mayor edad).
-     *
-     * @return Lista de pacientes ordenados por fecha de nacimiento descendente
-     */
-    List<Paciente> encontrarPacientesOrdenadosPorEdadAsc();
+    List<Paciente> listarPacientesPorEdad();
 }

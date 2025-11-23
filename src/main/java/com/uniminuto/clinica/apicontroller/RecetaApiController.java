@@ -1,53 +1,96 @@
+package com.uniminuto.clinica.apicontroller;
 
-package com.uniminuto.clinica.RecetaRepository;
-
+import com.uniminuto.clinica.api.RecetaApi;
 import com.uniminuto.clinica.entity.Receta;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.service.RecetaService;
+import jakarta.validation.Valid;
+import com.uniminuto.clinica.utils.BadRequestException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Repositorio para gestionar operaciones de base de datos para la entidad Receta.
+ * Controlador REST para la gestión de recetas médicas.
+ * Implementa la interfaz RecetaApi.
  *
- * @author anago
+ * Endpoints:
+ *  - POST /api/recetas/guardar → Crea una receta
+ *  - GET  /api/recetas/listar → Lista todas las recetas
+ *  - POST /api/recetas/eliminar?id={id} → Elimina una receta
+ *  - POST /api/recetas/actualizar?id={id} → Actualiza una receta
+ * 
+ * @author 
  */
-@Repository
-public interface RecetaApiController extends JpaRepository<Receta, Long> {
+@RestController
+public class RecetaApiController implements RecetaApi {
+
+    private final RecetaService recetaService;
+
+    // ✅ Inyección por constructor (mejor práctica)
+    public RecetaApiController(RecetaService recetaService) {
+        this.recetaService = recetaService;
+    }
 
     /**
-     * Encuentra todas las recetas ordenadas por fecha de creación descendente.
-     *
-     * @return Lista de recetas ordenadas por fecha de creación descendente
+     * Guarda una nueva receta médica.
      */
-    @Query("SELECT r FROM Receta r ORDER BY r.fechaCreacionRegistro DESC")
-    List<Receta> findAllByOrderByFechaCreacionRegistroDesc();
+    @Override
+    public ResponseEntity<RespuestaRs> guardarReceta(@Valid @RequestBody RecetaRq recetaRq)
+            throws BadRequestException {
+        try {
+            return ResponseEntity.ok(recetaService.guardarReceta(recetaRq));
+        } catch (Exception e) {
+            RespuestaRs error = new RespuestaRs();
+            error.setStatus(400);
+            error.setMensaje("Error al guardar la receta: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
 
     /**
-     * Encuentra recetas por ID de cita.
-     *
-     * @param citaId ID de la cita
-     * @return Lista de recetas asociadas a la cita
+     * Lista todas las recetas disponibles.
      */
-    @Query("SELECT r FROM Receta r WHERE r.cita.id = :citaId ORDER BY r.fechaCreacionRegistro DESC")
-    List<Receta> findByCitaId(@Param("citaId") Long citaId);
+    @Override
+    public ResponseEntity<List<Receta>> listarRecetas() {
+        try {
+            return ResponseEntity.ok(recetaService.listarRecetas());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 
     /**
-     * Encuentra recetas por ID de medicamento.
-     *
-     * @param medicamentoId ID del medicamento
-     * @return Lista de recetas con el medicamento especificado
+     * Elimina una receta por su ID.
      */
-    @Query("SELECT r FROM Receta r WHERE r.medicamento.id = :medicamentoId")
-    List<Receta> findByMedicamentoId(@Param("medicamentoId") Long medicamentoId);
+    @Override
+    public ResponseEntity<RespuestaRs> eliminarReceta(@RequestParam Integer id)
+            throws BadRequestException {
+        try {
+            return ResponseEntity.ok(recetaService.eliminarReceta(id));
+        } catch (Exception e) {
+            RespuestaRs error = new RespuestaRs();
+            error.setStatus(400);
+            error.setMensaje("Error al eliminar la receta: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
 
     /**
-     * Cuenta el número de recetas por cita.
-     *
-     * @param citaId ID de la cita
-     * @return Número de recetas para la cita
+     * Actualiza una receta existente.
      */
-    @Query("SELECT COUNT(r) FROM Receta r WHERE r.cita.id = :citaId")
-    Long countByCitaId(@Param("citaId") Long citaId);
+    @Override
+    public ResponseEntity<RespuestaRs> actualizarReceta(
+            @RequestParam Integer id,
+            @RequestBody RecetaRq recetaRq) {
+        try {
+            return ResponseEntity.ok(recetaService.actualizarReceta(id, recetaRq));
+        } catch (Exception e) {
+            RespuestaRs error = new RespuestaRs();
+            error.setStatus(400);
+            error.setMensaje("Error al actualizar la receta: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
 }

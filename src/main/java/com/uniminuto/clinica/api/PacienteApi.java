@@ -1,180 +1,95 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Paciente;
+import com.uniminuto.clinica.model.PacienteRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import java.util.List;
+import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * API REST para la lógica de pacientes.
- *
- * @author lmora
+ * API de Pacientes
+ * Define los endpoints REST disponibles para la gestión de pacientes.
+ * 
+ * Endpoints:
+ *  - GET /listar → Lista todos los pacientes
+ *  - GET /buscar-paciente-documento → Busca paciente por documento
+ *  - POST /guardar → Crea un paciente
+ *  - POST /actualizar → Actualiza un paciente
+ *  - POST /eliminar → Elimina un paciente
+ *  - GET /por-edad → Lista pacientes ordenados por edad
+ *  - GET /listar-orden-fecha-nacimiento → Lista pacientes según orden (asc/desc)
+ * 
+ * @author 
  */
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/pacientes")
+@RequestMapping("/paciente")
 public interface PacienteApi {
 
-    /**
-     * Lista todos los pacientes.
-     *
-     * @return Lista de todos los pacientes
-     */
-    @RequestMapping(value = "/listar",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
+    @RequestMapping(
+        value = "/listar",
+        produces = {"application/json"},
+        method = RequestMethod.GET
+    )
     ResponseEntity<List<Paciente>> listarPacientes();
 
-    /**
-     * Lista todos los pacientes activos.
-     *
-     * @return Lista de pacientes activos
-     */
-    @RequestMapping(value = "/listar-activos",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<List<Paciente>> listarPacientesActivos();
-
-    /**
-     * Busca un paciente por su ID.
-     *
-     * @param id ID del paciente
-     * @return Paciente encontrado
-     */
-    @RequestMapping(value = "/buscar/{id}",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<Paciente> buscarPacientePorId(@PathVariable("id") Long id);
-
-    /**
-     * Busca un paciente por número de documento.
-     *
-     * @param numeroDocumento Número de documento del paciente
-     * @return Paciente encontrado
-     */
-    @RequestMapping(value = "/buscar-por-documento",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<Paciente> buscarPacientePorDocumento(@RequestParam("numeroDocumento") String numeroDocumento);
-
-    /**
-     * Busca pacientes por nombre.
-     *
-     * @param nombre Nombre a buscar
-     * @return Lista de pacientes que coinciden con el nombre
-     */
-    @RequestMapping(value = "/buscar-por-nombre",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<List<Paciente>> buscarPacientesPorNombre(@RequestParam("nombre") String nombre);
-
-    /**
-     * Busca pacientes por tipo de documento.
-     *
-     * @param tipoDocumento Tipo de documento
-     * @return Lista de pacientes con el tipo de documento especificado
-     */
-    @RequestMapping(value = "/buscar-por-tipo-documento",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<List<Paciente>> buscarPacientesPorTipoDocumento(@RequestParam("tipoDocumento") String tipoDocumento);
-
-    /**
-     * Busca pacientes por rango de edad.
-     *
-     * @param edadMinima Edad mínima
-     * @param edadMaxima Edad máxima
-     * @return Lista de pacientes en el rango de edad especificado
-     */
-    @RequestMapping(value = "/buscar-por-edad",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<List<Paciente>> buscarPacientesPorEdad(
-            @RequestParam("edadMinima") int edadMinima,
-            @RequestParam("edadMaxima") int edadMaxima);
-
-    /**
-     * Crea un nuevo paciente.
-     *
-     * @param paciente Paciente a crear
-     * @return Paciente creado
-     */
-    @RequestMapping(value = "/crear",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.POST)
-    ResponseEntity<Paciente> crearPaciente(@RequestBody Paciente paciente);
-
-    /**
-     * Actualiza un paciente existente.
-     *
-     * @param id ID del paciente a actualizar
-     * @param paciente Paciente con los datos actualizados
-     * @return Paciente actualizado
-     */
-    @RequestMapping(value = "/actualizar/{id}",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.PUT)
-    ResponseEntity<Paciente> actualizarPaciente(@PathVariable("id") Long id, @RequestBody Paciente paciente);
-
-    /**
-     * Elimina un paciente por su ID.
-     *
-     * @param id ID del paciente a eliminar
-     * @return Respuesta de confirmación
-     */
-    @RequestMapping(value = "/eliminar/{id}",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.DELETE)
-    ResponseEntity<Void> eliminarPaciente(@PathVariable("id") Long id);
-
-    /**
-     * Desactiva un paciente.
-     *
-     * @param id ID del paciente a desactivar
-     * @return Paciente desactivado
-     */
-    @RequestMapping(value = "/desactivar/{id}",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.PUT)
-    ResponseEntity<Paciente> desactivarPaciente(@PathVariable("id") Long id);
-
-    /**
-     * Activa un paciente.
-     *
-     * @param id ID del paciente a activar
-     * @return Paciente activado
-     */
-    @RequestMapping(value = "/activar/{id}",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.PUT)
-    ResponseEntity<Paciente> activarPaciente(@PathVariable("id") Long id);
-
-    /**
-     * Obtiene el conteo de pacientes activos.
-     *
-     * @return Número de pacientes activos
-     */
-    @RequestMapping(value = "/contar-activos",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<Long> contarPacientesActivos();
-    
-    @RequestMapping(value = "/ordenados-por-edad",
+    @RequestMapping(
+        value = "/buscar-paciente-documento",
         produces = {"application/json"},
-        method = RequestMethod.GET)
-ResponseEntity<List<Paciente>> listarPacientesOrdenadosPorEdad(
-        @RequestParam(defaultValue = "desc") String orden);
+        method = RequestMethod.GET
+    )
+    ResponseEntity<Paciente> buscarPacienteXIdentificacion(
+        @RequestParam String numeroDocumento
+    ) throws BadRequestException;
+
+    @RequestMapping(
+        value = "/guardar",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST
+    )
+    ResponseEntity<RespuestaRs> guardarPaciente(
+        @RequestBody PacienteRq pacienteRq
+    ) throws BadRequestException;
+
+    @RequestMapping(
+        value = "/actualizar",
+        produces = {"application/json"},
+        consumes = {"application/json"},
+        method = RequestMethod.POST
+    )
+    ResponseEntity<RespuestaRs> actualizarPaciente(
+        @RequestParam Integer id,
+        @RequestBody PacienteRq pacienteRq
+    ) throws BadRequestException;
+
+    @RequestMapping(
+        value = "/eliminar",
+        produces = {"application/json"},
+        method = RequestMethod.POST
+    )
+    ResponseEntity<RespuestaRs> eliminarPaciente(
+        @RequestParam Integer id
+    ) throws BadRequestException;
+
+    @RequestMapping(
+        value = "/por-edad",
+        produces = {"application/json"},
+        method = RequestMethod.GET
+    )
+    ResponseEntity<List<Paciente>> listarPacientesPorEdad();
+
+    @RequestMapping(
+        value = "/listar-orden-fecha-nacimiento",
+        produces = {"application/json"},
+        method = RequestMethod.GET
+    )
+    ResponseEntity<List<Paciente>> listarPacientesXOrden(
+        @RequestParam String orden
+    );
 }

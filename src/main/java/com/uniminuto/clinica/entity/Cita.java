@@ -1,39 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.entity;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+/**
+ * Entidad que representa una cita médica en el sistema.
+ *
+ * @author
+ */
+@Data
 @Entity
-@Table(name = "cita", schema = "clinica")
+@Table(name = "cita")
 public class Cita implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID de la cita (clave primaria).
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Integer id;
 
-    @ManyToOne
+    /**
+     * Paciente asociado a la cita.
+     */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
-    @ManyToOne
+    /**
+     * Médico asignado a la cita.
+     */
+    @ManyToOne(optional = false)
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
+    /**
+     * Fecha y hora de la cita.
+     */
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
 
-    @Column(name = "estado", nullable = false, length = 50)
-    private String estado = "programada";
+    /**
+     * Estado actual de la cita (Ej: "Programada", "Completada", "Cancelada").
+     */
+    @Column(name = "estado", length = 20)
+    private String estado;
 
-    @Column(name = "motivo", length = 500)
+    /**
+     * Motivo o descripción de la cita médica.
+     */
+    @Column(name = "motivo", columnDefinition = "TEXT")
     private String motivo;
 }

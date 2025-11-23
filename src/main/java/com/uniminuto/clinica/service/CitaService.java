@@ -1,59 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.service;
 
 import com.uniminuto.clinica.entity.Cita;
-import java.time.LocalDateTime;
+import com.uniminuto.clinica.model.CitaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import com.uniminuto.clinica.utils.BadRequestException;
+
 import java.util.List;
 
 /**
- * Servicio para gestionar operaciones relacionadas con citas médicas.
- *
- * @author anago
+ * Servicio que define las operaciones para la gestión de citas médicas.
  */
 public interface CitaService {
 
     /**
-     * Crea una nueva cita médica.
+     * Lista todas las citas ordenadas por fecha y hora.
      *
-     * @param cita Objeto Cita a crear
-     * @return Cita creada y guardada
+     * @return Lista de citas.
      */
-    Cita crearCita(Cita cita);
+    List<Cita> listarCitas();
 
     /**
-     * Obtiene todas las citas ordenadas por fecha y hora descendente.
+     * Guarda una nueva cita en el sistema.
      *
-     * @return Lista de citas ordenadas de más recientes a más antiguas
+     * @param citaRq Datos de la cita a registrar.
+     * @return Respuesta con el estado de la operación.
+     * @throws BadRequestException Si los datos son inválidos.
      */
-    List<Cita> getAllCitasOrdenadas();
+    RespuestaRs guardarCita(CitaRq citaRq) throws BadRequestException;
 
     /**
-     * Obtiene citas por ID de paciente.
+     * Actualiza una cita existente.
      *
-     * @param pacienteId ID del paciente
-     * @return Lista de citas del paciente
+     * @param id      Identificador de la cita.
+     * @param citaRq  Datos actualizados.
+     * @return Respuesta con el resultado de la actualización.
+     * @throws BadRequestException Si el ID no existe o los datos son inválidos.
      */
-    List<Cita> getCitasPorPaciente(Long pacienteId);
+    RespuestaRs actualizarCita(Integer id, CitaRq citaRq) throws BadRequestException;
 
     /**
-     * Obtiene citas por ID de médico.
+     * Elimina una cita del sistema.
      *
-     * @param medicoId ID del médico
-     * @return Lista de citas del médico
+     * @param id Identificador de la cita a eliminar.
+     * @return Respuesta con el resultado de la eliminación.
+     * @throws BadRequestException Si la cita no existe.
      */
-    List<Cita> getCitasPorMedico(Long medicoId);
+    RespuestaRs eliminarCita(Integer id) throws BadRequestException;
 
     /**
-     * Verifica disponibilidad de médico en una fecha y hora específica.
+     * Lista las citas asociadas a un paciente.
      *
-     * @param medicoId ID del médico
-     * @param fechaHora Fecha y hora a verificar
-     * @return true si está disponible, false si ya tiene cita
+     * @param pacienteId ID del paciente.
+     * @return Lista de citas del paciente.
+     * @throws BadRequestException Si el paciente no existe.
      */
-    boolean verificarDisponibilidadMedico(Long medicoId, LocalDateTime fechaHora);
-
-    public List<Cita> listarCitasRecientes();
+    List<Cita> listarCitasPorPaciente(Integer pacienteId) throws BadRequestException;
 }

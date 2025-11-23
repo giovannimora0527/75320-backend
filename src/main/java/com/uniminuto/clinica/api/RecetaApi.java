@@ -1,94 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.api;
 
 import com.uniminuto.clinica.entity.Receta;
-import java.util.List;
+import com.uniminuto.clinica.model.RecetaRq;
+import com.uniminuto.clinica.model.RespuestaRs;
+import jakarta.validation.Valid;
+import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 /**
- * API REST para la gestión de recetas médicas.
- * Proporciona servicios para crear, listar y gestionar recetas médicas.
- *
- * @author anago
+ * API para la gestión de recetas médicas.
+ * 
+ * Endpoints:
+ *  - GET /receta/listar → Lista todas las recetas.
+ *  - POST /receta/guardar → Crea una nueva receta.
+ *  - POST /receta/actualizar → Actualiza una receta existente.
+ *  - POST /receta/eliminar → Elimina una receta por su ID.
+ * 
+ * @author 
  */
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/recetas")
+@RequestMapping("/receta")
 public interface RecetaApi {
 
     /**
-     * Crea una nueva receta médica.
-     *
-     * @param receta Objeto Receta a crear
-     * @return Receta creada con estado HTTP 200
+     * Lista todas las recetas registradas en el sistema.
      */
-    @RequestMapping(value = "/crear",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.POST)
-    ResponseEntity<Receta> crearReceta(@RequestBody Receta receta);
+    @GetMapping(
+        value = "/listar",
+        produces = "application/json"
+    )
+    ResponseEntity<List<Receta>> listarRecetas();
 
     /**
-     * Lista todas las recetas ordenadas por fecha de creación descendente.
-     * Las recetas más recientes aparecen primero.
-     *
-     * @return Lista de recetas ordenadas por fecha de creación
+     * Guarda una nueva receta.
      */
-    @RequestMapping(value = "/listar-ordenadas",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<List<Receta>> listarRecetasOrdenadas();
-
-    /**
-     * Busca recetas por ID de cita.
-     *
-     * @param citaId ID de la cita
-     * @return Lista de recetas de la cita
-     */
-    @RequestMapping(value = "/buscar-por-cita/{citaId}",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<List<Receta>> buscarRecetasPorCita(@PathVariable("citaId") Long citaId);
-
-    /**
-     * Busca una receta por su ID.
-     *
-     * @param id ID de la receta
-     * @return Receta encontrada
-     */
-    @RequestMapping(value = "/buscar/{id}",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<Receta> buscarRecetaPorId(@PathVariable("id") Long id);
+    @PostMapping(
+        value = "/guardar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> guardarReceta(
+        @Valid @RequestBody RecetaRq recetaRq
+    ) throws BadRequestException;
 
     /**
      * Actualiza una receta existente.
-     *
-     * @param id ID de la receta a actualizar
-     * @param receta Receta con los datos actualizados
-     * @return Receta actualizada
      */
-    @RequestMapping(value = "/actualizar/{id}",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.PUT)
-    ResponseEntity<Receta> actualizarReceta(@PathVariable("id") Long id, @RequestBody Receta receta);
+    @PostMapping(
+        value = "/actualizar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> actualizarReceta(
+        @RequestParam Integer id,
+        @Valid @RequestBody RecetaRq recetaRq
+    ) throws BadRequestException;
 
     /**
      * Elimina una receta por su ID.
-     *
-     * @param id ID de la receta a eliminar
-     * @return Respuesta de confirmación
      */
-    @RequestMapping(value = "/eliminar/{id}",
-            produces = {"application/json"},
-            method = RequestMethod.DELETE)
-    ResponseEntity<Void> eliminarReceta(@PathVariable("id") Long id);
+    @PostMapping(
+        value = "/eliminar",
+        produces = "application/json",
+        consumes = "application/json"
+    )
+    ResponseEntity<RespuestaRs> eliminarReceta(
+        @RequestParam Integer id
+    ) throws BadRequestException;
 }

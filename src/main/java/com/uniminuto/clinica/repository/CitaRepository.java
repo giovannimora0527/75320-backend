@@ -1,63 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.repository;
 
 import com.uniminuto.clinica.entity.Cita;
+import com.uniminuto.clinica.entity.Medico;
+import com.uniminuto.clinica.entity.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Repositorio para gestionar operaciones de base de datos para la entidad Cita.
- *
- * @author anago
+ * Repositorio JPA para la entidad Cita.
+ * Proporciona operaciones CRUD y consultas personalizadas.
  */
 @Repository
-public interface CitaRepository extends JpaRepository<Cita, Long> {
+public interface CitaRepository extends JpaRepository<Cita, Integer> {
 
     /**
-     * Encuentra citas por ID de paciente.
-     *
-     * @param pacienteId ID del paciente
-     * @return Lista de citas del paciente
+     * Obtiene todas las citas ordenadas por fecha y hora descendente.
+     * @return lista de citas ordenadas por fecha y hora.
      */
-    List<Cita> findByPacienteId(Long pacienteId);
+    List<Cita> findAllByOrderByFechaHoraDesc();
 
     /**
-     * Encuentra citas por ID de mÃ©dico.
-     *
-     * @param medicoId ID del mÃ©dico
-     * @return Lista de citas del mÃ©dico
+     * Obtiene las citas de un médico en un rango de fechas.
+     * @param medico el médico asociado.
+     * @param fechaIni fecha de inicio del rango.
+     * @param fechaFin fecha de fin del rango.
+     * @return lista de citas del médico.
      */
-    List<Cita> findByMedicoId(Long medicoId);
+    List<Cita> findByMedicoAndFechaHoraBetween(
+            Medico medico, LocalDateTime fechaIni, LocalDateTime fechaFin);
 
     /**
-     * Encuentra citas por estado.
-     *
-     * @param estado Estado de la cita
-     * @return Lista de citas con el estado especificado
+     * Obtiene las citas de un paciente en un rango de fechas.
+     * @param paciente el paciente asociado.
+     * @param fechaIni fecha de inicio del rango.
+     * @param fechaFin fecha de fin del rango.
+     * @return lista de citas del paciente.
      */
-    List<Cita> findByEstado(String estado);
+    List<Cita> findByPacienteAndFechaHoraBetween(
+            Paciente paciente, LocalDateTime fechaIni, LocalDateTime fechaFin);
 
     /**
-     * Encuentra citas entre un rango de fechas.
-     *
-     * @param startFecha Fecha inicial
-     * @param endFecha Fecha final
-     * @return Lista de citas en el rango de fechas
+     * Obtiene todas las citas de un paciente, ordenadas por fecha y hora descendente.
+     * @param paciente el paciente asociado.
+     * @return lista de citas ordenadas.
      */
-    @Query("SELECT c FROM Cita c WHERE c.fechaHora BETWEEN :startFecha AND :endFecha ORDER BY c.fechaHora DESC")
-    List<Cita> findCitasBetweenDates(@Param("startFecha") LocalDateTime startFecha, 
-                                   @Param("endFecha") LocalDateTime endFecha);
+    List<Cita> findByPacienteOrderByFechaHoraDesc(Paciente paciente);
 
-    public List<Cita> findAllByOrderByFechaHoraDesc();
-
-    public List<Cita> findByFechaHoraBetweenOrderByFechaHoraDesc(LocalDateTime desde, LocalDateTime hasta);
-
-    public long countByEstado(String estado);
+    /**
+     * Obtiene todas las citas de un paciente.
+     * @param paciente el paciente asociado.
+     * @return lista de citas del paciente.
+     */
+    List<Cita> findByPaciente(Paciente paciente);
 }

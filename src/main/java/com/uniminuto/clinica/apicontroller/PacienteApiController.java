@@ -1,162 +1,101 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.uniminuto.clinica.apicontroller;
 
 import com.uniminuto.clinica.api.PacienteApi;
 import com.uniminuto.clinica.entity.Paciente;
+import com.uniminuto.clinica.model.PacienteRq;
+import com.uniminuto.clinica.model.RespuestaRs;
 import com.uniminuto.clinica.service.PacienteService;
-import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import com.uniminuto.clinica.utils.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
- * Controlador REST para la gestión de pacientes.
+ * Controlador REST que implementa la API de Pacientes.
  *
- * @author lmora
+ * Endpoints principales:
+ *  - GET  /paciente/listar → Lista todos los pacientes.
+ *  - GET  /paciente/buscar → Busca un paciente por número de documento.
+ *  - POST /paciente/guardar → Registra un nuevo paciente.
+ *  - PUT  /paciente/actualizar/{id} → Actualiza un paciente existente.
+ *  - DELETE /paciente/eliminar/{id} → Elimina un paciente.
+ *  - GET  /paciente/listar-por-edad → Lista pacientes ordenados por edad.
+ * 
+ * @author 
  */
 @RestController
-@RequestMapping("/api/pacientes")
 public class PacienteApiController implements PacienteApi {
 
-    @Autowired
-    private PacienteService pacienteService;
+    private final PacienteService pacienteService;
 
+    // ✅ Inyección por constructor (mejor que @Autowired)
+    public PacienteApiController(PacienteService pacienteService) {
+        this.pacienteService = pacienteService;
+    }
+
+    /**
+     * Lista todos los pacientes.
+     */
     @Override
     public ResponseEntity<List<Paciente>> listarPacientes() {
-        List<Paciente> pacientes = pacienteService.encontrarTodosLosPacientes();
-        return ResponseEntity.ok(pacientes);
+        return ResponseEntity.ok(pacienteService.encontrarTodosLosPacientes());
     }
 
+    /**
+     * Busca un paciente por su número de documento.
+     */
     @Override
-    public ResponseEntity<List<Paciente>> listarPacientesActivos() {
-        List<Paciente> pacientes = pacienteService.encontrarPacientesActivos();
-        return ResponseEntity.ok(pacientes);
-    }
-
-    @Override
-    public ResponseEntity<Paciente> buscarPacientePorId(Long id) {
+    public ResponseEntity<Paciente> buscarPacienteXIdentificacion(String numeroDocumento)
+            throws BadRequestException {
         try {
-            Paciente paciente = pacienteService.encontrarPacientePorId(id)
-                    .orElseThrow(() -> new RuntimeException("Paciente no encontrado con ID: " + id));
-            return ResponseEntity.ok(paciente);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(pacienteService.buscarPacientePorDocumento(numeroDocumento));
+        } catch (org.springframework.web.server.ResponseStatusException e) {
+            throw new BadRequestException(e.getReason());
         }
     }
 
+    /**
+     * Guarda un nuevo paciente en la base de datos.
+     */
     @Override
-    public ResponseEntity<Paciente> buscarPacientePorDocumento(String numeroDocumento) {
-        try {
-            Paciente paciente = pacienteService.encontrarPacientePorDocumento(numeroDocumento)
-                    .orElseThrow(() -> new RuntimeException("Paciente no encontrado con documento: " + numeroDocumento));
-            return ResponseEntity.ok(paciente);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<RespuestaRs> guardarPaciente(PacienteRq pacienteRq)
+            throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.guardarPaciente(pacienteRq));
     }
 
+    /**
+     * Actualiza los datos de un paciente existente.
+     */
     @Override
-    public ResponseEntity<List<Paciente>> buscarPacientesPorNombre(String nombre) {
-        List<Paciente> pacientes = pacienteService.buscarPacientesPorNombre(nombre);
-        return ResponseEntity.ok(pacientes);
+    public ResponseEntity<RespuestaRs> actualizarPaciente(Integer id, PacienteRq pacienteRq)
+            throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.actualizarPaciente(id, pacienteRq));
     }
 
+    /**
+     * Elimina un paciente por su ID.
+     */
     @Override
-    public ResponseEntity<List<Paciente>> buscarPacientesPorTipoDocumento(String tipoDocumento) {
-        List<Paciente> pacientes = pacienteService.buscarPacientesPorTipoDocumento(tipoDocumento);
-        return ResponseEntity.ok(pacientes);
+    public ResponseEntity<RespuestaRs> eliminarPaciente(Integer id)
+            throws BadRequestException {
+        return ResponseEntity.ok(pacienteService.eliminarPaciente(id));
     }
 
+    /**
+     * Lista los pacientes ordenados por edad.
+     */
     @Override
-    public ResponseEntity<List<Paciente>> buscarPacientesPorEdad(int edadMinima, int edadMaxima) {
-        List<Paciente> pacientes = pacienteService.buscarPacientesPorRangoEdad(edadMinima, edadMaxima);
-        return ResponseEntity.ok(pacientes);
+    public ResponseEntity<List<Paciente>> listarPacientesPorEdad() {
+        return ResponseEntity.ok(pacienteService.listarPacientesPorEdad());
     }
 
+    /**
+     * Lista los pacientes ordenados por fecha de nacimiento según el orden especificado.
+     */
     @Override
-    public ResponseEntity<Paciente> crearPaciente(Paciente paciente) {
-        try {
-            Paciente pacienteCreado = pacienteService.guardarPaciente(paciente);
-            return ResponseEntity.status(HttpStatus.CREATED).body(pacienteCreado);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<Paciente> actualizarPaciente(Long id, Paciente paciente) {
-        try {
-            // Asegurar que el ID del path coincida con el ID del objeto
-            paciente.setId(id);
-            Paciente pacienteActualizado = pacienteService.actualizarPaciente(paciente);
-            return ResponseEntity.ok(pacienteActualizado);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<Void> eliminarPaciente(Long id) {
-        try {
-            pacienteService.eliminarPaciente(id);
-            return ResponseEntity.noContent().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<Paciente> desactivarPaciente(Long id) {
-        try {
-            Paciente paciente = pacienteService.desactivarPaciente(id);
-            return ResponseEntity.ok(paciente);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<Paciente> activarPaciente(Long id) {
-        try {
-            Paciente paciente = pacienteService.activarPaciente(id);
-            return ResponseEntity.ok(paciente);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<Long> contarPacientesActivos() {
-        long conteo = pacienteService.contarPacientesActivos();
-        return ResponseEntity.ok(conteo);
-    }
-    
-    // NUEVO ENDPOINT AGREGADO
-    @GetMapping("/ordenados-por-edad")
-    public ResponseEntity<List<Paciente>> listarPacientesOrdenadosPorEdad(
-            @RequestParam(defaultValue = "desc") String orden) {
-        
-        List<Paciente> pacientes;
-        if ("asc".equalsIgnoreCase(orden)) {
-            pacientes = pacienteService.encontrarPacientesOrdenadosPorEdadAsc();
-        } else {
-            pacientes = pacienteService.encontrarPacientesOrdenadosPorEdadDesc();
-        }
-        return ResponseEntity.ok(pacientes);
+    public ResponseEntity<List<Paciente>> listarPacientesXOrden(String orden) {
+        boolean ascendente = "asc".equalsIgnoreCase(orden) || "ascendente".equalsIgnoreCase(orden);
+        return ResponseEntity.ok(pacienteService.listarOrdenadoPorFechaNacimiento(ascendente));
     }
 }
