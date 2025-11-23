@@ -1,62 +1,1110 @@
-2025-11-18 22:32:27 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 24556 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
-2025-11-18 22:32:27 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
-2025-11-18 22:32:27 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
-2025-11-18 22:32:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-11-18 22:32:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-11-18 22:32:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-11-18 22:32:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 139 ms. Found 10 JPA repository interfaces.
-2025-11-18 22:32:30 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
-2025-11-18 22:32:30 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-11-18 22:32:30 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
-2025-11-18 22:32:30 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
-2025-11-18 22:32:30 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2685 ms
-2025-11-18 22:32:30 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
-2025-11-18 22:32:30 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-11-18 22:32:30 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
-2025-11-18 22:32:31 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2025-11-18 22:32:31 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-11-18 22:32:31 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-11-18 22:32:31 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2025-11-18 22:32:32 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-11-18 22:32:32 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18 22:32:33 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-11-22 19:26:00 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 12036 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 19:26:00 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 19:26:00 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 19:26:00 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 19:26:00 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 19:26:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 19:26:01 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 103 ms. Found 10 JPA repository interfaces.
+2025-11-22 19:26:01 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 19:26:01 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 19:26:01 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 19:26:01 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 19:26:01 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1660 ms
+2025-11-22 19:26:01 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 19:26:01 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 19:26:01 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 19:26:02 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 19:26:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 19:26:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 19:26:02 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 19:26:03 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 19:26:03 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 19:26:03 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: b0720d11-377e-4220-a097-9f073fb0ca23
+Using generated security password: bbd9483d-a031-4c75-ae27-15c99d8e2a39
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-11-18 22:32:33 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@188d4ec2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@54024527, org.springframework.security.web.context.SecurityContextPersistenceFilter@4d766b9, org.springframework.security.web.header.HeaderWriterFilter@121bd0a4, org.springframework.web.filter.CorsFilter@7052b5c9, org.springframework.security.web.authentication.logout.LogoutFilter@44db6fe, com.uniminuto.clinica.security.JwtTokenFilter@33d90405, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@11cb5f07, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13bc07be, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@90bb848, org.springframework.security.web.session.SessionManagementFilter@4c9972de, org.springframework.security.web.access.ExceptionTranslationFilter@605078e6, org.springframework.security.web.access.intercept.AuthorizationFilter@38038ee0]
-2025-11-18 22:32:33 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-18 22:32:34 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2025-11-18 22:32:34 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
-2025-11-18 22:32:34 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 7.155 seconds (JVM running for 7.792)
-2025-11-18 22:33:11 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-11-18 22:33:11 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2025-11-18 22:33:11 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 33 ms
-2025-11-18 22:33:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:33:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:33:12 [http-nio-8000-exec-3] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: false, IP: 0:0:0:0:0:0:0:1
-2025-11-18 22:33:12 [http-nio-8000-exec-3] WARN  c.u.clinica.security.JwtTokenFilter - Error en la petición: Usuario o contraseña incorrectos. Intentos restantes: 2
-2025-11-18 22:33:12 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
-2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:34:02 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:34:29 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/recuperar-contrasena
-2025-11-18 22:34:29 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/recuperar-contrasena
-2025-11-18 22:34:33 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:34:33 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
-2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:34:48 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
-2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
-2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:35:02 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
-2025-11-18 22:35:06 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/usuario/listar
-2025-11-18 22:35:06 [http-nio-8000-exec-10] WARN  o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [133] milliseconds.
-2025-11-18 22:35:06 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/usuario/listar
+2025-11-22 19:26:03 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7b83a622, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@53d1baed, org.springframework.security.web.context.SecurityContextPersistenceFilter@24e0769b, org.springframework.security.web.header.HeaderWriterFilter@3c40b9b2, org.springframework.web.filter.CorsFilter@7c703505, org.springframework.security.web.authentication.logout.LogoutFilter@172de715, com.uniminuto.clinica.security.JwtTokenFilter@9973658, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@73bd7640, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2c910e9a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@70c701f9, org.springframework.security.web.session.SessionManagementFilter@21ecfe9f, org.springframework.security.web.access.ExceptionTranslationFilter@bc7bc72, org.springframework.security.web.access.intercept.AuthorizationFilter@1996d309]
+2025-11-22 19:26:03 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 19:26:04 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 19:26:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 19:26:04 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.706 seconds (JVM running for 5.066)
+2025-11-22 19:26:29 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 19:26:29 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 19:26:29 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-11-22 19:26:29 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:26:29 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:26:35 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:26:35 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:26:49 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:26:49 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:26:56 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:26:56 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:27:23 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:27:23 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:30:45 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 15640 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 19:30:45 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 19:30:45 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 19:30:45 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 19:30:45 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 19:30:47 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 19:30:47 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 187 ms. Found 10 JPA repository interfaces.
+2025-11-22 19:30:49 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 19:30:49 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 19:30:49 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 19:30:49 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 19:30:49 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3673 ms
+2025-11-22 19:30:49 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 19:30:49 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 19:30:49 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 19:30:50 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 19:30:50 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 19:30:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 19:30:51 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 19:30:52 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 19:30:52 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 19:30:53 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: cebb0d77-3ebf-49f3-84b6-07567113d34d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 19:30:53 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6501effa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@29dad1ab, org.springframework.security.web.context.SecurityContextPersistenceFilter@2f136bcd, org.springframework.security.web.header.HeaderWriterFilter@23b7aa, org.springframework.web.filter.CorsFilter@42a15453, org.springframework.security.web.authentication.logout.LogoutFilter@3598353b, com.uniminuto.clinica.security.JwtTokenFilter@4c36d71e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5bf8e9f3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6ba4096c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a695a5a, org.springframework.security.web.session.SessionManagementFilter@ce0f189, org.springframework.security.web.access.ExceptionTranslationFilter@55d67141, org.springframework.security.web.access.intercept.AuthorizationFilter@7b520853]
+2025-11-22 19:30:53 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 19:30:54 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 19:30:54 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 19:30:54 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 10.054 seconds (JVM running for 10.94)
+2025-11-22 19:37:00 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 19712 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 19:37:00 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 19:37:00 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 19:37:00 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 19:37:00 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 19:37:01 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 19:37:01 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 90 ms. Found 10 JPA repository interfaces.
+2025-11-22 19:37:02 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 19:37:02 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 19:37:02 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 19:37:02 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 19:37:02 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1654 ms
+2025-11-22 19:37:02 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 19:37:02 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 19:37:02 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 19:37:02 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 19:37:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 19:37:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 19:37:02 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 19:37:03 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 19:37:03 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 19:37:03 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 373c812f-8a47-4ea2-8972-d877310cdc41
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 19:37:04 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6501effa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@29dad1ab, org.springframework.security.web.context.SecurityContextPersistenceFilter@7fe618cd, org.springframework.security.web.header.HeaderWriterFilter@32aaa135, org.springframework.web.filter.CorsFilter@42a15453, org.springframework.security.web.authentication.logout.LogoutFilter@3598353b, com.uniminuto.clinica.security.JwtTokenFilter@4c36d71e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5bf8e9f3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6ba4096c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a695a5a, org.springframework.security.web.session.SessionManagementFilter@23266a36, org.springframework.security.web.access.ExceptionTranslationFilter@23b7aa, org.springframework.security.web.access.intercept.AuthorizationFilter@7b520853]
+2025-11-22 19:37:04 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 19:37:04 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 19:37:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 19:37:04 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.523 seconds (JVM running for 4.886)
+2025-11-22 19:37:35 [http-nio-8000-exec-2] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 19:37:35 [http-nio-8000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 19:37:35 [http-nio-8000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 19:37:35 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:37:35 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - Petición a Swagger, se permite sin token: /clinica/v1/swagger-ui.html
+2025-11-22 19:37:35 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:37:36 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:37:36 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - Petición a Swagger, se permite sin token: /clinica/v1/swagger-ui.html
+2025-11-22 19:37:36 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:37:58 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 21812 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 19:37:58 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 19:37:58 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 19:37:58 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 19:37:58 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 19:37:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 19:37:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 79 ms. Found 10 JPA repository interfaces.
+2025-11-22 19:37:59 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 19:37:59 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 19:37:59 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 19:37:59 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 19:37:59 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1562 ms
+2025-11-22 19:37:59 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 19:37:59 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 19:37:59 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 19:38:00 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 19:38:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 19:38:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 19:38:00 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 19:38:00 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 19:38:00 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 19:38:01 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d0378dfc-b9c7-41d2-92ea-247b277073ac
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 19:38:01 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3bf24ddd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5e7c67bb, org.springframework.security.web.context.SecurityContextPersistenceFilter@338937d7, org.springframework.security.web.header.HeaderWriterFilter@50443a1, org.springframework.web.filter.CorsFilter@28ae61ae, org.springframework.security.web.authentication.logout.LogoutFilter@55f07bee, com.uniminuto.clinica.security.JwtTokenFilter@4c36d71e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@479e6ec1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@383c6eb2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@34a97ee4, org.springframework.security.web.session.SessionManagementFilter@44705527, org.springframework.security.web.access.ExceptionTranslationFilter@6b9d9cad, org.springframework.security.web.access.intercept.AuthorizationFilter@2babb1f3]
+2025-11-22 19:38:01 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 19:38:02 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 19:38:02 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 19:38:02 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.363 seconds (JVM running for 4.677)
+2025-11-22 19:39:42 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 19:39:42 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 19:39:42 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-11-22 19:39:42 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui.html
+2025-11-22 19:39:42 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - Petición a Swagger, se permite sin token: /clinica/v1/swagger-ui.html
+2025-11-22 19:39:43 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:40:03 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 19:40:03 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - Petición a Swagger, se permite sin token: /clinica/v1/v3/api-docs
+2025-11-22 19:40:03 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 19:41:06 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 6140 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 19:41:06 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 19:41:06 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 19:41:06 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 19:41:06 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 19:41:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 19:41:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 10 JPA repository interfaces.
+2025-11-22 19:41:08 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 19:41:08 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 19:41:08 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 19:41:08 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 19:41:08 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1557 ms
+2025-11-22 19:41:08 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 19:41:08 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 19:41:08 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 19:41:08 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 19:41:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 19:41:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 19:41:08 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 19:41:09 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 19:41:09 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 19:41:09 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 5d5882d4-7387-48ff-b7d1-7dcbc4eec353
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 19:41:10 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5ff8b072, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@679fcedd, org.springframework.security.web.context.SecurityContextPersistenceFilter@7154a67f, org.springframework.security.web.header.HeaderWriterFilter@7d31b3b2, org.springframework.web.filter.CorsFilter@fae3db5, org.springframework.security.web.authentication.logout.LogoutFilter@18f04e14, com.uniminuto.clinica.security.JwtTokenFilter@1dc4df21, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f229216, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@59f32754, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@466a2c4e, org.springframework.security.web.session.SessionManagementFilter@6d9937fb, org.springframework.security.web.access.ExceptionTranslationFilter@5c4a1152, org.springframework.security.web.access.intercept.AuthorizationFilter@eaccebd]
+2025-11-22 19:41:10 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 19:41:10 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 19:41:10 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 19:41:10 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.545 seconds (JVM running for 4.879)
+2025-11-22 19:49:35 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 12064 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 19:49:35 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 19:49:35 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 19:49:35 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 19:49:35 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 19:49:36 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 19:49:36 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 76 ms. Found 10 JPA repository interfaces.
+2025-11-22 19:49:37 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 19:49:37 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 19:49:37 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 19:49:37 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 19:49:37 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1717 ms
+2025-11-22 19:49:37 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 19:49:37 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 19:49:37 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 19:49:38 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 19:49:38 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 19:49:38 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 19:49:38 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 19:49:38 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 19:49:38 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 19:49:39 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 7ca0a66c-5572-471c-8225-a8d9f2946881
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 19:49:39 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3112274e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6e419740, org.springframework.security.web.context.SecurityContextPersistenceFilter@21717b1b, org.springframework.security.web.header.HeaderWriterFilter@6f01aadd, org.springframework.web.filter.CorsFilter@480b3805, org.springframework.security.web.authentication.logout.LogoutFilter@280f5252, com.uniminuto.clinica.security.JwtTokenFilter@2c4fc592, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a11229e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@55f07bee, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7f1baa49, org.springframework.security.web.session.SessionManagementFilter@34f911a0, org.springframework.security.web.access.ExceptionTranslationFilter@24f4bb1f, org.springframework.security.web.access.intercept.AuthorizationFilter@50ded643]
+2025-11-22 19:49:39 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 19:49:40 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 19:49:40 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 19:49:40 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.891 seconds (JVM running for 5.258)
+2025-11-22 20:07:20 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 13972 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 20:07:20 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 20:07:20 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 20:07:20 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 20:07:20 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 20:07:21 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 20:07:21 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 91 ms. Found 10 JPA repository interfaces.
+2025-11-22 20:07:22 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 20:07:22 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 20:07:22 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 20:07:22 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 20:07:22 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1744 ms
+2025-11-22 20:07:22 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 20:07:22 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 20:07:22 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 20:07:22 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 20:07:22 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 20:07:23 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 20:07:23 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 20:07:23 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 20:07:23 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 20:07:24 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 9ceb3cbe-e524-4b6c-88ae-50961561f99b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 20:07:24 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@613ef77d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3fcb3598, org.springframework.security.web.context.SecurityContextPersistenceFilter@a2f0f04, org.springframework.security.web.header.HeaderWriterFilter@597ede50, org.springframework.web.filter.CorsFilter@50a9c947, org.springframework.security.web.authentication.logout.LogoutFilter@6d2cf181, com.uniminuto.clinica.security.JwtTokenFilter@2f06cdc7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@69fe2fa5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e75a876, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6a405922, org.springframework.security.web.session.SessionManagementFilter@75aa6c1c, org.springframework.security.web.access.ExceptionTranslationFilter@54bd96da, org.springframework.security.web.access.intercept.AuthorizationFilter@103ff650]
+2025-11-22 20:07:24 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 20:07:24 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 20:07:25 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 20:07:25 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.716 seconds (JVM running for 5.093)
+2025-11-22 20:10:10 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 20:10:10 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 20:10:10 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 34 ms
+2025-11-22 20:10:10 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 20:10:10 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 20:10:11 [http-nio-8000-exec-3] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
+2025-11-22 20:10:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-22 20:10:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-22 20:10:16 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/receta/listar
+2025-11-22 20:10:16 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/receta/listar
+2025-11-22 20:10:27 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 20:10:27 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 20:10:27 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 20:10:29 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 20:10:29 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 20:10:29 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 20:47:51 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 15396 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 20:47:51 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 20:47:51 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 20:47:51 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 20:47:51 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 20:47:52 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 20:47:52 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 96 ms. Found 10 JPA repository interfaces.
+2025-11-22 20:47:53 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 20:47:53 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 20:47:53 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 20:47:53 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 20:47:53 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1584 ms
+2025-11-22 20:47:53 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 20:47:53 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 20:47:53 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 20:47:53 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 20:47:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 20:47:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 20:47:53 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 20:47:54 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 20:47:54 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 20:47:54 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 3fcb517e-43f0-466c-a26e-e4cfca622f1e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 20:47:55 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@84404ec, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@58d701b0, org.springframework.security.web.context.SecurityContextPersistenceFilter@12a2b0cc, org.springframework.security.web.header.HeaderWriterFilter@48a09b7d, org.springframework.web.filter.CorsFilter@751795ed, org.springframework.security.web.authentication.logout.LogoutFilter@68add248, com.uniminuto.clinica.security.JwtTokenFilter@22c80ade, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@696f609b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3598353b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@43d19bf6, org.springframework.security.web.session.SessionManagementFilter@150c7bd4, org.springframework.security.web.access.ExceptionTranslationFilter@57af6153, org.springframework.security.web.access.intercept.AuthorizationFilter@4fbc4a25]
+2025-11-22 20:47:55 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 20:47:55 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 20:47:55 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 20:47:55 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.517 seconds (JVM running for 4.89)
+2025-11-22 20:48:21 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 20:48:21 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 20:48:21 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 20:48:21 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/index.html
+2025-11-22 20:48:21 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/index.html
+2025-11-22 20:48:21 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 20:48:21 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 20:48:21 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 20:48:21 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 20:48:21 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 20:48:21 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 20:48:21 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 20:48:21 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 20:48:21 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 20:48:21 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 20:48:21 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 20:48:21 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 20:48:21 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 20:48:21 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 20:48:21 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 20:48:21 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 20:48:21 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 20:48:21 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 20:48:22 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 558 ms
+2025-11-22 20:50:35 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 20:50:35 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:18:59 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 18808 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 21:18:59 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 21:18:59 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 21:18:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 21:18:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 21:19:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 21:19:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 96 ms. Found 10 JPA repository interfaces.
+2025-11-22 21:19:01 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 21:19:01 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 21:19:01 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 21:19:01 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 21:19:01 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1710 ms
+2025-11-22 21:19:01 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 21:19:01 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 21:19:01 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 21:19:01 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 21:19:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 21:19:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 21:19:02 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 21:19:02 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 21:19:02 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 21:19:03 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d1739f57-ac80-41cf-8812-8b19a55eb0fa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 21:19:03 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3ed97c22, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3ad99462, org.springframework.security.web.context.SecurityContextPersistenceFilter@5b4777dc, org.springframework.security.web.header.HeaderWriterFilter@9cc10a, org.springframework.web.filter.CorsFilter@412bb8b9, org.springframework.security.web.authentication.logout.LogoutFilter@797b8aa6, com.uniminuto.clinica.security.JwtTokenFilter@3b4a0d98, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16dc8880, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57fe6064, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@72e1ff2b, org.springframework.security.web.session.SessionManagementFilter@5758c25, org.springframework.security.web.access.ExceptionTranslationFilter@5cf7250d, org.springframework.security.web.access.intercept.AuthorizationFilter@1a9c32a2]
+2025-11-22 21:19:03 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 21:19:04 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 21:19:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 21:19:04 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.952 seconds (JVM running for 5.343)
+2025-11-22 21:19:13 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 21:19:13 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 21:19:13 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 21:19:13 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:19:13 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:19:13 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:19:13 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:19:13 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:19:13 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:19:13 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:19:13 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:19:13 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:19:13 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:19:13 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:19:13 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:19:14 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:19:14 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:19:14 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:19:14 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:19:14 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:19:14 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:19:16 [http-nio-8000-exec-3] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 2347 ms
+2025-11-22 21:22:19 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 20052 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 21:22:19 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 21:22:19 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 21:22:19 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 21:22:19 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 21:22:19 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 21:22:20 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 102 ms. Found 10 JPA repository interfaces.
+2025-11-22 21:22:20 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 21:22:20 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 21:22:20 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 21:22:20 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 21:22:20 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1626 ms
+2025-11-22 21:22:20 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 21:22:21 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 21:22:21 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 21:22:21 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 21:22:21 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 21:22:21 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 21:22:21 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 21:22:22 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 21:22:22 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 21:22:22 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: caa39772-4f32-42c5-a70c-2ef2652b5561
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 21:22:22 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2187bcfc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@12d75ab2, org.springframework.security.web.context.SecurityContextPersistenceFilter@1538efa6, org.springframework.security.web.header.HeaderWriterFilter@9fbb3d1, org.springframework.web.filter.CorsFilter@7318f0c7, org.springframework.security.web.authentication.logout.LogoutFilter@7ea4c69b, com.uniminuto.clinica.security.JwtTokenFilter@541ec3cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5cf7250d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7e5130ff, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74c93167, org.springframework.security.web.session.SessionManagementFilter@19285036, org.springframework.security.web.access.ExceptionTranslationFilter@74e6be19, org.springframework.security.web.access.intercept.AuthorizationFilter@3bdb5eb9]
+2025-11-22 21:22:22 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 21:22:23 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 21:22:23 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 21:22:23 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.606 seconds (JVM running for 4.957)
+2025-11-22 21:22:33 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 21:22:33 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 21:22:33 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 21:22:33 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:22:33 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:22:33 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:22:33 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:22:33 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:22:33 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:22:33 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:22:33 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:22:33 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:22:33 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:22:33 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:22:33 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:22:33 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:22:33 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:22:33 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:22:33 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:22:33 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:22:33 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:22:34 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 607 ms
+2025-11-22 21:24:48 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 21:24:48 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 21:24:49 [http-nio-8000-exec-3] WARN  c.u.clinica.security.JwtTokenFilter - Error en la petición: Usuario o contraseña incorrectos
+2025-11-22 21:24:49 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-22 21:25:28 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 21:25:28 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 21:25:29 [http-nio-8000-exec-5] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
+2025-11-22 21:25:29 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-22 21:25:29 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-22 21:48:43 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 4508 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 21:48:43 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 21:48:43 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 21:48:43 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 21:48:43 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 21:48:44 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 21:48:44 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 10 JPA repository interfaces.
+2025-11-22 21:48:45 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 21:48:45 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 21:48:45 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 21:48:45 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 21:48:45 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1587 ms
+2025-11-22 21:48:45 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 21:48:45 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 21:48:45 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 21:48:45 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 21:48:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 21:48:46 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 21:48:46 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 21:48:46 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 21:48:46 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 21:48:47 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: cfb6a05d-f20a-4908-b49e-7a3e3a54e0a9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 21:48:47 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@74b5982c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49cacdd4, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e5130ff, org.springframework.security.web.header.HeaderWriterFilter@4237d3be, org.springframework.web.filter.CorsFilter@9a58840, org.springframework.security.web.authentication.logout.LogoutFilter@cc52ba9, com.uniminuto.clinica.security.JwtTokenFilter@541ec3cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@10297786, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5775037f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@37b56102, org.springframework.security.web.session.SessionManagementFilter@520b5132, org.springframework.security.web.access.ExceptionTranslationFilter@1c1d6c8e, org.springframework.security.web.access.intercept.AuthorizationFilter@68b5035e]
+2025-11-22 21:48:47 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 21:48:48 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 21:48:48 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 21:48:48 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.782 seconds (JVM running for 5.15)
+2025-11-22 21:49:11 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 21:49:11 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 21:49:11 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-11-22 21:49:11 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:49:11 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:49:11 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:49:11 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:49:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:49:11 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:49:11 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:49:11 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:49:11 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:49:11 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:49:11 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:49:11 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:49:11 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:49:11 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:49:11 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:49:11 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:49:11 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:49:11 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:49:13 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1737 ms
+2025-11-22 21:50:06 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 21:50:06 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 21:51:40 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 21:51:40 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 21:57:34 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 20892 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 21:57:34 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 21:57:34 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 21:57:34 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 21:57:34 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 21:57:35 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 21:57:35 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 89 ms. Found 10 JPA repository interfaces.
+2025-11-22 21:57:36 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 21:57:36 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 21:57:36 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 21:57:36 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 21:57:36 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1763 ms
+2025-11-22 21:57:36 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 21:57:36 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 21:57:36 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 21:57:36 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 21:57:36 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 21:57:37 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 21:57:37 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 21:57:37 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 21:57:37 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 21:57:38 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 57a2088a-92a5-4b3a-9663-cf37288fe104
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 21:57:38 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70a22f6a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@55604eb6, org.springframework.security.web.context.SecurityContextPersistenceFilter@c3bc039, org.springframework.security.web.header.HeaderWriterFilter@e194fc6, org.springframework.web.filter.CorsFilter@49c18869, org.springframework.security.web.authentication.logout.LogoutFilter@165f6936, com.uniminuto.clinica.security.JwtTokenFilter@541ec3cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5073b9c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@488598f2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69a13a8a, org.springframework.security.web.session.SessionManagementFilter@10297786, org.springframework.security.web.access.ExceptionTranslationFilter@612fc146, org.springframework.security.web.access.intercept.AuthorizationFilter@37b56102]
+2025-11-22 21:57:38 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 21:57:39 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 21:57:39 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 21:57:39 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 5.088 seconds (JVM running for 5.46)
+2025-11-22 21:57:54 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 21:57:54 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 21:57:54 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 21:57:54 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:57:54 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 21:57:54 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:57:54 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 21:57:54 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:57:54 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:57:54 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:57:54 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 21:57:54 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 21:57:54 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:57:54 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 21:57:54 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 21:57:55 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:57:55 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 21:57:55 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:57:55 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 21:57:55 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:57:55 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 21:57:57 [http-nio-8000-exec-10] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1807 ms
+2025-11-22 21:58:04 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 21:58:04 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 21:58:04 [http-nio-8000-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 21:58:04 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 21:59:46 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 21:59:46 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:00:09 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:00:09 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:00:09 [http-nio-8000-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:00:09 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:00:16 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:00:16 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:00:16 [http-nio-8000-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:00:16 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:06:01 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 11728 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 22:06:01 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 22:06:01 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 22:06:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 22:06:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 22:06:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 22:06:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 85 ms. Found 10 JPA repository interfaces.
+2025-11-22 22:06:03 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 22:06:03 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 22:06:03 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 22:06:03 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 22:06:03 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1748 ms
+2025-11-22 22:06:03 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 22:06:03 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 22:06:03 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 22:06:04 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 22:06:04 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 22:06:04 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 22:06:04 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 22:06:05 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 22:06:05 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 22:06:05 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: f43251ca-6d30-4f29-ac09-a9b4f528ca00
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 22:06:05 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@69a13a8a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@81991ab, org.springframework.security.web.context.SecurityContextPersistenceFilter@288c21dd, org.springframework.security.web.header.HeaderWriterFilter@519bed2c, org.springframework.web.filter.CorsFilter@5f5b7be0, org.springframework.security.web.authentication.logout.LogoutFilter@7518c07c, com.uniminuto.clinica.security.JwtTokenFilter@541ec3cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5758c25, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@727adc35, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1a9c32a2, org.springframework.security.web.session.SessionManagementFilter@c3bc039, org.springframework.security.web.access.ExceptionTranslationFilter@19285036, org.springframework.security.web.access.intercept.AuthorizationFilter@55604eb6]
+2025-11-22 22:06:06 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 22:06:06 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 22:06:06 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 22:06:06 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 5.192 seconds (JVM running for 5.585)
+2025-11-22 22:06:12 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 22:06:12 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 22:06:12 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 22:06:12 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:06:12 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:06:12 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:06:12 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:06:12 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:06:12 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:06:12 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:06:12 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:06:12 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:06:12 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:06:12 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:06:12 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:06:12 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:06:12 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:06:12 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:06:12 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:06:13 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:06:13 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:06:13 [http-nio-8000-exec-10] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 654 ms
+2025-11-22 22:06:20 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:06:20 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:06:20 [http-nio-8000-exec-4] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:06:20 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:06:33 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/
+2025-11-22 22:06:33 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/
+2025-11-22 22:06:33 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:06:41 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:06:41 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:06:42 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:06:42 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:06:42 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:06:42 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:06:42 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:06:42 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:06:42 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:06:42 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:06:42 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:06:42 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:06:42 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:06:42 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:06:42 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:06:42 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:06:48 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:06:48 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:06:48 [http-nio-8000-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:06:48 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:11:25 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 9432 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 22:11:25 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 22:11:25 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 22:11:25 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 22:11:25 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 22:11:25 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 22:11:26 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 109 ms. Found 10 JPA repository interfaces.
+2025-11-22 22:11:26 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 22:11:26 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 22:11:26 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 22:11:26 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 22:11:26 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1710 ms
+2025-11-22 22:11:26 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 22:11:26 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 22:11:26 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 22:11:27 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 22:11:27 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 22:11:27 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 22:11:27 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 22:11:28 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 22:11:28 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 22:11:28 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: a676c667-3c02-4daa-ad1f-ccfd37ec173e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 22:11:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1a9c32a2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a892e11, org.springframework.security.web.context.SecurityContextPersistenceFilter@488598f2, org.springframework.security.web.header.HeaderWriterFilter@5cf7250d, org.springframework.web.filter.CorsFilter@3ed97c22, org.springframework.security.web.authentication.logout.LogoutFilter@4ab94c3e, com.uniminuto.clinica.security.JwtTokenFilter@541ec3cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5b4777dc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@12b9bba, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3ad99462, org.springframework.security.web.session.SessionManagementFilter@288c21dd, org.springframework.security.web.access.ExceptionTranslationFilter@1538efa6, org.springframework.security.web.access.intercept.AuthorizationFilter@81991ab]
+2025-11-22 22:11:29 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 22:11:29 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 22:11:29 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 22:11:29 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 5.102 seconds (JVM running for 5.503)
+2025-11-22 22:11:36 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 22:11:36 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 22:11:36 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-11-22 22:11:36 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:11:36 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:11:36 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:11:36 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:11:36 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:11:36 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:11:36 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:11:36 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:11:36 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:11:36 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:11:36 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:11:36 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:11:36 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:11:36 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:11:36 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:11:36 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:11:36 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:11:36 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:11:37 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 680 ms
+2025-11-22 22:11:43 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:11:43 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:11:43 [http-nio-8000-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:11:43 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:11:47 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:11:47 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:11:47 [http-nio-8000-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:11:47 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:12:16 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/especializacion/listar
+2025-11-22 22:12:16 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/especializacion/listar
+2025-11-22 22:12:16 [http-nio-8000-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:12:16 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:12:32 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 22:12:32 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 22:12:32 [http-nio-8000-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:12:32 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:13:44 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 7728 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 22:13:44 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 22:13:44 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 22:13:44 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 22:13:44 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 22:13:45 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 22:13:45 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 81 ms. Found 10 JPA repository interfaces.
+2025-11-22 22:13:46 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 22:13:46 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 22:13:46 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 22:13:46 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 22:13:46 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1545 ms
+2025-11-22 22:13:46 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 22:13:46 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 22:13:46 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 22:13:46 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 22:13:46 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 22:13:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 22:13:47 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 22:13:47 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 22:13:47 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 22:13:48 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: baba362d-f367-48e6-ac4e-02dfbd23ea68
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 22:13:48 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@55604eb6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49c18869, org.springframework.security.web.context.SecurityContextPersistenceFilter@5775037f, org.springframework.security.web.header.HeaderWriterFilter@19285036, org.springframework.web.filter.CorsFilter@69a13a8a, org.springframework.security.web.authentication.logout.LogoutFilter@3f716ce9, com.uniminuto.clinica.security.JwtTokenFilter@541ec3cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@288c21dd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@14ecaf6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@81991ab, org.springframework.security.web.session.SessionManagementFilter@560a3160, org.springframework.security.web.access.ExceptionTranslationFilter@1d7954fe, org.springframework.security.web.access.intercept.AuthorizationFilter@6f99fb20]
+2025-11-22 22:13:48 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 22:13:49 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 22:13:49 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 22:13:49 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.498 seconds (JVM running for 4.85)
+2025-11-22 22:13:58 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 22:13:58 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 22:13:58 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-11-22 22:13:58 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:13:58 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:13:58 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:13:58 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:13:58 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:13:58 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:13:58 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:13:58 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:13:58 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:13:58 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:13:58 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:13:58 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:13:59 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:13:59 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:13:59 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:13:59 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:13:59 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:13:59 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:14:01 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 2000 ms
+2025-11-22 22:14:05 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 22:14:05 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 22:14:05 [http-nio-8000-exec-5] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:14:05 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:14:07 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 22:14:07 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/medicamento/listar
+2025-11-22 22:14:07 [http-nio-8000-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:14:07 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:14:14 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:14:14 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:14:15 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:14:15 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:14:15 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:14:15 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:14:15 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:14:15 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:14:15 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:14:15 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:14:15 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:14:15 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:14:15 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:14:15 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:14:15 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:14:15 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:14:15 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:14:15 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:14:22 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:14:22 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:14:22 [http-nio-8000-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:14:22 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:14:34 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:14:34 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:16:48 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 18588 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 22:16:48 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 22:16:48 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 22:16:48 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 22:16:48 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 22:16:49 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 22:16:49 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 87 ms. Found 10 JPA repository interfaces.
+2025-11-22 22:16:50 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 22:16:50 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 22:16:50 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 22:16:50 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 22:16:50 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1608 ms
+2025-11-22 22:16:50 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 22:16:50 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 22:16:50 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 22:16:50 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 22:16:50 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 22:16:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 22:16:51 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 22:16:51 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 22:16:51 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 22:16:52 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 8a3eeba8-39b8-4305-bcd7-5b06f9d3f4f8
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 22:16:52 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3ed97c22, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3ad99462, org.springframework.security.web.context.SecurityContextPersistenceFilter@5b4777dc, org.springframework.security.web.header.HeaderWriterFilter@9cc10a, org.springframework.web.filter.CorsFilter@412bb8b9, org.springframework.security.web.authentication.logout.LogoutFilter@797b8aa6, com.uniminuto.clinica.security.JwtTokenFilter@1bd4df4b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16dc8880, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57fe6064, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@72e1ff2b, org.springframework.security.web.session.SessionManagementFilter@5758c25, org.springframework.security.web.access.ExceptionTranslationFilter@5cf7250d, org.springframework.security.web.access.intercept.AuthorizationFilter@1a9c32a2]
+2025-11-22 22:16:52 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 22:16:53 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 22:16:53 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 22:16:53 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.804 seconds (JVM running for 5.159)
+2025-11-22 22:16:57 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 22:16:57 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 22:16:57 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-11-22 22:16:57 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:16:57 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:16:57 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:16:57 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:16:57 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:16:57 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:16:57 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:16:57 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:16:57 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:16:57 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:16:57 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:16:57 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:16:58 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:16:58 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:16:58 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:16:58 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:16:58 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:16:58 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:16:58 [http-nio-8000-exec-4] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 550 ms
+2025-11-22 22:17:52 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:17:52 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:17:52 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:17:52 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:17:52 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:17:52 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:17:52 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:17:52 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:17:52 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:17:52 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:17:52 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:17:52 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:17:53 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:17:53 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:17:53 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:17:53 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:17:53 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:17:53 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:17:53 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:17:53 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:17:59 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:17:59 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:17:59 [http-nio-8000-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:17:59 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:18:56 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 8844 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 22:18:56 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 22:18:56 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 22:18:56 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 22:18:56 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 22:18:57 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 22:18:57 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 84 ms. Found 10 JPA repository interfaces.
+2025-11-22 22:18:58 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 22:18:58 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 22:18:58 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 22:18:58 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 22:18:58 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1613 ms
+2025-11-22 22:18:58 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 22:18:58 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 22:18:58 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 22:18:58 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 22:18:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 22:18:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 22:18:59 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 22:18:59 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 22:18:59 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 22:19:00 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: c159ecda-a3bc-490b-b32d-1ff2397037b2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 22:19:00 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@74c93167, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@68b5035e, org.springframework.security.web.context.SecurityContextPersistenceFilter@519bed2c, org.springframework.security.web.header.HeaderWriterFilter@4fbe343a, org.springframework.web.filter.CorsFilter@409fc630, org.springframework.security.web.authentication.logout.LogoutFilter@2548b1d, com.uniminuto.clinica.security.JwtTokenFilter@3f2981e5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4e4aa4d7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1b6ba1d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74b5982c, org.springframework.security.web.session.SessionManagementFilter@e194fc6, org.springframework.security.web.access.ExceptionTranslationFilter@26b34572, org.springframework.security.web.access.intercept.AuthorizationFilter@2187bcfc]
+2025-11-22 22:19:00 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 22:19:01 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 22:19:01 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 22:19:01 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.758 seconds (JVM running for 5.114)
+2025-11-22 22:19:16 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 22:19:16 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 22:19:16 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 22:19:16 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:19:16 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:19:16 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:19:16 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:19:16 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:19:16 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:19:16 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:19:16 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:19:16 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:19:16 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:19:16 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:19:16 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:19:16 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:19:16 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:19:16 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:19:16 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:19:16 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:19:16 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:19:17 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 734 ms
+2025-11-22 22:19:21 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:19:21 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:19:21 [http-nio-8000-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:19:21 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:19:23 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:19:23 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:19:23 [http-nio-8000-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2025-11-22 22:19:23 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:23:51 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 20008 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 22:23:51 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 22:23:51 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 22:23:51 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 22:23:51 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 22:23:52 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 22:23:52 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 88 ms. Found 10 JPA repository interfaces.
+2025-11-22 22:23:53 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 22:23:53 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 22:23:53 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 22:23:53 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 22:23:53 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1784 ms
+2025-11-22 22:23:53 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 22:23:53 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 22:23:53 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 22:23:53 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 22:23:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 22:23:54 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 22:23:54 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 22:23:54 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 22:23:54 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 22:23:55 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 8c310798-1f46-4269-8062-616468f54e98
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 22:23:55 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@68b5035e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@409fc630, org.springframework.security.web.context.SecurityContextPersistenceFilter@1538efa6, org.springframework.security.web.header.HeaderWriterFilter@ee94da2, org.springframework.web.filter.CorsFilter@74b5982c, org.springframework.security.web.authentication.logout.LogoutFilter@62eb6de3, com.uniminuto.clinica.security.JwtTokenFilter@6ba8a057, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5cf7250d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7e5130ff, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@49cacdd4, org.springframework.security.web.session.SessionManagementFilter@19285036, org.springframework.security.web.access.ExceptionTranslationFilter@9fbb3d1, org.springframework.security.web.access.intercept.AuthorizationFilter@12d75ab2]
+2025-11-22 22:23:55 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 22:23:56 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 22:23:56 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 22:23:56 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 5.058 seconds (JVM running for 5.433)
+2025-11-22 22:24:13 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 22:24:13 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 22:24:13 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 22:24:13 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:24:13 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:24:13 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:24:13 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:24:13 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:24:13 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:24:13 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:24:13 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:24:13 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:24:13 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:24:13 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:24:13 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:24:13 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:24:13 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:24:13 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:24:13 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:24:13 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:24:13 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:24:14 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 647 ms
+2025-11-22 22:24:18 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:24:18 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:31:18 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Starting ClinicaApplication using Java 21.0.7 on Andres with PID 17288 (C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend\target\classes started by Andre in C:\Users\Andre\OneDrive\Documentos\UNIMINUTO\3 semestre\Programacion WEB\Github\75320-backend)
+2025-11-22 22:31:18 [restartedMain] DEBUG c.u.clinica.ClinicaApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+2025-11-22 22:31:18 [restartedMain] INFO  c.u.clinica.ClinicaApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-22 22:31:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-22 22:31:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-22 22:31:18 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-22 22:31:19 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 83 ms. Found 10 JPA repository interfaces.
+2025-11-22 22:31:19 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8000 (http)
+2025-11-22 22:31:19 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-22 22:31:19 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-11-22 22:31:19 [restartedMain] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring embedded WebApplicationContext
+2025-11-22 22:31:19 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1680 ms
+2025-11-22 22:31:19 [restartedMain] DEBUG c.u.clinica.security.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-11-22 22:31:19 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-22 22:31:20 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-11-22 22:31:20 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-11-22 22:31:20 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-22 22:31:20 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-22 22:31:20 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-11-22 22:31:21 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-11-22 22:31:21 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-22 22:31:21 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 27290d15-48a3-4bf2-91ad-0216eeb311e3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-22 22:31:21 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6b75359d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2d7c96c3, org.springframework.security.web.context.SecurityContextPersistenceFilter@585dae7a, org.springframework.security.web.header.HeaderWriterFilter@24209cf6, org.springframework.web.filter.CorsFilter@5a92b5c6, org.springframework.security.web.authentication.logout.LogoutFilter@12b9bba, com.uniminuto.clinica.security.JwtTokenFilter@15840a8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4604fd04, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@612fc146, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7fb0a131, org.springframework.security.web.session.SessionManagementFilter@ee94da2, org.springframework.security.web.access.ExceptionTranslationFilter@392636fa, org.springframework.security.web.access.intercept.AuthorizationFilter@6985e951]
+2025-11-22 22:31:22 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-22 22:31:22 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-11-22 22:31:22 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8000 (http) with context path '/clinica/v1'
+2025-11-22 22:31:22 [restartedMain] INFO  c.u.clinica.ClinicaApplication - Started ClinicaApplication in 4.776 seconds (JVM running for 5.157)
+2025-11-22 22:31:29 [http-nio-8000-exec-1] INFO  o.a.c.c.C.[.[.[/clinica/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-22 22:31:29 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-22 22:31:29 [http-nio-8000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-22 22:31:29 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:31:29 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:31:29 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:31:29 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:31:29 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:31:29 [http-nio-8000-exec-3] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:31:29 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:31:29 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:31:29 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:31:29 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:31:29 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:31:29 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:31:29 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:31:29 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:31:29 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:31:29 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/favicon-32x32.png
+2025-11-22 22:31:29 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:31:29 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:31:31 [http-nio-8000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 2014 ms
+2025-11-22 22:31:35 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:31:35 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:32:09 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/especializacion/listar
+2025-11-22 22:32:09 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/especializacion/listar
+2025-11-22 22:36:51 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:36:51 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:39:05 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:39:05 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:43:20 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:43:20 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:43:45 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:43:45 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:43:45 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:43:48 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:43:48 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:43:48 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:43:54 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:43:54 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:43:54 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:45:34 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:45:34 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/v3/api-docs
+2025-11-22 22:45:34 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/error
+2025-11-22 22:46:47 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/index.html
+2025-11-22 22:46:47 [http-nio-8000-exec-2] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/index.html
+2025-11-22 22:46:47 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:46:47 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.html
+2025-11-22 22:46:47 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:46:47 [http-nio-8000-exec-6] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui.css
+2025-11-22 22:46:47 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:46:47 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/index.css
+2025-11-22 22:46:47 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:46:47 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:46:47 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-initializer.js
+2025-11-22 22:46:47 [http-nio-8000-exec-8] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-bundle.js
+2025-11-22 22:46:47 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:46:47 [http-nio-8000-exec-9] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/swagger-ui/swagger-ui/swagger-ui-standalone-preset.js
+2025-11-22 22:46:47 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:46:47 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs/swagger-config
+2025-11-22 22:46:47 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:46:47 [http-nio-8000-exec-4] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:46:53 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:46:53 [http-nio-8000-exec-10] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:47:29 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:47:29 [http-nio-8000-exec-1] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/api-docs
+2025-11-22 22:54:20 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:54:20 [http-nio-8000-exec-5] INFO  c.u.clinica.security.JwtTokenFilter - GET request to http://localhost:8000/clinica/v1/cita/listar
+2025-11-22 22:58:20 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 22:58:20 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - POST request to http://localhost:8000/clinica/v1/auth/login
+2025-11-22 22:58:20 [http-nio-8000-exec-7] INFO  c.u.c.s.impl.LoginIntentoServiceImpl - Intento de login registrado - Usuario: carlos, Éxito: true, IP: 0:0:0:0:0:0:0:1
+2025-11-22 22:58:21 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.
+2025-11-22 22:58:21 [http-nio-8000-exec-7] INFO  c.u.clinica.security.JwtTokenFilter - Petición a /auth/login o /auth/recuperar-contrasena, se permite sin token.

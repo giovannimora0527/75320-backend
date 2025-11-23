@@ -12,11 +12,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- * Clase de configuracion para la seguridad.
- *
- * @author lmora
- */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -24,52 +19,71 @@ public class SecurityConfig {
     @Autowired
     private JwtTokenFilter jwtTokenFilter;
 
-   /**
-     * Filtro de seguridad.
-     *
-     * @param http peticion de entrada.
-     * @return Autorizado.
-     * @throws Exception Excepcion.
-     */
     @Bean
-    public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors() // Habilita CORS
+                .cors()
                 .and()
-                .csrf().disable() // Deshabilita CSRF si estás probando con Postman
+                .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeHttpRequests((requests) -> requests
-                    // Permitir acceso sin autenticación solo a login y recuperar-contrasena
-                    .antMatchers("/auth/login", "/auth/recuperar-contrasena").permitAll()
-                    // El resto de endpoints requieren autenticación
-                    .anyRequest().authenticated()
+
+                        // ==== SWAGGER PERMITIDO ====
+                        .antMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ).permitAll()
+
+                        // ==== ENDPOINTS PÚBLICOS QUE TÚ DEFINISTE ====
+                        .antMatchers("/auth/login", "/auth/recuperar-contrasena").permitAll()
+
+                        .antMatchers("/auth/**").permitAll()
+                        .antMatchers("/cita/**").permitAll()
+                        .antMatchers("/clinica/**").permitAll()
+                        .antMatchers("/email/**").permitAll()
+                        .antMatchers("/especializacion/**").permitAll()
+                        .antMatchers("/medicamento/**").permitAll()
+                        .antMatchers("/medico/**").permitAll()
+                        .antMatchers("/paciente/**").permitAll()
+                        .antMatchers("/receta/**").permitAll()
+                        .antMatchers("/usuario/**").permitAll()
+
+                        // ==== CUALQUIER OTRO ====
+                        .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout((logout) -> logout.permitAll());
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    /**
-     * Configuracion del cors.
-     *
-     * @return configuracion.
-     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
+
         config.setAllowedOrigins(List.of(
                 "http://localhost:4200",
                 "http://localhost:8080",
                 "http://127.0.0.1:8080",
-                "http://127.0.0.1:4200"));
+                "http://127.0.0.1:4200"
+        ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*", "Authorization", "Content-Type"));
+
+        // Headers necesarios para Swagger
+        config.addAllowedHeader("*");
+        config.addAllowedHeader("Authorization");
+        config.addAllowedHeader("Content-Type");
+
+        config.addExposedHeader("*");
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-
 }

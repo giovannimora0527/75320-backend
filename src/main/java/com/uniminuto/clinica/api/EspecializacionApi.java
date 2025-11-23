@@ -9,25 +9,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author lmora
- */
+import io.swagger.v3.oas.annotations.Operation;           
+import io.swagger.v3.oas.annotations.tags.Tag;            
+import io.swagger.v3.oas.annotations.media.Content;       
+import io.swagger.v3.oas.annotations.media.Schema;        
+import io.swagger.v3.oas.annotations.responses.ApiResponse; 
+
 @CrossOrigin(origins = "*")
+@Tag(name = "Especialización", description = "Endpoints para gestión de especializaciones")  
 @RequestMapping("/especializacion")
 public interface EspecializacionApi {
     
-    @RequestMapping(value = "/listar",
+    @Operation(
+            summary = "Listar especializaciones",
+            description = "Retorna todas las especializaciones registradas.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Listado obtenido correctamente",
+                            content = @Content(schema = @Schema(implementation = Especializacion.class))
+                    )
+            }
+    )
+    @RequestMapping(
+            value = "/listar",
             produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.GET)
+            method = RequestMethod.GET   // ← CONSUMES QUITADO
+    )
     ResponseEntity<List<Especializacion>> listarEspecializaciones();
     
     
-    @RequestMapping(value = "/buscar-por-codigo",
+    @Operation(
+            summary = "Buscar especialización por código",
+            description = "Consulta una especialización usando su código.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Especialización encontrada",
+                            content = @Content(schema = @Schema(implementation = Especializacion.class))
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Código inválido",
+                            content = @Content(schema = @Schema(implementation = Especializacion.class))
+                    )
+            }
+    )
+    @RequestMapping(
+            value = "/buscar-por-codigo",
             produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.GET)
+            method = RequestMethod.GET  // ← CONSUMES QUITADO
+    )
     ResponseEntity<Especializacion> buscarPorCodigo(
       @RequestParam String codigo
     ) throws BadRequestException;

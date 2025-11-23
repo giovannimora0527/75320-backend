@@ -128,7 +128,35 @@
             <artifactId>java-jwt</artifactId>
             <version>3.4.1</version>
         </dependency>
+        
+
+        
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        
+        
+        
+        
+        
+        
+        
     </dependencies>
+    
+    
+
     <build>
         <plugins>
             <plugin>
