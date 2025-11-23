@@ -1,3 +1,14 @@
+/**
+ * Implementación del servicio de auditoría de login.
+ * Gestiona el registro de intentos de acceso, control de bloqueos por intentos fallidos
+ * y el reinicio de contadores de seguridad para usuarios del sistema clínico.
+ *
+ * @author Edwin Morales
+ * @author Nahum Dominguez
+ * @author Emily Aldana
+ * @author Julian Amaya
+ * @author Sebastian Paez
+ */
 package com.uniminuto.clinica.service.impl;
 
 import com.uniminuto.clinica.config.LoginConfig;
@@ -26,6 +37,16 @@ public class AuditoriaLoginServiceImpl implements AuditoriaLoginService {
     @Autowired
     private LoginConfig loginConfig;
 
+    /**
+     * Registra un intento de login en el sistema y actualiza el estado del usuario
+     * según el resultado del intento. Para intentos fallidos, incrementa el contador
+     * y bloquea al usuario si excede el límite configurado.
+     *
+     * @param username Nombre de usuario que intentó el acceso
+     * @param ipAddress Dirección IP desde donde se realizó el intento
+     * @param exitoso true si el login fue exitoso, false si falló
+     * @param descripcion Descripción detallada del resultado del intento
+     */
     @Override
     public void registrarIntentoLogin(String username, String ipAddress, boolean exitoso, String descripcion) {
         RecuperarPasswordAuditoria auditoria = new RecuperarPasswordAuditoria(username, descripcion, ipAddress);
@@ -59,6 +80,14 @@ public class AuditoriaLoginServiceImpl implements AuditoriaLoginService {
         }
     }
 
+    /**
+     * Verifica si un usuario está bloqueado por exceso de intentos fallidos.
+     * Si el tiempo de bloqueo ha expirado, desbloquea automáticamente al usuario
+     * y reinicia sus contadores de seguridad.
+     *
+     * @param username Nombre de usuario a verificar
+     * @return true si el usuario está actualmente bloqueado, false en caso contrario
+     */
     @Override
     public boolean usuarioEstaBloqueado(String username) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(username);
@@ -82,6 +111,13 @@ public class AuditoriaLoginServiceImpl implements AuditoriaLoginService {
         return false;
     }
 
+    /**
+     * Reinicia completamente los contadores de intentos fallidos y elimina
+     * cualquier bloqueo activo para un usuario específico.
+     * Útil después de un login exitoso o para desbloquear manualmente una cuenta.
+     *
+     * @param username Nombre de usuario al que se le reiniciarán los intentos fallidos
+     */
     @Override
     public void reiniciarIntentosFallidos(String username) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(username);
